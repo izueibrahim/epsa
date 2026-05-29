@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ms">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,45 +8,71 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & Playfair Display for certificate -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap"
+        rel="stylesheet">
     <!-- FontAwesome Icons for Industrial look -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Cool Slate 50 - Ultra clean background */
+            background-color: #f8fafc;
+            /* Cool Slate 50 - Ultra clean background */
         }
+
         /* Custom Premium Scrollbar for light mode */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: #f1f5f9;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 3px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #0d9488;
         }
+
         /* Pulsing animation for hotspots */
         @keyframes pulse-ring {
-            0% { transform: scale(0.65); opacity: 1; }
-            100% { transform: scale(1.3); opacity: 0; }
+            0% {
+                transform: scale(0.65);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
         }
+
         .animate-pulse-ring {
             animation: pulse-ring 2s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
         }
+
         /* Fade transitions */
         .fade-in {
             animation: fadeIn 0.4s ease-out forwards;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         /* Dragging styles */
         .dragging {
             opacity: 0.5;
@@ -53,30 +80,45 @@
             border-color: #0d9488;
             transform: scale(0.98);
         }
+
         .drag-over {
             background-color: #f0fdf4 !important;
             border-color: #10b981 !important;
             border-style: solid !important;
         }
+
+        /* Vertical text for side-tab labels */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            white-space: nowrap;
+        }
     </style>
 </head>
+
 <body class="text-slate-800 flex flex-col h-screen overflow-hidden">
 
     <!-- TOP HEADER BAR (Ultra Clean Light Theme) -->
-    <header class="bg-white border-b border-slate-200 h-16 min-h-16 flex items-center justify-between px-6 z-10 shadow-sm">
+    <header
+        class="bg-white border-b border-slate-200 h-16 min-h-16 flex items-center justify-between px-6 z-10 shadow-sm">
         <div class="flex items-center space-x-3">
             <!-- Sidebar Toggle Menu Button -->
-            <button onclick="toggleSidebar()" class="p-2 hover:bg-slate-100 rounded-lg text-slate-600 transition-colors mr-1" title="Buka/Tutup Menu Sisi">
+            <button onclick="toggleSidebar()"
+                class="p-2 hover:bg-slate-100 rounded-lg text-slate-600 transition-colors mr-1"
+                title="Buka/Tutup Menu Sisi">
                 <i class="fa-solid fa-bars text-lg"></i>
             </button>
-            <div class="bg-teal-600 text-white font-black px-2.5 py-1 rounded text-sm tracking-wider shadow-sm">EPSA</div>
+            <div class="bg-teal-600 text-white font-black px-2.5 py-1 rounded text-sm tracking-wider shadow-sm">EPSA
+            </div>
             <div class="h-6 w-px bg-slate-200"></div>
             <div>
-                <span class="text-[10px] text-slate-400 block uppercase tracking-widest font-bold">Institut Tadbiran Awam Negara</span>
+                <span class="text-[10px] text-slate-400 block uppercase tracking-widest font-bold">Institut Tadbiran
+                    Awam Negara</span>
                 <span class="text-xs md:text-sm font-bold text-slate-800">Modul Interaktif: Teknologi Makanan</span>
             </div>
         </div>
-        
+
         <!-- Live Global Metrics in light mode -->
         <div class="hidden md:flex items-center space-x-6">
             <div class="text-right">
@@ -93,7 +135,8 @@
                 <span class="text-[10px] text-slate-400 block uppercase font-bold mb-0.5">Kemajuan Modul</span>
                 <div class="flex items-center space-x-2">
                     <div class="w-24 bg-slate-100 rounded-full h-2 overflow-hidden border border-slate-200">
-                        <div id="globalProgressBar" class="bg-teal-600 h-2 transition-all duration-500" style="width: 8%"></div>
+                        <div id="globalProgressBar" class="bg-teal-600 h-2 transition-all duration-500"
+                            style="width: 8%"></div>
                     </div>
                     <span class="text-xs font-mono font-bold text-teal-600" id="globalProgressPercent">8%</span>
                 </div>
@@ -103,16 +146,18 @@
 
     <!-- CORE WORKSPACE -->
     <div class="flex flex-1 overflow-hidden">
-        
+
         <!-- PERSISTENT LEFT SIDEBAR NAVIGATION (Modern Light Clean - Supports Toggle) -->
-        <aside id="sidebarMenuContainer" class="w-80 bg-white border-r border-slate-200 flex flex-col justify-between overflow-y-auto transition-all duration-300 ease-in-out shrink-0">
+        <aside id="sidebarMenuContainer"
+            class="w-80 bg-white border-r border-slate-200 flex flex-col justify-between overflow-y-auto transition-all duration-300 ease-in-out shrink-0">
             <div class="p-4">
-                <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-widest px-2 mb-3">Laluan Pembelajaran (Linear)</h3>
+                <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-widest px-2 mb-3">Laluan Pembelajaran
+                    (Linear)</h3>
                 <nav class="space-y-1" id="sidebarMenu">
                     <!-- Dynamic Navigation Injected Here in clean light states -->
                 </nav>
             </div>
-            
+
             <div class="p-4 border-t border-slate-100 bg-slate-50 space-y-3">
                 <div class="flex justify-between items-center text-xs">
                     <span class="text-slate-500 font-medium">Status Sesi:</span>
@@ -130,63 +175,81 @@
 
         <!-- MAIN INTERACTIVE WORKSPACE CANVAS -->
         <main class="flex-1 bg-slate-50 flex flex-col justify-between overflow-y-auto relative p-4 md:p-8">
-            
+
             <!-- SCREEN BOX CONTAINER -->
             <div class="max-w-5xl mx-auto w-full flex-1 flex flex-col justify-center">
-                
+
                 <!-- SCREEN 1: LANDING / INTRO -->
                 <div id="screen-1" class="screen-view space-y-8 py-6">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                         <div class="lg:col-span-7 space-y-6">
-                            <div class="inline-flex items-center space-x-2 bg-teal-50 border border-teal-100 px-3 py-1 rounded-full text-teal-700 text-xs font-semibold">
+                            <div
+                                class="inline-flex items-center space-x-2 bg-teal-50 border border-teal-100 px-3 py-1 rounded-full text-teal-700 text-xs font-semibold">
                                 <i class="fa-solid fa-shield-halved animate-pulse text-teal-600"></i>
                                 <span>Latihan Profesional Pengurusan Awam</span>
                             </div>
                             <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
                                 Teknologi <span class="text-teal-600">Makanan</span>
                             </h1>
-                            <p class="text-lg text-teal-800 font-medium">Keselamatan, Kualiti dan Inovasi dalam Industri Makanan</p>
+                            <p class="text-lg text-teal-800 font-medium">Keselamatan, Kualiti dan Inovasi dalam Industri
+                                Makanan</p>
                             <p class="text-slate-600 leading-relaxed text-sm md:text-base">
-                                Modul ini memperkenalkan konsep teknologi makanan serta peranannya dalam memastikan penghasilan makanan yang selamat, berkualiti, dan memenuhi keperluan industri moden berdasarkan kajian kes MARDI, KKM dan FAO.
+                                Modul ini memperkenalkan konsep teknologi makanan serta peranannya dalam memastikan
+                                penghasilan makanan yang selamat, berkualiti, dan memenuhi keperluan industri moden
+                                berdasarkan kajian kes MARDI, KKM dan FAO.
                             </p>
-                            
+
                             <div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-200">
                                 <div class="text-center md:text-left">
-                                    <span class="text-[10px] text-slate-400 uppercase font-bold block">Tempoh Keseluruhan</span>
-                                    <span class="text-sm font-bold text-slate-700"><i class="fa-regular fa-clock text-teal-600 mr-1.5"></i>5-8 minit</span>
+                                    <span class="text-[10px] text-slate-400 uppercase font-bold block">Tempoh
+                                        Keseluruhan</span>
+                                    <span class="text-sm font-bold text-slate-700"><i
+                                            class="fa-regular fa-clock text-teal-600 mr-1.5"></i>5-8 minit</span>
                                 </div>
                                 <div class="text-center md:text-left">
-                                    <span class="text-[10px] text-slate-400 uppercase font-bold block">Tahap Sukatan</span>
-                                    <span class="text-sm font-bold text-slate-700"><i class="fa-solid fa-chart-line text-teal-600 mr-1.5"></i>Asas</span>
+                                    <span class="text-[10px] text-slate-400 uppercase font-bold block">Tahap
+                                        Sukatan</span>
+                                    <span class="text-sm font-bold text-slate-700"><i
+                                            class="fa-solid fa-chart-line text-teal-600 mr-1.5"></i>Asas</span>
                                 </div>
                             </div>
-                            
+
                             <div class="pt-2">
-                                <button onclick="startCourse()" class="bg-teal-600 hover:bg-teal-700 text-white px-10 py-3.5 rounded-lg font-bold text-sm tracking-wide shadow-md hover:shadow-teal-600/10 transform transition duration-200 flex items-center justify-center space-x-2">
+                                <button onclick="startCourse()"
+                                    class="bg-teal-600 hover:bg-teal-700 text-white px-10 py-3.5 rounded-lg font-bold text-sm tracking-wide shadow-md hover:shadow-teal-600/10 transform transition duration-200 flex items-center justify-center space-x-2">
                                     <span>Mulakan Pembelajaran</span>
                                     <i class="fa-solid fa-arrow-right"></i>
                                 </button>
                             </div>
                         </div>
-                        
+
                         <div class="lg:col-span-5 relative flex justify-center">
                             <!-- Premium Light Tech Graphic -->
-                            <div class="relative w-72 h-72 md:w-80 md:h-80 mx-auto bg-white rounded-full border border-slate-200 flex items-center justify-center p-6 shadow-xl">
-                                <div class="absolute inset-0 rounded-full border border-dashed border-teal-500/20 animate-spin" style="animation-duration: 45s;"></div>
+                            <div
+                                class="relative w-72 h-72 md:w-80 md:h-80 mx-auto bg-white rounded-full border border-slate-200 flex items-center justify-center p-6 shadow-xl">
+                                <div class="absolute inset-0 rounded-full border border-dashed border-teal-500/20 animate-spin"
+                                    style="animation-duration: 45s;"></div>
                                 <div class="absolute inset-6 rounded-full border border-slate-100 bg-slate-50/50"></div>
-                                <div class="absolute inset-12 rounded-full bg-white shadow-md flex flex-col justify-center items-center text-center p-4 z-10">
-                                    <i class="fa-solid fa-flask text-teal-600 text-3xl mb-2 animate-bounce" style="animation-duration: 4s;"></i>
-                                    <span class="text-[9px] text-slate-400 uppercase tracking-widest font-bold">Piawaian Kawalan</span>
-                                    <span class="text-xs text-teal-700 font-mono font-bold mt-1">ISO 22000 & HACCP</span>
+                                <div
+                                    class="absolute inset-12 rounded-full bg-white shadow-md flex flex-col justify-center items-center text-center p-4 z-10">
+                                    <i class="fa-solid fa-flask text-teal-600 text-3xl mb-2 animate-bounce"
+                                        style="animation-duration: 4s;"></i>
+                                    <span class="text-[9px] text-slate-400 uppercase tracking-widest font-bold">Piawaian
+                                        Kawalan</span>
+                                    <span class="text-xs text-teal-700 font-mono font-bold mt-1">ISO 22000 &
+                                        HACCP</span>
                                 </div>
                                 <!-- Orbiting Nodes -->
-                                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-white border border-slate-200 rounded-full px-3 py-1 text-[10px] font-bold text-slate-700 flex items-center space-x-1 shadow">
+                                <div
+                                    class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-white border border-slate-200 rounded-full px-3 py-1 text-[10px] font-bold text-slate-700 flex items-center space-x-1 shadow">
                                     <i class="fa-solid fa-shield-virus text-emerald-500"></i><span>Keselamatan</span>
                                 </div>
-                                <div class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-white border border-slate-200 rounded-full px-3 py-1 text-[10px] font-bold text-slate-700 flex items-center space-x-1 shadow">
+                                <div
+                                    class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-white border border-slate-200 rounded-full px-3 py-1 text-[10px] font-bold text-slate-700 flex items-center space-x-1 shadow">
                                     <i class="fa-solid fa-clipboard-check text-blue-500"></i><span>Kualiti</span>
                                 </div>
-                                <div class="absolute top-1/4 -right-4 bg-white border border-slate-200 rounded-full px-3 py-1 text-[10px] font-bold text-slate-700 flex items-center space-x-1 shadow">
+                                <div
+                                    class="absolute top-1/4 -right-4 bg-white border border-slate-200 rounded-full px-3 py-1 text-[10px] font-bold text-slate-700 flex items-center space-x-1 shadow">
                                     <i class="fa-solid fa-lightbulb text-amber-500"></i><span>Inovasi</span>
                                 </div>
                             </div>
@@ -198,60 +261,82 @@
                 <div id="screen-2" class="screen-view space-y-6 py-4 hidden">
                     <div class="text-center max-w-2xl mx-auto space-y-2">
                         <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Kandungan Modul</h2>
-                        <p class="text-slate-500 text-sm">Modul ini mengandungi beberapa komponen pembelajaran interaktif yang direka untuk memberikan pengalaman pembelajaran yang berstruktur dan praktikal.</p>
+                        <p class="text-slate-500 text-sm">Modul ini mengandungi beberapa komponen pembelajaran
+                            interaktif yang direka untuk memberikan pengalaman pembelajaran yang berstruktur dan
+                            praktikal.</p>
                     </div>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mt-6 font-medium">
                         <!-- TOC Card 1 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="goToScreen(4)">
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
+                            onclick="goToScreen(4)">
                             <div class="space-y-3 text-center">
-                                <div class="w-12 h-12 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mx-auto text-lg font-bold">1</div>
+                                <div
+                                    class="w-12 h-12 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mx-auto text-lg font-bold">
+                                    1</div>
                                 <h3 class="text-sm font-bold text-slate-800">Pengenalan Video</h3>
-                                <p class="text-slate-500 text-xs leading-relaxed">Pengenalan ringkas kepada teknologi makanan.</p>
+                                <p class="text-slate-500 text-xs leading-relaxed">Pengenalan ringkas kepada teknologi
+                                    makanan.</p>
                             </div>
                             <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
                                 <span>Estimasi: 2 Min</span>
                             </div>
                         </div>
                         <!-- TOC Card 2 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="goToScreen(5)">
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
+                            onclick="goToScreen(5)">
                             <div class="space-y-3 text-center">
-                                <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto text-lg font-bold">2</div>
+                                <div
+                                    class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto text-lg font-bold">
+                                    2</div>
                                 <h3 class="text-sm font-bold text-slate-800">Proses Industri</h3>
-                                <p class="text-slate-500 text-xs leading-relaxed">Rantaian pengeluaran dari bahan mentah hingga pengedaran.</p>
+                                <p class="text-slate-500 text-xs leading-relaxed">Rantaian pengeluaran dari bahan mentah
+                                    hingga pengedaran.</p>
                             </div>
                             <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
                                 <span>Estimasi: 3 Min</span>
                             </div>
                         </div>
                         <!-- TOC Card 3 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="goToScreen(7)">
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
+                            onclick="goToScreen(7)">
                             <div class="space-y-3 text-center">
-                                <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto text-lg font-bold">3</div>
+                                <div
+                                    class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto text-lg font-bold">
+                                    3</div>
                                 <h3 class="text-sm font-bold text-slate-800">Interaksi & Simulasi</h3>
-                                <p class="text-slate-500 text-xs leading-relaxed">Penerokaan situasi keselamatan dan operasi makanan.</p>
+                                <p class="text-slate-500 text-xs leading-relaxed">Penerokaan situasi keselamatan dan
+                                    operasi makanan.</p>
                             </div>
                             <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
                                 <span>Estimasi: 3 Min</span>
                             </div>
                         </div>
                         <!-- TOC Card 4 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="goToScreen(10)">
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
+                            onclick="goToScreen(10)">
                             <div class="space-y-3 text-center">
-                                <div class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mx-auto text-lg font-bold">4</div>
+                                <div
+                                    class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mx-auto text-lg font-bold">
+                                    4</div>
                                 <h3 class="text-sm font-bold text-slate-800">Cabaran Interaktif</h3>
-                                <p class="text-slate-500 text-xs leading-relaxed">Aktiviti pengukuhan pembelajaran & pengkategorian.</p>
+                                <p class="text-slate-500 text-xs leading-relaxed">Aktiviti pengukuhan pembelajaran &
+                                    pengkategorian.</p>
                             </div>
                             <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
                                 <span>Estimasi: 2 Min</span>
                             </div>
                         </div>
                         <!-- TOC Card 5 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer" onclick="goToScreen(12)">
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
+                            onclick="goToScreen(12)">
                             <div class="space-y-3 text-center">
-                                <div class="w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto text-lg font-bold">5</div>
+                                <div
+                                    class="w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto text-lg font-bold">
+                                    5</div>
                                 <h3 class="text-sm font-bold text-slate-800">Penilaian Akhir</h3>
-                                <p class="text-slate-500 text-xs leading-relaxed">Ujian kefahaman selepas modul selesai.</p>
+                                <p class="text-slate-500 text-xs leading-relaxed">Ujian kefahaman selepas modul selesai.
+                                </p>
                             </div>
                             <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
                                 <span>Lulus: Min 80%</span>
@@ -261,7 +346,8 @@
 
                     <div class="bg-white border border-slate-200 rounded-xl p-5 flex items-center space-x-3 shadow-sm">
                         <i class="fa-solid fa-circle-info text-teal-650 text-lg animate-pulse"></i>
-                        <span class="text-xs md:text-sm text-slate-655">Sila ikuti urutan pembelajaran linear. Selesaikan aktiviti untuk melayakkan diri ke halaman seterusnya.</span>
+                        <span class="text-xs md:text-sm text-slate-655">Sila ikuti urutan pembelajaran linear.
+                            Selesaikan aktiviti untuk melayakkan diri ke halaman seterusnya.</span>
                     </div>
                 </div>
 
@@ -269,71 +355,99 @@
                 <div id="screen-3" class="screen-view space-y-6 py-4 hidden">
                     <div class="space-y-1">
                         <h2 class="text-2xl font-extrabold text-slate-900">Objektif Pembelajaran</h2>
-                        <p class="text-slate-500 text-sm">Sila klik pada mana-mana objektif pembelajaran di bawah untuk membuka penerangan:</p>
+                        <p class="text-slate-500 text-sm">Sila klik pada mana-mana objektif pembelajaran di bawah untuk
+                            membuka penerangan:</p>
                     </div>
 
                     <div class="space-y-3">
                         <!-- Obj Row 1 (Green) -->
-                        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
-                            <button onclick="revealObjective(1)" class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
+                        <div
+                            class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
+                            <button onclick="revealObjective(1)"
+                                class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
                                 <div class="flex items-center space-x-4">
-                                    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">1</div>
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">
+                                        1</div>
                                     <span class="text-sm font-bold text-slate-800">Konsep Teknologi Makanan</span>
                                 </div>
                                 <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-1"></i>
                             </button>
-                            <div id="obj-content-1" class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Memahami definisi teknologi makanan serta peranannya dalam penghasilan, pemprosesan, dan pengurusan makanan secara saintifik.
+                            <div id="obj-content-1"
+                                class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
+                                Memahami definisi teknologi makanan serta peranannya dalam penghasilan, pemprosesan, dan
+                                pengurusan makanan secara saintifik.
                             </div>
                         </div>
 
                         <!-- Obj Row 2 (Blue) -->
-                        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
-                            <button onclick="revealObjective(2)" class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
+                        <div
+                            class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
+                            <button onclick="revealObjective(2)"
+                                class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
                                 <div class="flex items-center space-x-4">
-                                    <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">2</div>
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">
+                                        2</div>
                                     <span class="text-sm font-bold text-slate-800">Rantaian Industri Makanan</span>
                                 </div>
                                 <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-2"></i>
                             </button>
-                            <div id="obj-content-2" class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Mengenal pasti proses utama dalam rantaian pengeluaran makanan daripada bahan mentah hingga pengedaran berpusat.
+                            <div id="obj-content-2"
+                                class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
+                                Mengenal pasti proses utama dalam rantaian pengeluaran makanan daripada bahan mentah
+                                hingga pengedaran berpusat.
                             </div>
                         </div>
 
                         <!-- Obj Row 3 (Purple) -->
-                        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
-                            <button onclick="revealObjective(3)" class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
+                        <div
+                            class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
+                            <button onclick="revealObjective(3)"
+                                class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
                                 <div class="flex items-center space-x-4">
-                                    <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold">3</div>
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold">
+                                        3</div>
                                     <span class="text-sm font-bold text-slate-800">Keselamatan & Kualiti</span>
                                 </div>
                                 <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-3"></i>
                             </button>
-                            <div id="obj-content-3" class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Memahami kepentingan keselamatan makanan, kawalan kualiti, pemantauan rantaian sejuk beku, dan pematuhan standard industri (HACCP/ISO).
+                            <div id="obj-content-3"
+                                class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
+                                Memahami kepentingan keselamatan makanan, kawalan kualiti, pemantauan rantaian sejuk
+                                beku, dan pematuhan standard industri (HACCP/ISO).
                             </div>
                         </div>
 
                         <!-- Obj Row 4 (Orange) -->
-                        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
-                            <button onclick="revealObjective(4)" class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
+                        <div
+                            class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
+                            <button onclick="revealObjective(4)"
+                                class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
                                 <div class="flex items-center space-x-4">
-                                    <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">4</div>
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">
+                                        4</div>
                                     <span class="text-sm font-bold text-slate-800">Aplikasi Industri & Inovasi</span>
                                 </div>
                                 <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-4"></i>
                             </button>
-                            <div id="obj-content-4" class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Meneroka bagaimana teknologi menyokong kecekapan operasi and pembangunan formulasi produk makanan baharu yang lebih mampan.
+                            <div id="obj-content-4"
+                                class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
+                                Meneroka bagaimana teknologi menyokong kecekapan operasi and pembangunan formulasi
+                                produk makanan baharu yang lebih mampan.
                             </div>
                         </div>
                     </div>
 
                     <!-- Informative guide -->
-                    <div class="bg-slate-100 border border-slate-200 rounded-xl p-4 shadow-sm flex items-center space-x-2">
+                    <div
+                        class="bg-slate-100 border border-slate-200 rounded-xl p-4 shadow-sm flex items-center space-x-2">
                         <i class="fa-solid fa-lock text-teal-600"></i>
-                        <span class="text-xs text-slate-550" id="objectiveGuide">Sila klik dan buka kesemua <span class="font-bold text-teal-600">4 objektif</span> di atas untuk mengaktifkan butang Seterusnya di bawah.</span>
+                        <span class="text-xs text-slate-550" id="objectiveGuide">Sila klik dan buka kesemua <span
+                                class="font-bold text-teal-600">4 objektif</span> di atas untuk mengaktifkan butang
+                            Seterusnya di bawah.</span>
                     </div>
                 </div>
 
@@ -342,55 +456,73 @@
                     <div class="flex justify-between items-center border-b border-slate-200 pb-3">
                         <div class="space-y-1">
                             <h2 class="text-xl font-bold text-slate-900">Video Pengenalan Eksklusif</h2>
-                            <p class="text-xs text-slate-500">Penerangan ringkas korporat mengenai teknologi industri makanan moden.</p>
+                            <p class="text-xs text-slate-500">Penerangan ringkas korporat mengenai teknologi industri
+                                makanan moden.</p>
                         </div>
-                        <span class="text-[11px] bg-slate-100 border border-slate-200 px-2.5 py-1 rounded text-slate-600">Tempoh: <span class="font-mono">0:25</span></span>
+                        <span
+                            class="text-[11px] bg-slate-100 border border-slate-200 px-2.5 py-1 rounded text-slate-600">Tempoh:
+                            <span class="font-mono">0:25</span></span>
                     </div>
 
                     <!-- Video Simulator Frame -->
-                    <div class="relative bg-slate-900 aspect-video rounded-xl overflow-hidden border border-slate-200 shadow-xl flex flex-col justify-between">
-                        <div class="absolute inset-0 flex items-center justify-center p-6 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(15,23,42,0.8) 0%, rgba(15,23,42,0.95) 100%);">
-                            
+                    <div
+                        class="relative bg-slate-900 aspect-video rounded-xl overflow-hidden border border-slate-200 shadow-xl flex flex-col justify-between">
+                        <div class="absolute inset-0 flex items-center justify-center p-6 bg-cover bg-center"
+                            style="background-image: linear-gradient(to bottom, rgba(15,23,42,0.8) 0%, rgba(15,23,42,0.95) 100%);">
+
                             <div class="text-center space-y-4 max-w-lg" id="videoGraphicContainer">
-                                <div class="w-16 h-16 bg-teal-500/10 text-teal-400 rounded-full flex items-center justify-center text-2xl mx-auto border border-teal-500/30 animate-pulse">
+                                <div
+                                    class="w-16 h-16 bg-teal-500/10 text-teal-400 rounded-full flex items-center justify-center text-2xl mx-auto border border-teal-500/30 animate-pulse">
                                     <i class="fa-solid fa-industry"></i>
                                 </div>
                                 <h3 class="text-lg font-bold text-slate-200" id="videoSceneTitle">Teknologi Makanan</h3>
-                                <p class="text-xs text-slate-400" id="videoSceneDesc">Mula meneroka bagaimana teknologi menyokong kecekapan, kualiti dan inovasi dalam industri makanan.</p>
+                                <p class="text-xs text-slate-400" id="videoSceneDesc">Mula meneroka bagaimana teknologi
+                                    menyokong kecekapan, kualiti dan inovasi dalam industri makanan.</p>
                             </div>
                         </div>
 
                         <!-- Mid Screen Big Play Button Overlay -->
                         <div class="absolute inset-0 flex items-center justify-center z-10" id="bigPlayOverlay">
-                            <button onclick="toggleSimulatedVideo()" class="w-16 h-16 rounded-full bg-teal-600 hover:bg-teal-500 text-white flex items-center justify-center text-xl shadow-lg transform hover:scale-105 transition-all">
+                            <button onclick="toggleSimulatedVideo()"
+                                class="w-16 h-16 rounded-full bg-teal-600 hover:bg-teal-500 text-white flex items-center justify-center text-xl shadow-lg transform hover:scale-105 transition-all">
                                 <i class="fa-solid fa-play ml-1"></i>
                             </button>
                         </div>
 
                         <!-- Subtitle Box -->
-                        <div class="z-10 w-full px-8 text-center bg-slate-950/85 backdrop-blur-sm border-t border-slate-800/50 py-3 text-xs text-teal-300 font-medium" id="videoSubtitles">
+                        <div class="z-10 w-full px-8 text-center bg-slate-950/85 backdrop-blur-sm border-t border-slate-800/50 py-3 text-xs text-teal-300 font-medium"
+                            id="videoSubtitles">
                             Sila klik butang main untuk memulakan video pengenalan.
                         </div>
 
                         <!-- Custom Controls Bar -->
-                        <div class="z-10 bg-slate-950 border-t border-slate-800 px-4 py-2.5 flex items-center justify-between">
+                        <div
+                            class="z-10 bg-slate-950 border-t border-slate-800 px-4 py-2.5 flex items-center justify-between">
                             <div class="flex items-center space-x-3">
-                                <button onclick="toggleSimulatedVideo()" class="text-white hover:text-teal-400 focus:outline-none text-sm transition-colors" id="videoPlayBtn">
+                                <button onclick="toggleSimulatedVideo()"
+                                    class="text-white hover:text-teal-400 focus:outline-none text-sm transition-colors"
+                                    id="videoPlayBtn">
                                     <i class="fa-solid fa-play"></i>
                                 </button>
                                 <span class="text-[11px] font-mono text-slate-400" id="videoTimeText">0:00 / 0:25</span>
                             </div>
 
                             <!-- Video Progress Bar -->
-                            <div class="flex-1 mx-4 bg-slate-800 rounded-full h-1.5 overflow-hidden relative cursor-pointer" onclick="scrubVideo(event)">
-                                <div class="bg-teal-500 h-1.5 transition-all duration-300" id="videoProgressFill" style="width: 0%"></div>
+                            <div class="flex-1 mx-4 bg-slate-800 rounded-full h-1.5 overflow-hidden relative cursor-pointer"
+                                onclick="scrubVideo(event)">
+                                <div class="bg-teal-500 h-1.5 transition-all duration-300" id="videoProgressFill"
+                                    style="width: 0%"></div>
                             </div>
 
                             <div class="flex items-center space-x-3">
-                                <button onclick="skipVideo()" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded border border-slate-700" title="Langkau tontonan video">
+                                <button onclick="skipVideo()"
+                                    class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded border border-slate-700"
+                                    title="Langkau tontonan video">
                                     <span class="text-[10px] font-semibold">Langkau Video</span>
                                 </button>
-                                <button onclick="toggleAudioSpeech()" class="text-slate-400 hover:text-white text-xs flex items-center space-x-1 bg-slate-900 px-2.5 py-1 rounded border border-slate-800" title="Mainkan Transkrip Suara (BM)">
+                                <button onclick="toggleAudioSpeech()"
+                                    class="text-slate-400 hover:text-white text-xs flex items-center space-x-1 bg-slate-900 px-2.5 py-1 rounded border border-slate-800"
+                                    title="Mainkan Transkrip Suara (BM)">
                                     <i class="fa-solid fa-volume-high text-teal-400"></i>
                                     <span class="text-[10px]">Audio BM</span>
                                 </button>
@@ -399,67 +531,59 @@
                     </div>
                 </div>
 
-                <!-- SCREEN 5: PROCESS EXPLORER -->
-                <div id="screen-5" class="screen-view space-y-6 py-4 hidden">
-                    <div class="text-center space-y-1">
-                        <h2 class="text-2xl font-extrabold text-slate-900">Proses Utama dalam Industri Makanan</h2>
-                        <p class="text-sm text-slate-500">Sila klik pada setiap peringkat di bawah untuk meneroka maklumat lanjut.</p>
+                <!-- SCREEN 5: PROCESS EXPLORER (CLICK & REVEAL - ACCORDING TO IMAGE) -->
+                <div id="screen-5" class="screen-view space-y-4 py-4 hidden">
+                    <div class="text-center mb-4">
+                        <h2 class="text-2xl font-extrabold text-slate-900">Rantai Pengeluaran Makanan</h2>
+                        <p class="text-xs text-slate-500">Klik pada tab di sebelah kanan untuk melihat setiap fasa
+                            industri.</p>
                     </div>
 
-                    <!-- Process Timeline Cards -->
-                    <div class="grid grid-cols-5 gap-3 relative py-2">
-                        <div class="absolute top-[28px] left-[10%] right-[10%] h-0.5 bg-slate-200 z-0"></div>
-                        
-                        <button onclick="selectProcessStep(1)" class="process-step-btn z-10 flex flex-col items-center focus:outline-none" id="proc-btn-1">
-                            <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs font-bold shadow-md transition-all border-4 border-white" id="proc-dot-1">1</div>
-                            <span class="text-xs font-bold text-teal-700 mt-2 block" id="proc-lbl-1">Bahan Mentah</span>
-                        </button>
-                        <button onclick="selectProcessStep(2)" class="process-step-btn z-10 flex flex-col items-center focus:outline-none" id="proc-btn-2">
-                            <div class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold transition-all border-4 border-white" id="proc-dot-2">2</div>
-                            <span class="text-xs font-medium text-slate-500 mt-2 block" id="proc-lbl-2">Pemprosesan</span>
-                        </button>
-                        <button onclick="selectProcessStep(3)" class="process-step-btn z-10 flex flex-col items-center focus:outline-none" id="proc-btn-3">
-                            <div class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold transition-all border-4 border-white" id="proc-dot-3">3</div>
-                            <span class="text-xs font-medium text-slate-500 mt-2 block" id="proc-lbl-3">Pembungkusan</span>
-                        </button>
-                        <button onclick="selectProcessStep(4)" class="process-step-btn z-10 flex flex-col items-center focus:outline-none" id="proc-btn-4">
-                            <div class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold transition-all border-4 border-white" id="proc-dot-4">4</div>
-                            <span class="text-xs font-medium text-slate-500 mt-2 block" id="proc-lbl-4">Penyimpanan</span>
-                        </button>
-                        <button onclick="selectProcessStep(5)" class="process-step-btn z-10 flex flex-col items-center focus:outline-none" id="proc-btn-5">
-                            <div class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold transition-all border-4 border-white" id="proc-dot-5">5</div>
-                            <span class="text-xs font-medium text-slate-500 mt-2 block" id="proc-lbl-5">Pengedaran</span>
-                        </button>
-                    </div>
+                    <!-- Layout based on image -->
+                    <div class="flex h-[480px] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-md">
+                        <!-- Left Side: ACTIVE TAB LABEL -->
+                        <div id="active-side-tab"
+                            class="w-12 bg-slate-800 flex items-center justify-center transition-all duration-300 text-center">
+                            <span class="vertical-text text-white font-bold uppercase tracking-widest text-[11px]"
+                                id="currentActiveLabel">Bahan Mentah</span>
+                        </div>
 
-                    <!-- Step Content Card -->
-                    <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm min-h-[240px] flex flex-col md:flex-row gap-6 items-center justify-between" id="processContentCard">
-                        <div class="space-y-4 flex-1">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center text-lg" id="proc-desc-icon">
-                                    <i class="fa-solid fa-leaf"></i>
+                        <!-- Center: CONTENT AREA (Text Left, Image Right) -->
+                        <div class="flex-1 flex flex-col p-10 bg-slate-50/30">
+                            <div class="flex h-full gap-10">
+                                <!-- Text Left -->
+                                <div class="w-1/2 space-y-6">
+                                    <h3 class="text-xl font-bold text-slate-900 border-b-2 border-teal-600 pb-2 inline-block"
+                                        id="proc-title-disp">Fasa 1: Bahan Mentah</h3>
+                                    <div class="space-y-4">
+                                        <p class="text-sm leading-relaxed text-slate-600" id="proc-desc-disp">Pemilihan
+                                            bahan mentah yang berkualiti merupakan langkah awal dalam memastikan
+                                            keselamatan dan kualiti produk makanan.</p>
+                                        <ul id="proc-bullets-list" class="space-y-2">
+                                            <!-- Dynamically generated bullets -->
+                                        </ul>
+                                    </div>
                                 </div>
-                                <h3 class="text-lg font-bold text-slate-900" id="proc-desc-title">Pemilihan Bahan Mentah Berkualiti</h3>
+                                <!-- Image Right -->
+                                <div
+                                    class="w-1/2 bg-white border border-slate-200 rounded-2xl shadow-inner flex items-center justify-center p-6">
+                                    <div id="proc-img-disp" class="w-full h-full flex items-center justify-center">
+                                        <!-- SVG Injected here -->
+                                    </div>
+                                </div>
                             </div>
-                            <p class="text-slate-600 text-sm leading-relaxed" id="proc-desc-text">
-                                Pemilihan bahan mentah yang berkualiti tinggi merupakan langkah awal paling penting dalam menjamin rantaian makanan yang selamat, berkhasiat, dan berkualiti tinggi.
-                            </p>
                         </div>
-                        
-                        <!-- SVG graphic representation -->
-                        <div class="w-full md:w-56 h-40 shrink-0 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden p-3 flex flex-col items-center justify-center text-center space-y-2">
-                            <svg viewBox="0 0 100 100" class="w-20 h-20 text-teal-600">
-                                <path d="M50 15 Q30 35 30 55 A20 20 0 0 0 70 55 Q70 35 50 15 Z" fill="#0d9488" fill-opacity="0.1" stroke="#0d9488" stroke-width="3"/>
-                                <circle cx="50" cy="55" r="8" fill="#10b981"/>
-                                <path d="M50 15 L50 25" stroke="#0d9488" stroke-width="2"/>
-                            </svg>
-                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest" id="proc-illustration-lbl">Pemeriksaan Bahan</span>
+
+                        <!-- Right Side: TAB BUTTONS (Click and Reveal) -->
+                        <div id="inactive-tabs-container" class="w-14 bg-slate-200 flex flex-col">
+                            <!-- Tab buttons generated dynamically -->
                         </div>
                     </div>
 
-                    <!-- Progress tracker -->
-                    <div class="text-right text-xs text-slate-400 font-medium" id="proc-progress-tracker">
-                        Langkah 1 dari 5 dilihat
+                    <!-- Clean progress tracker -->
+                    <div class="flex justify-between items-center text-xs text-slate-500 mt-2 px-1">
+                        <span id="proc-progress-tracker" class="font-bold text-teal-600">Langkah 1 dari 5 dilihat</span>
+                        <span>Sila klik semua fasa di sebelah kanan untuk menyahkunci modul seterusnya.</span>
                     </div>
                 </div>
 
@@ -467,58 +591,75 @@
                 <div id="screen-6" class="screen-view space-y-4 py-4 hidden">
                     <div class="space-y-1">
                         <h2 class="text-xl font-bold text-slate-900">Terokai Fasiliti Pengeluaran</h2>
-                        <p class="text-xs text-slate-500">Klik pada titik penderia hijau (+) di dalam pelan kilang untuk menyiasat setiap kawasan operasi.</p>
+                        <p class="text-xs text-slate-500">Klik pada titik penderia hijau (+) di dalam pelan kilang untuk
+                            menyiasat setiap kawasan operasi.</p>
                     </div>
 
                     <!-- Layout: 70% Graphic, 30% Info panel -->
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                        
-                        <div class="lg:col-span-8 bg-white rounded-xl overflow-hidden border border-slate-200 p-4 relative min-h-[340px] flex items-center justify-center shadow-sm">
+
+                        <div
+                            class="lg:col-span-8 bg-white rounded-xl overflow-hidden border border-slate-200 p-4 relative min-h-[340px] flex items-center justify-center shadow-sm">
                             <svg viewBox="0 0 800 400" class="w-full h-auto text-slate-300">
-                                <rect x="10" y="10" width="780" height="380" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
-                                <path d="M10 200 H 790 M250 10 V 390 M550 10 V 390" stroke="#e2e8f0" stroke-dasharray="6,6"/>
-                                
-                                <text x="130" y="40" fill="#94a3b8" font-size="11" font-weight="800" text-anchor="middle" letter-spacing="2">KAWASAN PROSES</text>
-                                <text x="400" y="40" fill="#94a3b8" font-size="11" font-weight="800" text-anchor="middle" letter-spacing="2">MAKMAL KAWALAN KUALITI</text>
-                                <text x="670" y="40" fill="#94a3b8" font-size="11" font-weight="800" text-anchor="middle" letter-spacing="2">KAWASAN PEMBUNGKUSAN</text>
-                                
-                                <rect x="40" y="120" width="170" height="180" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
-                                <circle cx="125" cy="200" r="18" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.5"/>
-                                <text x="125" y="260" fill="#64748b" font-size="10" font-weight="bold" text-anchor="middle">Sistem Kebersihan</text>
+                                <rect x="10" y="10" width="780" height="380" rx="12" fill="#f8fafc" stroke="#e2e8f0"
+                                    stroke-width="2" />
+                                <path d="M10 200 H 790 M250 10 V 390 M550 10 V 390" stroke="#e2e8f0"
+                                    stroke-dasharray="6,6" />
 
-                                <rect x="290" y="120" width="220" height="180" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
-                                <line x1="290" y1="210" x2="510" y2="210" stroke="#f1f5f9" stroke-width="4"/>
-                                <text x="400" y="260" fill="#64748b" font-size="10" font-weight="bold" text-anchor="middle">Pemantauan Standard</text>
+                                <text x="130" y="40" fill="#94a3b8" font-size="11" font-weight="800"
+                                    text-anchor="middle" letter-spacing="2">KAWASAN PROSES</text>
+                                <text x="400" y="40" fill="#94a3b8" font-size="11" font-weight="800"
+                                    text-anchor="middle" letter-spacing="2">MAKMAL KAWALAN KUALITI</text>
+                                <text x="670" y="40" fill="#94a3b8" font-size="11" font-weight="800"
+                                    text-anchor="middle" letter-spacing="2">KAWASAN PEMBUNGKUSAN</text>
 
-                                <rect x="580" y="120" width="180" height="180" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
-                                <circle cx="670" cy="200" r="15" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
-                                <text x="670" y="260" fill="#64748b" font-size="10" font-weight="bold" text-anchor="middle">Storan Bekalan</text>
+                                <rect x="40" y="120" width="170" height="180" rx="8" fill="#ffffff" stroke="#e2e8f0"
+                                    stroke-width="2" />
+                                <circle cx="125" cy="200" r="18" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.5" />
+                                <text x="125" y="260" fill="#64748b" font-size="10" font-weight="bold"
+                                    text-anchor="middle">Sistem Kebersihan</text>
+
+                                <rect x="290" y="120" width="220" height="180" rx="8" fill="#ffffff" stroke="#e2e8f0"
+                                    stroke-width="2" />
+                                <line x1="290" y1="210" x2="510" y2="210" stroke="#f1f5f9" stroke-width="4" />
+                                <text x="400" y="260" fill="#64748b" font-size="10" font-weight="bold"
+                                    text-anchor="middle">Pemantauan Standard</text>
+
+                                <rect x="580" y="120" width="180" height="180" rx="8" fill="#ffffff" stroke="#e2e8f0"
+                                    stroke-width="2" />
+                                <circle cx="670" cy="200" r="15" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5" />
+                                <text x="670" y="260" fill="#64748b" font-size="10" font-weight="bold"
+                                    text-anchor="middle">Storan Bekalan</text>
                             </svg>
 
                             <!-- Interactive Pulse Hotspots -->
                             <div class="absolute top-[50%] left-[16%] transform -translate-x-1/2 -translate-y-1/2">
-                                <button onclick="triggerHotspot(1)" class="relative w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center focus:outline-none z-10 hover:scale-110 transition-transform">
+                                <button onclick="triggerHotspot(1)"
+                                    class="relative w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center focus:outline-none z-10 hover:scale-110 transition-transform">
                                     <span class="absolute inset-0 rounded-full bg-teal-400 animate-pulse-ring"></span>
                                     <i class="fa-solid fa-plus text-xs"></i>
                                 </button>
                             </div>
 
                             <div class="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2">
-                                <button onclick="triggerHotspot(2)" class="relative w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center focus:outline-none z-10 hover:scale-110 transition-transform">
+                                <button onclick="triggerHotspot(2)"
+                                    class="relative w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center focus:outline-none z-10 hover:scale-110 transition-transform">
                                     <span class="absolute inset-0 rounded-full bg-teal-400 animate-pulse-ring"></span>
                                     <i class="fa-solid fa-plus text-xs"></i>
                                 </button>
                             </div>
 
                             <div class="absolute top-[35%] left-[84%] transform -translate-x-1/2 -translate-y-1/2">
-                                <button onclick="triggerHotspot(3)" class="relative w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center focus:outline-none z-10 hover:scale-110 transition-transform">
+                                <button onclick="triggerHotspot(3)"
+                                    class="relative w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center focus:outline-none z-10 hover:scale-110 transition-transform">
                                     <span class="absolute inset-0 rounded-full bg-teal-400 animate-pulse-ring"></span>
                                     <i class="fa-solid fa-plus text-xs"></i>
                                 </button>
                             </div>
 
                             <div class="absolute top-[70%] left-[84%] transform -translate-x-1/2 -translate-y-1/2">
-                                <button onclick="triggerHotspot(4)" class="relative w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center focus:outline-none z-10 hover:scale-110 transition-transform">
+                                <button onclick="triggerHotspot(4)"
+                                    class="relative w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center focus:outline-none z-10 hover:scale-110 transition-transform">
                                     <span class="absolute inset-0 rounded-full bg-teal-400 animate-pulse-ring"></span>
                                     <i class="fa-solid fa-plus text-xs"></i>
                                 </button>
@@ -526,23 +667,32 @@
                         </div>
 
                         <!-- Info Panel -->
-                        <div class="lg:col-span-4 bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between shadow-sm">
+                        <div
+                            class="lg:col-span-4 bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between shadow-sm">
                             <div class="space-y-4" id="hotspotInfoPanel">
-                                <div class="bg-teal-50 border border-teal-100 p-3.5 rounded-lg flex items-start space-x-2">
+                                <div
+                                    class="bg-teal-50 border border-teal-100 p-3.5 rounded-lg flex items-start space-x-2">
                                     <i class="fa-solid fa-circle-exclamation text-teal-600 mt-0.5"></i>
-                                    <p class="text-[11px] text-teal-800 leading-normal font-medium">Terokai keempat-empat zon pengeluaran dengan mengklik simbol penderia pada pelan kilang di sebelah kiri.</p>
+                                    <p class="text-[11px] text-teal-800 leading-normal font-medium">Terokai
+                                        keempat-empat zon pengeluaran dengan mengklik simbol penderia pada pelan kilang
+                                        di sebelah kiri.</p>
                                 </div>
                                 <div class="space-y-2">
-                                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest" id="hotspotTitle">Zon Keselamatan</h3>
-                                    <h4 class="text-base font-bold text-slate-900" id="hotspotDisplayTitle">Sila Pilih Zon</h4>
-                                    <p class="text-slate-500 text-xs leading-relaxed" id="hotspotDesc">Fasiliti moden yang mengaplikasikan amalan kebersihan tinggi bagi menjamin tiada sebarang pencemaran silang.</p>
+                                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest"
+                                        id="hotspotTitle">Zon Keselamatan</h3>
+                                    <h4 class="text-base font-bold text-slate-900" id="hotspotDisplayTitle">Sila Pilih
+                                        Zon</h4>
+                                    <p class="text-slate-500 text-xs leading-relaxed" id="hotspotDesc">Fasiliti moden
+                                        yang mengaplikasikan amalan kebersihan tinggi bagi menjamin tiada sebarang
+                                        pencemaran silang.</p>
                                 </div>
                             </div>
 
                             <div class="pt-4 border-t border-slate-100">
                                 <div class="flex justify-between items-center text-[11px] text-slate-500 font-semibold">
                                     <span>Zon Disiasat:</span>
-                                    <span class="font-mono font-bold text-teal-600" id="hotspotsVisitedCount">0 / 4 Teroka</span>
+                                    <span class="font-mono font-bold text-teal-600" id="hotspotsVisitedCount">0 / 4
+                                        Teroka</span>
                                 </div>
                             </div>
                         </div>
@@ -553,28 +703,37 @@
                 <div id="screen-7" class="screen-view space-y-4 py-4 hidden">
                     <div class="flex justify-between items-center border-b border-slate-200 pb-2">
                         <div class="space-y-1">
-                            <span class="text-[10px] bg-red-100 text-red-700 border border-red-200 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Amaran Operasi</span>
+                            <span
+                                class="text-[10px] bg-red-100 text-red-700 border border-red-200 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Amaran
+                                Operasi</span>
                             <h2 class="text-lg font-bold text-slate-900">Simulasi Situasi: Suhu Di Luar Julat</h2>
                         </div>
                         <div class="text-right">
                             <span class="text-[10px] text-slate-400 block uppercase font-bold">Fasa Kajian Kes</span>
-                            <span class="text-xs font-mono font-bold text-teal-600" id="scenarioFlowLabel">Langkah 1: Kenal Pasti Isu</span>
+                            <span class="text-xs font-mono font-bold text-teal-600" id="scenarioFlowLabel">Langkah 1:
+                                Kenal Pasti Isu</span>
                         </div>
                     </div>
 
                     <!-- Flow Steps Lock Tracker -->
-                    <div class="grid grid-cols-3 gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200 text-center">
-                        <div class="py-1 px-2 rounded-md text-xs font-bold bg-white text-teal-800 shadow-sm" id="scen-step-tab-1">1. Kenal Pasti Isu</div>
-                        <div class="py-1 px-2 rounded-md text-xs font-bold text-slate-400" id="scen-step-tab-2">2. Buat Keputusan</div>
-                        <div class="py-1 px-2 rounded-md text-xs font-bold text-slate-400" id="scen-step-tab-3">3. Dapatkan Maklum Balas</div>
+                    <div
+                        class="grid grid-cols-3 gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200 text-center">
+                        <div class="py-1 px-2 rounded-md text-xs font-bold bg-white text-teal-800 shadow-sm"
+                            id="scen-step-tab-1">1. Kenal Pasti Isu</div>
+                        <div class="py-1 px-2 rounded-md text-xs font-bold text-slate-400" id="scen-step-tab-2">2. Buat
+                            Keputusan</div>
+                        <div class="py-1 px-2 rounded-md text-xs font-bold text-slate-400" id="scen-step-tab-3">3.
+                            Dapatkan Maklum Balas</div>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                         <!-- Left Panel -->
-                        <div class="lg:col-span-4 bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between shadow-sm">
+                        <div
+                            class="lg:col-span-4 bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between shadow-sm">
                             <div class="space-y-4">
                                 <div class="bg-red-50 border border-red-200 p-4 rounded-xl space-y-2" id="alertBox">
-                                    <div class="flex items-center space-x-2 text-red-700 font-bold text-xs uppercase tracking-wider">
+                                    <div
+                                        class="flex items-center space-x-2 text-red-700 font-bold text-xs uppercase tracking-wider">
                                         <i class="fa-solid fa-triangle-exclamation animate-pulse"></i>
                                         <span>Amaran Penyimpanan</span>
                                     </div>
@@ -584,37 +743,46 @@
                                             <span class="font-bold text-red-600 text-sm">11°C</span>
                                         </div>
                                         <div>
-                                            <span class="text-[10px] text-slate-400 block uppercase">Julat Selamat</span>
+                                            <span class="text-[10px] text-slate-400 block uppercase">Julat
+                                                Selamat</span>
                                             <span class="font-bold text-teal-600 text-sm">0°C - 5°C</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="space-y-1.5">
-                                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Deskripsi Isu</h3>
+                                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Deskripsi Isu
+                                    </h3>
                                     <p class="text-xs text-slate-600 leading-relaxed">
-                                        Satu batch makanan sejuk beku direkodkan berada di luar julat suhu penyimpanan safe semasa pemeriksaan rutin.
+                                        Satu batch makanan sejuk beku direkodkan berada di luar julat suhu penyimpanan
+                                        safe semasa pemeriksaan rutin.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="pt-4 border-t border-slate-100 flex items-center space-x-2.5">
                                 <i class="fa-solid fa-clipboard text-slate-400"></i>
-                                <span class="text-[10px] text-slate-400 leading-normal italic">Pematuhan Prosedur Standard (SOP) Kementerian Kesihatan Malaysia.</span>
+                                <span class="text-[10px] text-slate-400 leading-normal italic">Pematuhan Prosedur
+                                    Standard (SOP) Kementerian Kesihatan Malaysia.</span>
                             </div>
                         </div>
 
                         <!-- Right Panel -->
-                        <div class="lg:col-span-8 bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between shadow-sm" id="scenarioInteractionArea">
+                        <div class="lg:col-span-8 bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between shadow-sm"
+                            id="scenarioInteractionArea">
                             <div class="space-y-4">
                                 <div class="flex items-center justify-between">
-                                    <h3 class="text-sm font-bold text-slate-900">Mengesahkan Ketiadaan Pemantauan Suhu</h3>
-                                    <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600" title="Pegawai QA">
+                                    <h3 class="text-sm font-bold text-slate-900">Mengesahkan Ketiadaan Pemantauan Suhu
+                                    </h3>
+                                    <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600"
+                                        title="Pegawai QA">
                                         <i class="fa-solid fa-user-doctor"></i>
                                     </div>
                                 </div>
                                 <p class="text-xs text-slate-600 leading-relaxed">
-                                    Satu batch makanan sejuk beku didapati terbiar di luar kawasan terkawal. Sebagai pegawai operasi, apakah tindakan paling sesuai untuk mengurangkan risiko pembiakan bakteria bahaya?
+                                    Satu batch makanan sejuk beku didapati terbiar di luar kawasan terkawal. Sebagai
+                                    pegawai operasi, apakah tindakan paling sesuai untuk mengurangkan risiko pembiakan
+                                    bakteria bahaya?
                                 </p>
                                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
                                     <div class="flex justify-between items-center text-xs">
@@ -622,13 +790,15 @@
                                         <span class="text-red-600 font-bold">Kritikal</span>
                                     </div>
                                     <p class="text-[11px] text-slate-500 leading-normal">
-                                        Setiap keputusan yang anda buat memberi impak kepada keselamatan makanan dan kepatuhan operasi perundangan halal serta GMP.
+                                        Setiap keputusan yang anda buat memberi impak kepada keselamatan makanan dan
+                                        kepatuhan operasi perundangan halal serta GMP.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="mt-6 pt-4 border-t border-slate-100 flex justify-end">
-                                <button onclick="advanceScenarioToStep2()" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center space-x-1 shadow">
+                                <button onclick="advanceScenarioToStep2()"
+                                    class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center space-x-1 shadow">
                                     <span>Mula Buat Keputusan</span>
                                     <i class="fa-solid fa-arrow-right"></i>
                                 </button>
@@ -641,47 +811,68 @@
                 <div id="screen-8" class="screen-view space-y-4 py-4 hidden">
                     <div class="space-y-1">
                         <h2 class="text-xl font-bold text-slate-900">Peranan Teknologi dalam Industri Makanan</h2>
-                        <p class="text-xs text-slate-500">Klik pada tab di atas untuk meneroka topik lain berkaitan sistem industri makanan moden.</p>
+                        <p class="text-xs text-slate-500">Klik pada tab di atas untuk meneroka topik lain berkaitan
+                            sistem industri makanan moden.</p>
                     </div>
 
                     <!-- Clean Pill style Tab Bar -->
                     <div class="flex flex-wrap gap-2 border-b border-slate-200 pb-2">
-                        <button onclick="toggleInfoTab(1)" class="info-tab-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-teal-600 text-white shadow-sm" id="tab-btn-1">
+                        <button onclick="toggleInfoTab(1)"
+                            class="info-tab-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-teal-600 text-white shadow-sm"
+                            id="tab-btn-1">
                             <i class="fa-solid fa-industry"></i><span>Teknologi</span>
                         </button>
-                        <button onclick="toggleInfoTab(2)" class="info-tab-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200" id="tab-btn-2">
+                        <button onclick="toggleInfoTab(2)"
+                            class="info-tab-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200"
+                            id="tab-btn-2">
                             <i class="fa-solid fa-shield-halved"></i><span>Keselamatan Makanan</span>
                         </button>
-                        <button onclick="toggleInfoTab(3)" class="info-tab-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200" id="tab-btn-3">
+                        <button onclick="toggleInfoTab(3)"
+                            class="info-tab-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200"
+                            id="tab-btn-3">
                             <i class="fa-solid fa-square-check"></i><span>Kualiti</span>
                         </button>
-                        <button onclick="toggleInfoTab(4)" class="info-tab-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200" id="tab-btn-4">
+                        <button onclick="toggleInfoTab(4)"
+                            class="info-tab-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200"
+                            id="tab-btn-4">
                             <i class="fa-solid fa-lightbulb"></i><span>Inovasi</span>
                         </button>
                     </div>
 
                     <!-- Right Content Area -->
-                    <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm min-h-[250px] flex flex-col md:flex-row gap-6 items-center" id="tabContentArea">
+                    <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm min-h-[250px] flex flex-col md:flex-row gap-6 items-center"
+                        id="tabContentArea">
                         <div class="space-y-4 flex-1">
-                            <h3 class="text-lg font-bold text-slate-900" id="tab-title-disp">Peranan Teknologi dalam Industri Makanan</h3>
+                            <h3 class="text-lg font-bold text-slate-900" id="tab-title-disp">Peranan Teknologi dalam
+                                Industri Makanan</h3>
                             <p class="text-xs md:text-sm text-slate-600 leading-relaxed" id="tab-desc-disp">
-                                Teknologi moden membantu meningkatkan kecekapan, konsistensi dan keselamatan makanan melalui automasi, pemantauan digital dan analitik data.
+                                Teknologi moden membantu meningkatkan kecekapan, konsistensi dan keselamatan makanan
+                                melalui automasi, pemantauan digital dan analitik data.
                             </p>
-                            
+
                             <ul class="space-y-1.5 text-xs text-slate-600 font-medium">
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-600"></i><span>Automasi proses pengeluaran</span></li>
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-600"></i><span>Pemantauan masa nyata</span></li>
-                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-600"></i><span>Kawalan kualiti digital yang konsisten</span></li>
+                                <li class="flex items-center space-x-2"><i
+                                        class="fa-solid fa-check text-emerald-600"></i><span>Automasi proses
+                                        pengeluaran</span></li>
+                                <li class="flex items-center space-x-2"><i
+                                        class="fa-solid fa-check text-emerald-600"></i><span>Pemantauan masa
+                                        nyata</span></li>
+                                <li class="flex items-center space-x-2"><i
+                                        class="fa-solid fa-check text-emerald-600"></i><span>Kawalan kualiti digital
+                                        yang konsisten</span></li>
                             </ul>
                         </div>
 
                         <!-- Graphic representation -->
-                        <div class="w-full md:w-64 h-40 shrink-0 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden p-3 flex flex-col justify-center items-center">
+                        <div
+                            class="w-full md:w-64 h-40 shrink-0 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden p-3 flex flex-col justify-center items-center">
                             <svg viewBox="0 0 100 100" class="w-24 h-24 text-teal-600">
-                                <rect x="25" y="25" width="50" height="50" rx="8" fill="#0d9488" fill-opacity="0.1" stroke="#0d9488" stroke-width="2"/>
-                                <path d="M40 50 L47 57 L60 42" fill="none" stroke="#0d9488" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="15" cy="15" r="5" fill="#3b82f6"/>
-                                <circle cx="85" cy="85" r="5" fill="#10b981"/>
+                                <rect x="25" y="25" width="50" height="50" rx="8" fill="#0d9488" fill-opacity="0.1"
+                                    stroke="#0d9488" stroke-width="2" />
+                                <path d="M40 50 L47 57 L60 42" fill="none" stroke="#0d9488" stroke-width="3"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <circle cx="15" cy="15" r="5" fill="#3b82f6" />
+                                <circle cx="85" cy="85" r="5" fill="#10b981" />
                             </svg>
                             <span class="text-[9px] font-bold text-slate-400 mt-1 uppercase">Sistem Rantai Pintar</span>
                         </div>
@@ -691,40 +882,56 @@
                 <!-- SCREEN 9: QUICK KNOWLEDGE CHECK -->
                 <div id="screen-9" class="screen-view space-y-6 py-4 hidden">
                     <div class="text-center max-w-xl mx-auto space-y-1">
-                        <span class="text-[10px] bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Cabaran Pantas</span>
+                        <span
+                            class="text-[10px] bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Cabaran
+                            Pantas</span>
                         <h2 class="text-2xl font-bold text-slate-900">Uji Pengetahuan Anda</h2>
-                        <p class="text-xs text-slate-500">Pilih jawapan yang paling tepat berdasarkan maklumat yang telah anda pelajari.</p>
+                        <p class="text-xs text-slate-500">Pilih jawapan yang paling tepat berdasarkan maklumat yang
+                            telah anda pelajari.</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch max-w-4xl mx-auto">
                         <!-- Left Clipboard -->
-                        <div class="md:col-span-4 bg-white border border-slate-200 rounded-xl p-5 flex flex-col items-center justify-center text-center shadow-sm">
+                        <div
+                            class="md:col-span-4 bg-white border border-slate-200 rounded-xl p-5 flex flex-col items-center justify-center text-center shadow-sm">
                             <svg viewBox="0 0 100 100" class="w-32 h-32">
-                                <rect x="25" y="15" width="50" height="70" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
-                                <rect x="35" y="10" width="30" height="8" rx="2" fill="#94a3b8"/>
-                                <line x1="35" y1="35" x2="65" y2="35" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-                                <line x1="35" y1="45" x2="60" y2="45" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-                                <line x1="35" y1="55" x2="55" y2="55" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-                                <circle cx="70" cy="70" r="10" fill="#3b82f6" fill-opacity="0.1"/>
-                                <path d="M66 70 L69 73 L74 67" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+                                <rect x="25" y="15" width="50" height="70" rx="4" fill="#ffffff" stroke="#cbd5e1"
+                                    stroke-width="2" />
+                                <rect x="35" y="10" width="30" height="8" rx="2" fill="#94a3b8" />
+                                <line x1="35" y1="35" x2="65" y2="35" stroke="#10b981" stroke-width="3"
+                                    stroke-linecap="round" />
+                                <line x1="35" y1="45" x2="60" y2="45" stroke="#10b981" stroke-width="3"
+                                    stroke-linecap="round" />
+                                <line x1="35" y1="55" x2="55" y2="55" stroke="#10b981" stroke-width="3"
+                                    stroke-linecap="round" />
+                                <circle cx="70" cy="70" r="10" fill="#3b82f6" fill-opacity="0.1" />
+                                <path d="M66 70 L69 73 L74 67" fill="none" stroke="#3b82f6" stroke-width="2"
+                                    stroke-linecap="round" />
                             </svg>
                             <div class="mt-2 space-y-1">
-                                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block">Statistik Latihan</span>
-                                <span class="text-xs font-mono font-bold text-teal-600" id="quizScoreLabel">Skor: 0</span>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block">Statistik
+                                    Latihan</span>
+                                <span class="text-xs font-mono font-bold text-teal-600" id="quizScoreLabel">Skor:
+                                    0</span>
                             </div>
                         </div>
 
                         <!-- Right Question Box -->
-                        <div class="md:col-span-8 bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col justify-between" id="quizBox">
+                        <div class="md:col-span-8 bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col justify-between"
+                            id="quizBox">
                             <div id="quizActiveArea" class="space-y-4">
                                 <div class="flex justify-between items-center text-xs">
-                                    <span class="text-slate-400 uppercase font-bold" id="quizProgressLabel">Soalan 1 dari 3</span>
-                                    <div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden border border-slate-200">
-                                        <div class="bg-teal-500 h-1.5 transition-all duration-300" id="quizProgressBar" style="width: 33%"></div>
+                                    <span class="text-slate-400 uppercase font-bold" id="quizProgressLabel">Soalan 1
+                                        dari 3</span>
+                                    <div
+                                        class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden border border-slate-200">
+                                        <div class="bg-teal-500 h-1.5 transition-all duration-300" id="quizProgressBar"
+                                            style="width: 33%"></div>
                                     </div>
                                 </div>
-                                <h3 class="text-sm md:text-base font-bold text-slate-800" id="quizQuestionText">Apakah tujuan utama teknologi dalam industri makanan?</h3>
-                                
+                                <h3 class="text-sm md:text-base font-bold text-slate-800" id="quizQuestionText">Apakah
+                                    tujuan utama teknologi dalam industri makanan?</h3>
+
                                 <div class="space-y-2.5" id="quizOptionsContainer">
                                     <!-- Options Injected -->
                                 </div>
@@ -741,7 +948,8 @@
 
                             <!-- Action btn -->
                             <div class="flex justify-end pt-3 border-t border-slate-100">
-                                <button id="quizActionBtn" disabled onclick="submitQuizAnswer()" class="bg-slate-105 bg-slate-100 text-slate-400 px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-not-allowed shadow-sm">
+                                <button id="quizActionBtn" disabled onclick="submitQuizAnswer()"
+                                    class="bg-slate-100 text-slate-400 px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-not-allowed shadow-sm">
                                     Semak Jawapan
                                 </button>
                             </div>
@@ -752,16 +960,20 @@
                 <!-- SCREEN 10: DRAG & DROP CLASSIFICATION -->
                 <div id="screen-10" class="screen-view space-y-4 py-4 hidden">
                     <div class="text-center max-w-xl mx-auto space-y-1">
-                        <span class="text-[10px] bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Aktiviti Padanan</span>
+                        <span
+                            class="text-[10px] bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Aktiviti
+                            Padanan</span>
                         <h2 class="text-2xl font-bold text-slate-900">Susun langkah mengikut turutan yang betul</h2>
-                        <p class="text-xs text-slate-500">Seret aktiviti dari kiri dan lepaskan di zon sasaran kanan. (Atau klik item kiri kemudian klik sasaran kanan jika menggunakan skrin sentuh).</p>
+                        <p class="text-xs text-slate-500">Seret aktiviti dari kiri dan lepaskan di zon sasaran kanan.
+                            (Atau klik item kiri kemudian klik sasaran kanan jika menggunakan skrin sentuh).</p>
                     </div>
 
                     <!-- Clean Premium Table Match Layout -->
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch max-w-4xl mx-auto">
                         <!-- Left column: Draggable Cards -->
                         <div class="md:col-span-5 space-y-2">
-                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Pilihan Aktiviti</h3>
+                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Pilihan Aktiviti
+                            </h3>
                             <div class="space-y-2" id="matchItemsContainer">
                                 <!-- Elements generated as draggable="true" -->
                             </div>
@@ -769,9 +981,12 @@
 
                         <!-- Center Status indicator -->
                         <div class="md:col-span-2 flex flex-col justify-center items-center">
-                            <div class="text-center p-3 rounded-xl bg-white border border-slate-200 w-full flex flex-col items-center justify-center space-y-1 shadow-sm">
-                                <span class="text-[9px] text-slate-400 tracking-widest block font-bold uppercase">Padanan</span>
-                                <div class="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-xs" id="matchLinkStatus">
+                            <div
+                                class="text-center p-3 rounded-xl bg-white border border-slate-200 w-full flex flex-col items-center justify-center space-y-1 shadow-sm">
+                                <span
+                                    class="text-[9px] text-slate-400 tracking-widest block font-bold uppercase">Padanan</span>
+                                <div class="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-xs"
+                                    id="matchLinkStatus">
                                     <i class="fa-solid fa-link text-slate-400"></i>
                                 </div>
                             </div>
@@ -779,82 +994,90 @@
 
                         <!-- Right column: Drop Targets -->
                         <div class="md:col-span-5 space-y-2">
-                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Langkah Turutan</h3>
+                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Langkah Turutan
+                            </h3>
                             <div class="space-y-2" id="matchTargetsContainer">
                                 <!-- Target slots with dragover/drop handlers -->
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200 shadow-sm mt-3">
-                        <span class="text-xs text-slate-400" id="matchSuccessGuide">Sila heret dan letakkan kesemua <span class="text-teal-655 font-bold text-teal-600">5 aktiviti</span> secara betul ke dalam zon sasaran.</span>
+                    <div
+                        class="flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200 shadow-sm mt-3">
+                        <span class="text-xs text-slate-400" id="matchSuccessGuide">Sila heret dan letakkan kesemua
+                            <span class="font-bold text-teal-600">5 aktiviti</span> secara betul ke dalam
+                            zon sasaran.</span>
                         <div class="flex space-x-2">
-                            <button onclick="resetMatchUI()" class="bg-slate-105 hover:bg-slate-200 bg-slate-100 text-slate-600 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all shadow-sm border border-slate-200">Sifar Semula</button>
+                            <button onclick="resetMatchUI()"
+                                class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all shadow-sm border border-slate-200">Sifar
+                                Semula</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- SCREEN 11: LEARNING SUMMARY / RUMUSAN -->
                 <div id="screen-11" class="screen-view space-y-6 py-4 hidden">
+                    <!-- Header -->
                     <div class="text-center max-w-xl mx-auto space-y-1">
-                        <span class="text-[10px] bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Rumusan</span>
+                        <span
+                            class="text-[10px] bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Rumusan</span>
                         <h2 class="text-2xl font-extrabold text-slate-900">Rumusan Pembelajaran</h2>
-                        <p class="text-xs text-slate-500">Berikut adalah perkara penting yang telah kita pelajari di dalam modul pengajian ini.</p>
+                        <p class="text-xs text-slate-500">Terokai 5 halaman rumusan interaktif di bawah untuk
+                            menyahkunci Penilaian Akhir.</p>
                     </div>
 
-                    <!-- 4 Premium White Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <!-- Summary 1 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl shadow-sm space-y-3 flex flex-col justify-between">
-                            <div class="space-y-2">
-                                <div class="w-9 h-9 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center text-sm">
-                                    <i class="fa-solid fa-gears"></i>
-                                </div>
-                                <h3 class="text-xs font-bold text-slate-800">Konsep Teknologi</h3>
-                                <p class="text-[11px] text-slate-500 leading-relaxed">Memahami definisi dan peranan teknologi moden dalam pengeluaran makanan.</p>
+                    <!-- Beautiful Pagination Buttons (Tabs/Cards Style) -->
+                    <div class="flex flex-wrap justify-center gap-2 md:gap-3" id="summaryPagination">
+                        <!-- Generated Dynamically via JS -->
+                    </div>
+
+                    <!-- Main Paginated Summary Content Card -->
+                    <div id="summaryCard"
+                        class="bg-white border border-slate-200 rounded-2xl shadow-md p-6 md:p-8 space-y-6 transition-all duration-300">
+                        <!-- Top Panel: Title & Large Icon/SVG Graphic -->
+                        <div
+                            class="flex flex-col md:flex-row items-center md:items-start justify-between gap-6 pb-6 border-b border-slate-100">
+                            <div class="space-y-2 text-center md:text-left flex-1">
+                                <span class="text-[10px] font-mono text-teal-600 uppercase tracking-widest font-bold"
+                                    id="summaryPageSub">Halaman 1 Dari 5</span>
+                                <h3 class="text-xl font-extrabold text-slate-800" id="summaryPageTitle">Konsep Teknologi
+                                    Makanan Moden</h3>
+                                <p class="text-xs text-slate-500 max-w-xl" id="summaryPageDesc">Asas sains dan aplikasi
+                                    teknologi pintar bagi memaksimumkan integriti, kualiti, serta jangka hayat rantaian
+                                    makanan negara.</p>
+                            </div>
+                            <!-- SVG Graphic Container -->
+                            <div class="w-32 h-32 md:w-36 md:h-36 flex items-center justify-center bg-slate-50 border border-slate-100 rounded-2xl p-4 shrink-0 shadow-inner"
+                                id="summarySvgContainer">
+                                <!-- Injected via JS -->
                             </div>
                         </div>
 
-                        <!-- Summary 2 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl shadow-sm space-y-3 flex flex-col justify-between">
-                            <div class="space-y-2">
-                                <div class="w-9 h-9 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-sm">
-                                    <i class="fa-solid fa-link"></i>
-                                </div>
-                                <h3 class="text-xs font-bold text-slate-800">Rantaian Industri</h3>
-                                <p class="text-[11px] text-slate-500 leading-relaxed">Mengenal pasti proses rantaian makanan bermula dari fasa bahan mentah hingga ke pengedaran.</p>
-                            </div>
-                        </div>
-
-                        <!-- Summary 3 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl shadow-sm space-y-3 flex flex-col justify-between">
-                            <div class="space-y-2">
-                                <div class="w-9 h-9 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-sm">
-                                    <i class="fa-solid fa-shield-halved"></i>
-                                </div>
-                                <h3 class="text-xs font-bold text-slate-800">Keselamatan & Kualiti</h3>
-                                <p class="text-[11px] text-slate-500 leading-relaxed">Kefahaman mengenai kawalan rantaian sejuk beku, standard kualiti, and pematuhan ISO.</p>
-                            </div>
-                        </div>
-
-                        <!-- Summary 4 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl shadow-sm space-y-3 flex flex-col justify-between">
-                            <div class="space-y-2">
-                                <div class="w-9 h-9 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-sm">
-                                    <i class="fa-solid fa-lightbulb"></i>
-                                </div>
-                                <h3 class="text-xs font-bold text-slate-800">Aplikasi & Inovasi</h3>
-                                <p class="text-[11px] text-slate-500 leading-relaxed">Pembangunan produk dan sistem kecekapan pemprosesan moden secara mampan.</p>
-                            </div>
+                        <!-- Bottom Panel: 3 Columns Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="summaryColumnsGrid">
+                            <!-- Injected via JS -->
                         </div>
                     </div>
 
-                    <!-- Bottom warning highlight -->
-                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center space-x-3 shadow-sm">
-                        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-circle-check"></i>
+                    <!-- Progress Indicator & Notice -->
+                    <div
+                        class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-9 h-9 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center shrink-0 border border-teal-100 shadow-sm"
+                                id="summaryStatusIcon">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800" id="summaryStatusTitle">Status Rumusan:
+                                    Belum Lengkap</h4>
+                                <p class="text-[11px] text-slate-500 leading-none mt-0.5" id="summaryStatusDesc">Sila
+                                    layari kesemua 5 halaman di atas untuk menyahkunci Penilaian Akhir.</p>
+                            </div>
                         </div>
-                        <p class="text-xs text-emerald-800 font-medium">Gunakan pengetahuan ini untuk membuat keputusan yang lebih baik dalam operasi seharian.</p>
+                        <!-- Progress text tracker -->
+                        <span
+                            class="text-xs font-mono font-bold bg-white border border-slate-200 text-teal-600 px-3 py-1.5 rounded-lg shadow-sm"
+                            id="summaryProgressTracker">Halaman dilawati: 0 / 5</span>
                     </div>
                 </div>
 
@@ -862,7 +1085,9 @@
                 <div id="screen-12" class="screen-view space-y-6 py-4 hidden">
                     <div class="flex justify-between items-center border-b border-slate-200 pb-3" id="examHeader">
                         <div class="space-y-1">
-                            <span class="text-[10px] bg-teal-100 text-teal-700 border border-teal-200 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Ujian Kriteria Pelepasan</span>
+                            <span
+                                class="text-[10px] bg-teal-100 text-teal-700 border border-teal-200 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Ujian
+                                Kriteria Pelepasan</span>
                             <h2 class="text-lg font-bold text-slate-900">Penilaian Akhir</h2>
                         </div>
                         <div class="text-right">
@@ -872,17 +1097,20 @@
                     </div>
 
                     <!-- Intro Screen of Exam -->
-                    <div id="examIntroBox" class="bg-white border border-slate-200 rounded-xl p-6 text-center space-y-6 max-w-xl mx-auto shadow-sm">
-                        <div class="w-16 h-16 bg-slate-105 bg-slate-100 text-slate-600 rounded-full flex items-center justify-center text-2xl mx-auto border border-slate-200">
+                    <div id="examIntroBox"
+                        class="bg-white border border-slate-200 rounded-xl p-6 text-center space-y-6 max-w-xl mx-auto shadow-sm">
+                        <div
+                            class="w-16 h-16 bg-slate-100 text-slate-600 rounded-full flex items-center justify-center text-2xl mx-auto border border-slate-200">
                             <i class="fa-solid fa-clipboard-list"></i>
                         </div>
                         <div class="space-y-2">
                             <h3 class="text-lg font-bold text-slate-900">Sila Jawab Semua Soalan</h3>
                             <p class="text-xs text-slate-500 leading-relaxed">
-                                Jawab semua soalan. Anda perlu mendapat sekurang-kurangnya 80% (4 betul) untuk lulus ujian draf EPSA.
+                                Jawab semua soalan. Anda perlu mendapat sekurang-kurangnya 80% (4 betul) untuk lulus
+                                ujian draf EPSA.
                             </p>
                         </div>
-                        
+
                         <!-- Mini score criteria card -->
                         <div class="grid grid-cols-3 gap-2 py-3.5 border-y border-slate-200 text-xs">
                             <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
@@ -899,20 +1127,23 @@
                             </div>
                         </div>
 
-                        <button onclick="startActualExam()" class="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all shadow-md">
+                        <button onclick="startActualExam()"
+                            class="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all shadow-md">
                             Mula Penilaian
                         </button>
                     </div>
 
                     <!-- Actual Exam Question Container -->
-                    <div id="examQuestionBox" class="hidden max-w-xl mx-auto bg-white border border-slate-200 rounded-xl p-6 space-y-6 shadow-sm">
+                    <div id="examQuestionBox"
+                        class="hidden max-w-xl mx-auto bg-white border border-slate-200 rounded-xl p-6 space-y-6 shadow-sm">
                         <div class="flex justify-between items-center text-xs border-b border-slate-200 pb-3">
                             <span class="text-slate-500 font-semibold" id="examProgressLabel">Soalan 1 dari 5</span>
                             <span class="text-teal-600 font-mono font-bold" id="examTimerLabel">Sesi Ujian Aktif</span>
                         </div>
 
                         <div class="space-y-3">
-                            <h3 class="text-sm md:text-base font-bold text-slate-800" id="examQuestionText">Sila tunggu, memuatkan soalan...</h3>
+                            <h3 class="text-sm md:text-base font-bold text-slate-800" id="examQuestionText">Sila tunggu,
+                                memuatkan soalan...</h3>
                         </div>
 
                         <div class="space-y-2.5" id="examOptionsContainer">
@@ -926,63 +1157,82 @@
 
                         <!-- Action bar -->
                         <div class="flex justify-end pt-3 border-t border-slate-100">
-                            <button id="examActionBtn" disabled onclick="submitExamAnswer()" class="bg-slate-100 text-slate-400 px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-not-allowed">
+                            <button id="examActionBtn" disabled onclick="submitExamAnswer()"
+                                class="bg-slate-100 text-slate-400 px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-not-allowed">
                                 Hantar Jawapan
                             </button>
                         </div>
                     </div>
 
                     <!-- Non-destructive Exam Result Container -->
-                    <div id="examResultBox" class="hidden text-center space-y-4 py-6 max-w-xl mx-auto bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                    <div id="examResultBox"
+                        class="hidden text-center space-y-4 py-6 max-w-xl mx-auto bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
                         <!-- Injected on finished -->
                     </div>
                 </div>
 
                 <!-- SCREEN 13: MODULE COMPLETION / OUTRO -->
                 <div id="screen-13" class="screen-view space-y-6 py-4 hidden">
-                    <div class="bg-white border border-slate-200 rounded-2xl p-8 max-w-2xl mx-auto text-center space-y-6 shadow-xl relative overflow-hidden">
-                        
+                    <div
+                        class="bg-white border border-slate-200 rounded-2xl p-8 max-w-2xl mx-auto text-center space-y-6 shadow-xl relative overflow-hidden">
+
                         <div class="absolute inset-0 pointer-events-none opacity-40">
                             <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="80" cy="80" r="5" fill="#10b981" fill-opacity="0.3"/>
-                                <circle cx="580" cy="180" r="6" fill="#3b82f6" fill-opacity="0.3"/>
-                                <rect x="120" y="240" width="12" height="12" fill="#f59e0b" fill-opacity="0.2" transform="rotate(45)"/>
-                                <rect x="520" y="60" width="8" height="8" fill="#ec4899" fill-opacity="0.2" transform="rotate(15)"/>
+                                <circle cx="80" cy="80" r="5" fill="#10b981" fill-opacity="0.3" />
+                                <circle cx="580" cy="180" r="6" fill="#3b82f6" fill-opacity="0.3" />
+                                <rect x="120" y="240" width="12" height="12" fill="#f59e0b" fill-opacity="0.2"
+                                    transform="rotate(45)" />
+                                <rect x="520" y="60" width="8" height="8" fill="#ec4899" fill-opacity="0.2"
+                                    transform="rotate(15)" />
                             </svg>
                         </div>
 
-                        <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto border-4 border-emerald-50">
+                        <div
+                            class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto border-4 border-emerald-50">
                             <i class="fa-solid fa-circle-check animate-bounce"></i>
                         </div>
 
                         <div class="space-y-2">
                             <h2 class="text-3xl font-black text-slate-900">Tahniah!</h2>
-                            <p class="text-slate-500 text-sm" id="outroWelcomeText">Anda telah berjaya melengkapkan keseluruhan modul pembelajaran Teknologi Makanan.</p>
+                            <p class="text-slate-500 text-sm" id="outroWelcomeText">Anda telah berjaya melengkapkan
+                                keseluruhan modul pembelajaran Teknologi Makanan.</p>
                         </div>
 
                         <!-- Score summary -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 py-4 border-y border-slate-200 text-xs">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 border-y border-slate-200 text-xs">
                             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                                <span class="text-slate-400 block uppercase font-bold text-[10px] tracking-wider mb-1">Status Sesi</span>
+                                <span
+                                    class="text-slate-400 block uppercase font-bold text-[10px] tracking-wider mb-1">Status
+                                    Sesi</span>
                                 <span class="font-black text-emerald-600 text-sm uppercase">LULUS</span>
                             </div>
                             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                                <span class="text-slate-400 block uppercase font-bold text-[10px] tracking-wider mb-1">Prestasi Anda</span>
+                                <span
+                                    class="text-slate-400 block uppercase font-bold text-[10px] tracking-wider mb-1">Prestasi
+                                    Anda</span>
                                 <span class="font-black text-slate-800 text-sm" id="outroScoreLabel">86%</span>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <span
+                                    class="text-slate-400 block uppercase font-bold text-[10px] tracking-wider mb-1">Tempoh Pembelajaran</span>
+                                <span class="font-black text-slate-800 text-sm" id="outroTimeLabel">00:00</span>
                             </div>
                         </div>
 
                         <p class="text-xs text-slate-500 leading-relaxed max-w-lg mx-auto">
-                            Pengetahuan berkaitan keselamatan makanan, kawalan kualiti, kecekapan operasi dan inovasi memainkan peranan penting dalam industri.
+                            Pengetahuan berkaitan keselamatan makanan, kawalan kualiti, kecekapan operasi dan inovasi
+                            memainkan peranan penting dalam industri.
                         </p>
 
                         <!-- Actions -->
                         <div class="flex flex-col sm:flex-row gap-3 justify-center pt-3 z-10 relative">
-                            <button onclick="downloadCertificate()" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 shadow-sm">
+                            <button onclick="downloadCertificate()"
+                                class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 shadow-sm">
                                 <i class="fa-solid fa-download"></i>
                                 <span>Muat Turun Sijil</span>
                             </button>
-                            <button onclick="restartCourseFromOutro()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 shadow-sm border border-slate-200">
+                            <button onclick="restartCourseFromOutro()"
+                                class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 shadow-sm border border-slate-200">
                                 <i class="fa-solid fa-rotate-left"></i>
                                 <span>Ulang Modul</span>
                             </button>
@@ -993,19 +1243,22 @@
             </div>
 
             <!-- FOOTER NAVIGATION TOOLBAR -->
-            <footer class="mt-8 border-t border-slate-200 pt-4 flex items-center justify-between max-w-5xl mx-auto w-full text-xs text-slate-400 font-medium">
+            <footer
+                class="mt-8 border-t border-slate-200 pt-4 flex items-center justify-between max-w-5xl mx-auto w-full text-xs text-slate-400 font-medium">
                 <div class="flex items-center space-x-2">
                     <span class="font-bold text-slate-700">EPSA © 2026</span>
                     <span>•</span>
                     <span class="hidden md:inline">Kementerian Sumber Manusia & INTAN</span>
                 </div>
-                
+
                 <div class="flex items-center space-x-3">
-                    <button id="globalBackBtn" disabled onclick="navigateBack()" class="bg-white border border-slate-200 text-slate-400 px-4 py-2 rounded-lg font-bold uppercase transition-all duration-300 cursor-not-allowed shadow-sm">
+                    <button id="globalBackBtn" disabled onclick="navigateBack()"
+                        class="bg-white border border-slate-200 text-slate-400 px-4 py-2 rounded-lg font-bold uppercase transition-all duration-300 cursor-not-allowed shadow-sm">
                         <i class="fa-solid fa-chevron-left mr-1"></i>Kembali
                     </button>
                     <!-- Dedicated single primary next button -->
-                    <button id="globalNextBtn" onclick="navigateNext()" class="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2 rounded-lg font-bold uppercase transition-all duration-300 flex items-center shadow-sm">
+                    <button id="globalNextBtn" onclick="navigateNext()"
+                        class="bg-teal-600 hover:bg-teal-700 text-white px-5 py-2 rounded-lg font-bold uppercase transition-all duration-300 flex items-center shadow-sm">
                         Seterusnya<i class="fa-solid fa-chevron-right ml-1"></i>
                     </button>
                 </div>
@@ -1015,20 +1268,26 @@
     </div>
 
     <!-- CERTIFICATE MODAL TEMPLATE -->
-    <div id="certificateModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
-        <div class="bg-white text-slate-900 border-[12px] border-teal-800 p-8 max-w-2xl w-full text-center relative shadow-2xl space-y-6">
-            <button onclick="closeCertModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl"><i class="fa-solid fa-xmark"></i></button>
-            
+    <div id="certificateModal"
+        class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div
+            class="bg-white text-slate-900 border-[12px] border-teal-800 p-8 max-w-2xl w-full text-center relative shadow-2xl space-y-6">
+            <button onclick="closeCertModal()"
+                class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl"><i
+                    class="fa-solid fa-xmark"></i></button>
+
             <div class="border border-teal-900/10 p-6 space-y-6">
                 <!-- Certificate Header -->
                 <div class="space-y-1">
-                    <p class="text-xs uppercase tracking-widest text-teal-700 font-bold">Institut Tadbiran Awam Negara (INTAN)</p>
+                    <p class="text-xs uppercase tracking-widest text-teal-700 font-bold">Institut Tadbiran Awam Negara
+                        (INTAN)</p>
                     <h2 class="text-2xl font-serif font-bold text-slate-800">Sijil Penghargaan EPSA</h2>
                 </div>
 
                 <div class="space-y-1">
                     <p class="text-[10px] text-slate-400 uppercase tracking-wider">Dengan ini diperakui bahawa</p>
-                    <p class="text-xl font-bold border-b border-slate-200 pb-1 max-w-sm mx-auto text-teal-800 font-serif" id="certStudentName">Pegawai Kualiti EPSA</p>
+                    <p class="text-xl font-bold border-b border-slate-200 pb-1 max-w-sm mx-auto text-teal-800 font-serif"
+                        id="certStudentName">Pegawai Kualiti EPSA</p>
                 </div>
 
                 <div class="space-y-2 max-w-md mx-auto text-xs leading-relaxed text-slate-500">
@@ -1048,7 +1307,8 @@
                 </div>
 
                 <div class="pt-2">
-                    <p class="text-[9px] text-slate-400">Sijil digital ini dijana secara automatik oleh pangkalan data EPSA sebagai pengesahan kualifikasi.</p>
+                    <p class="text-[9px] text-slate-400">Sijil digital ini dijana secara automatik oleh pangkalan data
+                        EPSA sebagai pengesahan kualifikasi.</p>
                 </div>
             </div>
         </div>
@@ -1083,26 +1343,26 @@
         ];
 
         const tabData = {
-            1: { 
-                title: "Peranan Teknologi dalam Industri Makanan", 
+            1: {
+                title: "Peranan Teknologi dalam Industri Makanan",
                 desc: "Teknologi moden membantu meningkatkan kecekapan, konsistensi, dan keselamatan makanan melalui sistem automasi bersepadu, pemantauan kualiti masa nyata, dan analitik data pintar.",
                 icon: "fa-solid fa-industry",
                 points: ["Automasi proses pengeluaran", "Pemantauan masa nyata", "Kawalan kualiti digital yang konsisten"]
             },
-            2: { 
-                title: "Kepentingan Keselamatan Makanan", 
+            2: {
+                title: "Kepentingan Keselamatan Makanan",
                 desc: "Teknologi memainkan peranan penting dalam memastikan makanan dihasilkan, diproses dan diedarkan dalam keadaan yang selamat bagi mengelakkan pencemaran biologi dan kimia.",
                 icon: "fa-solid fa-shield-halved",
                 points: ["Kawalan suhu automatik", "Kebersihan operator standard tinggi", "Pencegahan kontaminasi silang"]
             },
-            3: { 
-                title: "Kawalan Kualiti Standard Industri", 
+            3: {
+                title: "Kawalan Kualiti Standard Industri",
                 desc: "Kawalan kualiti memastikan setiap produk memenuhi piawaian keselamatan, rasa, pembungkusan, dan kualiti yang ketat sebelum diedarkan kepada masyarakat umum.",
                 icon: "fa-solid fa-square-check",
                 points: ["Pemeriksaan produk sebelum pelepasan", "Kepatuhan parameter HACCP", "Konsistensi rupa bentuk produk"]
             },
-            4: { 
-                title: "Inovasi & Pembangunan Produk Baru", 
+            4: {
+                title: "Inovasi & Pembangunan Produk Baru",
                 desc: "Teknologi menyokong pembangunan produk baharu serta penambahbaikan proses pengeluaran bagi memenuhi keperluan makanan sihat masa hadapan secara lestari.",
                 icon: "fa-solid fa-lightbulb",
                 points: ["Penyelidikan bahan formulasi baru", "Ujian makmal jangka hayat", "Pengurangan sisa industri makanan"]
@@ -1197,6 +1457,13 @@
         let startTime = Date.now();
         let name = "Pegawai Kualiti EPSA";
 
+        // Exam state variables
+        let examActive = false;
+        let examCurrentIdx = 0;
+        let examScore = 0;
+        let examSelectedAnsIdx = null;
+        let examFinished = false;
+
         // Global Module Timers
         setInterval(() => {
             const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
@@ -1224,26 +1491,25 @@
         function renderSidebar() {
             const container = document.getElementById('sidebarMenu');
             container.innerHTML = '';
-            
+
             screens.forEach((scr, idx) => {
                 const isActive = idx === currentScreenIdx;
                 const isVisited = visitedScreens.includes(scr.id);
-                
+
                 let iconClass = "fa-solid fa-lock text-slate-300";
                 if (isActive) {
-                    iconClass = "fa-solid fa-circle-dot text-teal-655 text-teal-600";
+                    iconClass = "fa-solid fa-circle-dot text-teal-600";
                 } else if (isVisited) {
                     iconClass = "fa-solid fa-circle-check text-emerald-500";
                 }
 
                 const btn = document.createElement('button');
-                btn.className = `w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left text-xs transition-all duration-200 ${
-                    isActive ? 'bg-teal-50 border border-teal-105 border-teal-100 text-teal-800 font-bold shadow-sm' : 
+                btn.className = `w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left text-xs transition-all duration-200 ${isActive ? 'bg-teal-50 border border-teal-100 text-teal-800 font-bold shadow-sm' :
                     isVisited ? 'text-slate-600 hover:bg-slate-100 hover:text-slate-800' : 'text-slate-300 cursor-not-allowed opacity-60'
-                }`;
+                    }`;
                 btn.disabled = !isVisited;
                 btn.onclick = () => goToScreen(scr.id);
-                
+
                 btn.innerHTML = `
                     <i class="${iconClass}"></i>
                     <span class="truncate">${scr.id}. ${scr.title}</span>
@@ -1283,7 +1549,7 @@
             const nextBtn = document.getElementById('globalNextBtn');
             const currentScreenId = screens[currentScreenIdx].id;
             let screenIsLocked = false;
-            
+
             if (currentScreenId === 3 && !allObjectivesViewed()) screenIsLocked = true;
             if (currentScreenId === 4 && !introVideoCompleted) screenIsLocked = true;
             if (currentScreenId === 5 && !allProcessesViewed()) screenIsLocked = true;
@@ -1291,6 +1557,7 @@
             if (currentScreenId === 7 && scenarioStep < 3) screenIsLocked = true;
             if (currentScreenId === 9 && !quizFinished) screenIsLocked = true;
             if (currentScreenId === 10 && !matchTaskFinished) screenIsLocked = true;
+            if (currentScreenId === 11 && !allSummaryPagesViewed()) screenIsLocked = true;
             if (currentScreenId === 12 && !examFinished) screenIsLocked = true;
             if (currentScreenId === 13) screenIsLocked = true; // Complete outro has no next
 
@@ -1308,24 +1575,32 @@
         function goToScreen(screenId) {
             const targetIdx = screens.findIndex(s => s.id === screenId);
             if (targetIdx === -1) return;
-            
+
             // Linear security check
             if (!visitedScreens.includes(screenId)) return;
-            
+
             document.querySelectorAll('.screen-view').forEach(elem => {
                 elem.classList.add('hidden');
             });
-            
+
             document.getElementById(`screen-${screenId}`).classList.remove('hidden');
             currentScreenIdx = targetIdx;
 
             // Auto-unlock non-interactive pages immediately upon visitation
             if (screenId === 2) unlockNextScreen();
             if (screenId === 8) unlockNextScreen();
-            if (screenId === 11) unlockNextScreen();
+
+            if (screenId === 5) {
+                renderProcessTabs();
+            }
 
             if (screenId === 10) {
                 renderMatchGame();
+            }
+
+            if (screenId === 11) {
+                renderSummaryPageBtns();
+                changeSummaryPage(1);
             }
 
             updateGlobalNavigationUI();
@@ -1368,7 +1643,7 @@
 
             const content = document.getElementById(`obj-content-${id}`);
             const arrow = document.getElementById(`obj-arrow-${id}`);
-            
+
             if (content.classList.contains('hidden')) {
                 content.classList.remove('hidden');
                 arrow.classList.replace('fa-chevron-down', 'fa-chevron-up');
@@ -1404,7 +1679,7 @@
         function toggleSimulatedVideo() {
             const playBtn = document.getElementById('videoPlayBtn');
             const bigOverlay = document.getElementById('bigPlayOverlay');
-            
+
             if (videoPlaying) {
                 videoPlaying = false;
                 playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
@@ -1415,7 +1690,7 @@
                 videoPlaying = true;
                 playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
                 bigOverlay.classList.add('hidden');
-                
+
                 videoInterval = setInterval(() => {
                     videoProgress += 1;
                     if (videoProgress > 25) {
@@ -1427,7 +1702,7 @@
                         introVideoCompleted = true;
                         unlockNextScreen();
                     }
-                    
+
                     updateVideoFrameUI();
                 }, 1000);
 
@@ -1480,7 +1755,7 @@
         function playSceneAudio() {
             if (!window.speechSynthesis) return;
             window.speechSynthesis.cancel();
-            
+
             const activeScene = [...videoScenes].reverse().find(s => videoProgress >= s.time);
             if (activeScene) {
                 speechUtterance = new SpeechSynthesisUtterance(activeScene.text);
@@ -1499,49 +1774,132 @@
         // ==========================================
         let viewedProcesses = [1];
         const processData = {
-            1: { title: "Pemilihan Bahan Mentah Berkualiti", desc: "Pemilihan bahan mentah yang berkualiti tinggi merupakan langkah awal dalam memastikan keselamatan dan kualiti produk makanan sebelum fasa pemrosesan bermula.", icon: "fa-solid fa-leaf", path: '<path d="M50 15 Q30 35 30 55 A20 20 0 0 0 70 55 Q70 35 50 15 Z" fill="#0d9488" fill-opacity="0.1" stroke="#0d9488" stroke-width="3"/><circle cx="50" cy="55" r="8" fill="#10b981"/>' },
-            2: { title: "Pemprosesan Makanan Standard Tinggi", desc: "Menggunakan teknologi pemprosesan moden seperti pasteurisasi, penyejukan kilat, dan kawalan terma tinggi untuk mematikan sebarang pembentukan spora tanpa menjejaskan nilai zat makanan asli.", icon: "fa-solid fa-gears", path: '<rect x="25" y="25" width="50" height="50" rx="6" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-width="3"/><circle cx="50" cy="50" r="12" fill="#3b82f6"/>' },
-            3: { title: "Pembungkusan Pintar & Vakum", desc: "Sistem pembungkusan moden membantu melindungi produk makanan daripada ancaman bakteria atau pencemaran silang luaran serta mengekalkan kualiti khasiat produk dengan pengedap udara nitrogen.", icon: "fa-solid fa-box", path: '<rect x="20" y="20" width="60" height="60" rx="4" fill="#a855f7" fill-opacity="0.1" stroke="#a855f7" stroke-width="3"/><line x1="20" y1="50" x2="80" y2="50" stroke="#a855f7" stroke-width="2"/>' },
-            4: { title: "Penyimpanan Suhu Terkawal", desc: "Penyimpanan suhu terkawal penting bagi memastikan kestabilan produk makanan serta mengurangkan risiko kerosakan atau pencemaran sebelum pengedaran.", icon: "fa-solid fa-snowflake", path: '<circle cx="50" cy="50" r="30" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-width="3"/><path d="M50 20 L50 80 M20 50 L80 50" stroke="#f59e0b" stroke-width="2"/>' },
-            5: { title: "Sistem Logistik Pengedaran Selamat", desc: "Produk makanan diedarkan melalui sistem rantaian logistik pintar yang mengekalkan suhu pembekuan terkawal bagi mengelakkan kemerosotan kualiti produk sebelum sampai kepada pengguna.", icon: "fa-solid fa-truck-ramp-box", path: '<rect x="15" y="30" width="70" height="40" rx="3" fill="#6366f1" fill-opacity="0.1" stroke="#6366f1" stroke-width="3"/><circle cx="30" cy="75" r="8" fill="#6366f1"/><circle cx="70" cy="75" r="8" fill="#6366f1"/>' }
+            1: {
+                label: "Bahan Mentah",
+                title: "Fasa 1: Bahan Mentah",
+                desc: "Pemilihan bahan mentah yang berkualiti merupakan langkah awal dalam memastikan keselamatan dan kualiti produk makanan.",
+                bullets: ["Saringan kualiti fizikal awal", "Kepatuhan standard pembekal", "Ujian mikrobiologi primer"],
+                color: "bg-teal-800",
+                svgPath: '<svg viewBox="0 0 100 100" class="w-24 h-24"><path d="M50 15 Q30 35 30 55 A20 20 0 0 0 70 55 Q70 35 50 15 Z" fill="#0d9488" fill-opacity="0.15" stroke="#0d9488" stroke-width="3"/><circle cx="50" cy="55" r="8" fill="#10b981"/></svg>'
+            },
+            2: {
+                label: "Pemprosesan",
+                title: "Fasa 2: Pemprosesan",
+                desc: "Fasa ini melibatkan penggunaan teknologi seperti pasteurisasi dan pensterilan untuk membasmi kuman merbahaya tanpa menjejaskan kualiti.",
+                bullets: ["Kawalan takat terma kinetik", "Sistem pasteurisasi automatik", "Pencegahan pembiakan bakteria"],
+                color: "bg-blue-800",
+                svgPath: '<svg viewBox="0 0 100 100" class="w-24 h-24"><rect x="25" y="25" width="50" height="50" rx="6" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="3"/><circle cx="50" cy="50" r="12" fill="#3b82f6"/></svg>'
+            },
+            3: {
+                label: "Pembungkusan",
+                title: "Fasa 3: Pembungkusan",
+                desc: "Pembungkusan vakum atau gas nitrogen membantu mengekalkan kesegaran makanan serta melindungi dari pencemaran luar.",
+                bullets: ["Sistem pengedap udara nitrogen", "Pengekalan nutrisi makanan", "Saringan kebocoran mikro"],
+                color: "bg-purple-800",
+                svgPath: '<svg viewBox="0 0 100 100" class="w-24 h-24"><rect x="20" y="20" width="60" height="60" rx="4" fill="#a855f7" fill-opacity="0.15" stroke="#a855f7" stroke-width="3"/><line x1="20" y1="50" x2="80" y2="50" stroke="#a855f7" stroke-width="2"/></svg>'
+            },
+            4: {
+                label: "Penyimpanan",
+                title: "Fasa 4: Penyimpanan",
+                desc: "Rantaian sejuk dikekalkan dalam suhu 0°C - 5°C bagi produk sejuk beku demi menjamin integriti biologi makanan.",
+                bullets: ["Pemeliharaan suhu rantaian sejuk", "Pemantauan telemetri digital", "Kawalan kestabilan kelembapan"],
+                color: "bg-amber-800",
+                svgPath: '<svg viewBox="0 0 100 100" class="w-24 h-24"><circle cx="50" cy="50" r="30" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="3"/><path d="M50 20 L50 80 M20 50 L80 50" stroke="#f59e0b" stroke-width="2"/></svg>'
+            },
+            5: {
+                label: "Pengedaran",
+                title: "Fasa 5: Pengedaran",
+                desc: "Logistik pintar membolehkan pengesanan status batch dan suhu dalam masa nyata sehingga sampai kepada pengguna akhir.",
+                bullets: ["Penjejakan logistik masa nyata", "Pengekalan standard kualiti lori", "Audit kebersihan storan transit"],
+                color: "bg-indigo-800",
+                svgPath: '<svg viewBox="0 0 100 100" class="w-24 h-24"><rect x="15" y="30" width="70" height="40" rx="3" fill="#6366f1" fill-opacity="0.15" stroke="#6366f1" stroke-width="3"/><circle cx="30" cy="75" r="8" fill="#6366f1"/><circle cx="70" cy="75" r="8" fill="#6366f1"/></svg>'
+            }
         };
 
-        function selectProcessStep(stepId) {
+        // Renders the side-tab buttons and initialises content to step 1
+        function renderProcessTabs() {
+            const tabContainer = document.getElementById('inactive-tabs-container');
+            tabContainer.innerHTML = '';
+
             for (let i = 1; i <= 5; i++) {
-                const dot = document.getElementById(`proc-dot-${i}`);
-                const lbl = document.getElementById(`proc-lbl-${i}`);
-                if (i === stepId) {
-                    dot.className = "w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs font-bold shadow-md transition-all border-4 border-white";
-                    lbl.className = "text-xs font-bold text-teal-700 mt-2 block";
-                } else if (viewedProcesses.includes(i)) {
-                    dot.className = "w-10 h-10 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs font-bold transition-all border-4 border-white";
-                    lbl.className = "text-xs font-semibold text-slate-700 mt-2 block";
-                } else {
-                    dot.className = "w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold transition-all border-4 border-white";
-                    lbl.className = "text-xs font-medium text-slate-500 mt-2 block";
-                }
+                const btn = document.createElement('button');
+                const isViewed = viewedProcesses.includes(i);
+                btn.className = `flex-1 flex items-center justify-center transition-all duration-200 relative ${isViewed
+                    ? 'bg-slate-300 hover:bg-slate-400'
+                    : 'bg-slate-200 hover:bg-slate-300'
+                    } focus:outline-none`;
+                btn.title = processData[i].label;
+                btn.onclick = () => selectProcessStep(i);
+                btn.innerHTML = `<span class="vertical-text text-slate-600 font-bold text-[10px] uppercase tracking-widest">${i}. ${processData[i].label}</span>`;
+                tabContainer.appendChild(btn);
             }
 
+            // Initialise display with the first step
+            selectProcessStep(1);
+        }
+
+        function selectProcessStep(stepId) {
             const data = processData[stepId];
-            document.getElementById('proc-desc-icon').innerHTML = `<i class="${data.icon}"></i>`;
-            document.getElementById('proc-desc-title').innerText = data.title;
-            document.getElementById('proc-desc-text').innerText = data.desc;
 
-            const rightContainer = document.querySelector('#processContentCard svg');
-            if (rightContainer) {
-                rightContainer.innerHTML = data.path;
+            // Update the active side label
+            const activeLabel = document.getElementById('currentActiveLabel');
+            if (activeLabel) activeLabel.innerText = data.label;
+
+            // Update the active-side-tab color
+            const activeSideTab = document.getElementById('active-side-tab');
+            if (activeSideTab) {
+                // Reset classes then set new background
+                activeSideTab.className = `w-12 flex items-center justify-center transition-all duration-300 text-center ${data.color}`;
             }
-            document.getElementById('proc-illustration-lbl').innerText = data.title.split(' ')[0] + " " + (data.title.split(' ')[1] || "");
 
+            // Update title
+            const titleEl = document.getElementById('proc-title-disp');
+            if (titleEl) titleEl.innerText = data.title;
+
+            // Update description
+            const descEl = document.getElementById('proc-desc-disp');
+            if (descEl) descEl.innerText = data.desc;
+
+            // Update bullet points
+            const bulletsEl = document.getElementById('proc-bullets-list');
+            if (bulletsEl) {
+                bulletsEl.innerHTML = data.bullets.map(b =>
+                    `<li class="flex items-start space-x-2 text-sm text-slate-600"><i class="fa-solid fa-check text-teal-500 mt-0.5 text-xs shrink-0"></i><span>${b}</span></li>`
+                ).join('');
+            }
+
+            // Update SVG illustration
+            const imgEl = document.getElementById('proc-img-disp');
+            if (imgEl) imgEl.innerHTML = data.svgPath;
+
+            // Track viewed
             if (!viewedProcesses.includes(stepId)) {
                 viewedProcesses.push(stepId);
             }
 
-            document.getElementById('proc-progress-tracker').innerText = `Langkah ${viewedProcesses.length} dari 5 dilihat`;
-            
+            // Update tab buttons to reflect viewed state
+            const tabContainer = document.getElementById('inactive-tabs-container');
+            if (tabContainer) {
+                const btns = tabContainer.querySelectorAll('button');
+                btns.forEach((btn, idx) => {
+                    const i = idx + 1;
+                    const isViewed = viewedProcesses.includes(i);
+                    btn.className = `flex-1 flex items-center justify-center transition-all duration-200 relative ${isViewed
+                        ? 'bg-slate-300 hover:bg-slate-400'
+                        : 'bg-slate-200 hover:bg-slate-300'
+                        } focus:outline-none`;
+                });
+            }
+
+            // Update progress tracker
+            const trackerEl = document.getElementById('proc-progress-tracker');
+            if (trackerEl) trackerEl.innerText = `Langkah ${viewedProcesses.length} dari 5 dilihat`;
+
             if (allProcessesViewed()) {
                 unlockNextScreen();
             }
+
+            updateGlobalNavigationUI();
         }
 
         function allProcessesViewed() {
@@ -1569,7 +1927,7 @@
             document.getElementById('hotspotDisplayTitle').innerText = data.display;
             document.getElementById('hotspotDesc').innerText = data.desc;
             document.getElementById('hotspotsVisitedCount').innerText = `${visitedHotspots.length} / 4 Teroka`;
-            
+
             if (allHotspotsVisited()) {
                 unlockNextScreen();
             }
@@ -1597,7 +1955,7 @@
                     
                     <div class="space-y-3 font-medium">
                         <button onclick="submitScenarioChoice('A')" class="w-full text-left bg-white border border-slate-200 hover:border-slate-300 p-4 rounded-xl flex items-start space-x-3 transition-all duration-200 shadow-sm">
-                            <span class="w-6 h-6 bg-slate-105 bg-slate-100 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 shrink-0">A</span>
+                            <span class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 shrink-0">A</span>
                             <div>
                                 <h4 class="text-xs font-bold text-slate-800">Teruskan penghantaran produk</h4>
                                 <p class="text-[10px] text-slate-500 mt-1">Mengabaikan gangguan suhu pendek demi mengekalkan kelancaran jadual penghantaran logistik.</p>
@@ -1605,7 +1963,7 @@
                         </button>
                         
                         <button onclick="submitScenarioChoice('B')" class="w-full text-left bg-white border border-slate-200 hover:border-slate-300 p-4 rounded-xl flex items-start space-x-3 transition-all duration-200 shadow-sm">
-                            <span class="w-6 h-6 bg-slate-105 bg-slate-100 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 shrink-0">B</span>
+                            <span class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 shrink-0">B</span>
                             <div>
                                 <h4 class="text-xs font-bold text-slate-800">Jalankan pemeriksaan lanjut dan kuarantin batch</h4>
                                 <p class="text-[10px] text-slate-500 mt-1">Lakukan pemeriksaan mikrobiologi makmal secara menyeluruh sebelum sebarang pelepasan kargo.</p>
@@ -1613,7 +1971,7 @@
                         </button>
                         
                         <button onclick="submitScenarioChoice('C')" class="w-full text-left bg-white border border-slate-200 hover:border-slate-300 p-4 rounded-xl flex items-start space-x-3 transition-all duration-200 shadow-sm">
-                            <span class="w-6 h-6 bg-slate-105 bg-slate-100 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 shrink-0">C</span>
+                            <span class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-xs font-bold text-slate-600 shrink-0">C</span>
                             <div>
                                 <h4 class="text-xs font-bold text-slate-800">Tukar pembungkusan dan teruskan penghantaran</h4>
                                 <p class="text-[10px] text-slate-500 mt-1">Membuat penukaran kotak luaran yang bersih tanpa menguji kemerosotan biologi dalaman.</p>
@@ -1634,8 +1992,8 @@
             let isCorrect = choice === 'B';
             let feedbackClass = isCorrect ? "bg-emerald-50 border-emerald-200 text-emerald-800" : "bg-red-50 border-red-200 text-red-800";
             let statusText = isCorrect ? "KEPUTUSAN TEPAT" : "KEPUTUSAN KURANG TEPAT";
-            let feedbackDesc = isCorrect ? 
-                "Produk yang berada di luar julat suhu selamat perlu diperiksa dan diasingkan bagi mengelakkan risiko keselamatan makanan kepada pengguna." : 
+            let feedbackDesc = isCorrect ?
+                "Produk yang berada di luar julat suhu selamat perlu diperiksa dan diasingkan bagi mengelakkan risiko keselamatan makanan kepada pengguna." :
                 "Meneruskan penghantaran tanpa pemeriksaan lanjut boleh meningkatkan risiko keselamatan makanan dan ketidakpatuhan terhadap amalan pengendalian yang safe.";
 
             document.getElementById('scenarioInteractionArea').innerHTML = `
@@ -1668,7 +2026,7 @@
             document.getElementById(`tab-btn-${id}`).className = "info-tab-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-teal-600 text-white shadow-sm";
 
             const data = tabData[id];
-            
+
             let listHTML = '';
             data.points.forEach(pt => {
                 listHTML += `<li class="flex items-center space-x-2"><i class="fa-solid fa-check text-emerald-600"></i><span>${pt}</span></li>`;
@@ -1706,14 +2064,14 @@
 
         function renderQuizQuestion() {
             quizSelectedAnsIdx = null;
-            
+
             // Strictly reset Action Button to "Semak Jawapan" and point onclick back to submitQuizAnswer
             const actionBtn = document.getElementById('quizActionBtn');
             actionBtn.innerText = "Semak Jawapan";
             actionBtn.onclick = submitQuizAnswer;
             actionBtn.disabled = true;
-            actionBtn.className = "bg-slate-101 bg-slate-100 text-slate-400 px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-not-allowed shadow-sm";
-            
+            actionBtn.className = "bg-slate-100 text-slate-400 px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-not-allowed shadow-sm";
+
             document.getElementById('quizFeedback').className = "hidden p-4 rounded-xl border text-xs leading-relaxed";
 
             const qData = quizQuestions[quizCurrentIdx];
@@ -1731,7 +2089,7 @@
                 btn.onclick = () => selectQuizOption(idx);
                 btn.id = `quiz-opt-${idx}`;
                 btn.innerHTML = `
-                    <span class="w-6 h-6 rounded-full border border-slate-355 flex items-center justify-center text-xs text-slate-500 font-bold shrink-0">${optionPrefix[idx]}</span>
+                    <span class="w-6 h-6 rounded-full border border-slate-300 flex items-center justify-center text-xs text-slate-500 font-bold shrink-0">${optionPrefix[idx]}</span>
                     <span>${ans.t}</span>
                 `;
                 optionsContainer.appendChild(btn);
@@ -1755,7 +2113,7 @@
         function submitQuizAnswer() {
             const qData = quizQuestions[quizCurrentIdx];
             const isCorrect = qData.a[quizSelectedAnsIdx].c;
-            
+
             qData.a.forEach((_, idx) => {
                 document.getElementById(`quiz-opt-${idx}`).disabled = true;
             });
@@ -1809,13 +2167,13 @@
         ];
 
         let selectedMatchItemId = null;
-        let matchedPairs = {}; 
-        let matchTaskFinished = false; 
+        let matchedPairs = {};
+        let matchTaskFinished = false;
 
         function renderMatchGame() {
             const itemsContainer = document.getElementById('matchItemsContainer');
             const targetsContainer = document.getElementById('matchTargetsContainer');
-            
+
             itemsContainer.innerHTML = '';
             targetsContainer.innerHTML = '';
 
@@ -1823,7 +2181,7 @@
             matchData.forEach(item => {
                 const isMatched = matchedPairs[item.id] !== undefined;
                 const card = document.createElement('div');
-                
+
                 if (isMatched) {
                     card.className = "w-full text-left p-3.5 rounded-xl border border-emerald-200 text-emerald-800 bg-emerald-50 opacity-60 flex items-center justify-between shadow-sm transition-all";
                     card.innerHTML = `
@@ -1835,10 +2193,9 @@
                     `;
                 } else {
                     card.draggable = true;
-                    card.className = `w-full text-left p-3.5 rounded-xl border flex items-center justify-between transition-all duration-250 cursor-grab active:cursor-grabbing shadow-sm ${
-                        selectedMatchItemId === item.id ? 'bg-teal-50 border-teal-500 text-teal-800 font-bold ring-2 ring-teal-100' : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                    }`;
-                    
+                    card.className = `w-full text-left p-3.5 rounded-xl border flex items-center justify-between transition-all duration-250 cursor-grab active:cursor-grabbing shadow-sm ${selectedMatchItemId === item.id ? 'bg-teal-50 border-teal-500 text-teal-800 font-bold ring-2 ring-teal-100' : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
+                        }`;
+
                     card.innerHTML = `
                         <div class="flex items-center space-x-2.5">
                             <span class="w-5 h-5 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-[10px]"><i class="fa-solid fa-grip-vertical text-slate-400"></i></span>
@@ -1884,13 +2241,13 @@
 
                 const slot = document.createElement('div');
                 slot.className = "flex items-center space-x-2 w-full font-medium";
-                
+
                 const idxSpan = document.createElement('span');
                 idxSpan.className = "w-7 h-7 shrink-0 rounded-full border border-slate-200 flex items-center justify-center font-bold text-xs text-slate-400 bg-white shadow-sm";
                 idxSpan.innerText = index + 1;
 
                 const targetBtn = document.createElement('div');
-                
+
                 if (matchedItem) {
                     targetBtn.className = "flex-1 text-left p-3.5 rounded-xl border border-emerald-300 text-emerald-800 bg-emerald-50 font-bold flex items-center justify-between shadow-sm";
                     targetBtn.innerHTML = `
@@ -1898,9 +2255,8 @@
                         <span class="text-[10px] text-emerald-600 max-w-[150px] truncate">${zon.label}</span>
                     `;
                 } else {
-                    targetBtn.className = `flex-1 text-left p-3.5 rounded-xl border border-dashed text-xs transition-all duration-200 flex items-center justify-between shadow-sm bg-slate-50 border-slate-200 text-slate-400 ${
-                        selectedMatchItemId !== null ? 'hover:bg-teal-50 hover:border-teal-400 hover:text-teal-800 cursor-pointer' : ''
-                    }`;
+                    targetBtn.className = `flex-1 text-left p-3.5 rounded-xl border border-dashed text-xs transition-all duration-200 flex items-center justify-between shadow-sm bg-slate-50 border-slate-200 text-slate-400 ${selectedMatchItemId !== null ? 'hover:bg-teal-50 hover:border-teal-400 hover:text-teal-800 cursor-pointer' : ''
+                        }`;
                     targetBtn.innerHTML = `
                         <span>Lepaskan di sini</span>
                         <span class="text-[10px] text-slate-400 max-w-[150px] truncate">${zon.label}</span>
@@ -1944,7 +2300,7 @@
                 selectedMatchItemId = null;
                 document.getElementById('matchLinkStatus').innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600"></i>';
             } else {
-                document.getElementById('matchLinkStatus').innerHTML = '<i class="fa-solid fa-circle-xmark text-red-655 animate-bounce"></i>';
+                document.getElementById('matchLinkStatus').innerHTML = '<i class="fa-solid fa-circle-xmark text-red-600 animate-bounce"></i>';
                 selectedMatchItemId = null;
             }
             renderMatchGame();
@@ -1954,6 +2310,285 @@
                 document.getElementById('matchSuccessGuide').innerHTML = "<span class='text-emerald-600 font-bold'><i class='fa-solid fa-circle-check mr-1'></i>Tahniah!</span> Langkah operasi telah disusun dengan turutan yang betul. Sila klik Seterusnya di bahagian bawah untuk meneruskan.";
                 unlockNextScreen();
             }
+        }
+
+        // ==========================================
+        // SCREEN 11: PAGINATED SUMMARY
+        // ==========================================
+        let visitedSummaryPages = [];
+        let currentSummaryPage = 1;
+
+        const summaryPagesData = {
+            1: {
+                title: "Konsep Teknologi Makanan Moden",
+                desc: "Asas sains dan aplikasi teknologi pintar bagi memaksimumkan integriti, kualiti, serta jangka hayat rantaian makanan negara.",
+                svg: `<svg viewBox="0 0 100 100" class="w-24 h-24 text-teal-600"><circle cx="50" cy="50" r="35" fill="#0d9488" fill-opacity="0.08" stroke="#0d9488" stroke-width="2.5" stroke-dasharray="4 2"/><circle cx="50" cy="50" r="20" fill="#0d9488" fill-opacity="0.12" stroke="#0d9488" stroke-width="3"/><path d="M50 20 L50 80 M20 50 L80 50 M29 29 L71 71 M29 71 L71 29" stroke="#0d9488" stroke-width="1.5" stroke-dasharray="2 2"/><circle cx="50" cy="50" r="8" fill="#14b8a6"/></svg>`,
+                columns: [
+                    {
+                        title: "Definisi & Asas",
+                        desc: "Aplikasi sains biologi, fizik, dan kimia untuk memproses, memelihara, dan membungkus makanan dengan selamat.",
+                        icon: "fa-solid fa-graduation-cap",
+                        iconBg: "bg-teal-50 text-teal-600",
+                        iconBorder: "border-teal-100"
+                    },
+                    {
+                        title: "Matlamat Utama",
+                        desc: "Mengurangkan pembaziran, memaksimumkan jangka hayat produk, serta mengekalkan nilai nutrisi makanan secara optimum.",
+                        icon: "fa-solid fa-bullseye",
+                        iconBg: "bg-teal-50 text-teal-600",
+                        iconBorder: "border-teal-100"
+                    },
+                    {
+                        title: "Kepentingan Sosioekonomi",
+                        desc: "Menjamin sekuriti makanan negara, menyokong industri hiliran, dan memenuhi permintaan populasi yang kian meningkat.",
+                        icon: "fa-solid fa-earth-asia",
+                        iconBg: "bg-teal-50 text-teal-600",
+                        iconBorder: "border-teal-100"
+                    }
+                ]
+            },
+            2: {
+                title: "Pengurusan Rantaian Bekalan Pintar",
+                desc: "Sistem logistik dan aliran kerja bersepadu daripada pengeluaran bahan mentah hingga pengedaran pengguna akhir.",
+                svg: `<svg viewBox="0 0 100 100" class="w-24 h-24 text-blue-600"><rect x="15" y="40" width="16" height="20" rx="3" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-width="2"/><rect x="42" y="40" width="16" height="20" rx="3" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-width="2"/><rect x="69" y="40" width="16" height="20" rx="3" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-width="2"/><line x1="31" y1="50" x2="42" y2="50" stroke="#3b82f6" stroke-width="2" stroke-dasharray="2 1"/><line x1="58" y1="50" x2="69" y2="50" stroke="#3b82f6" stroke-width="2" stroke-dasharray="2 1"/><path d="M23 40 Q50 15 77 40" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="3 3"/></svg>`,
+                columns: [
+                    {
+                        title: "Peringkat Awal",
+                        desc: "Fasa pemilihan benih, pengurusan pertanian lestari, serta penyelidikan standard spesifikasi bahan mentah.",
+                        icon: "fa-solid fa-seedling",
+                        iconBg: "bg-blue-50 text-blue-600",
+                        iconBorder: "border-blue-100"
+                    },
+                    {
+                        title: "Peringkat Tengah",
+                        desc: "Proses pemprosesan fizikal terma dan pembungkusan hermetik automatik untuk menghalang kontaminasi.",
+                        icon: "fa-solid fa-industry",
+                        iconBg: "bg-blue-50 text-blue-600",
+                        iconBorder: "border-blue-100"
+                    },
+                    {
+                        title: "Peringkat Akhir",
+                        desc: "Rangkaian logistik pengedaran pintar yang mengekalkan pemantauan status batch produk secara langsung.",
+                        icon: "fa-solid fa-truck-ramp-box",
+                        iconBg: "bg-blue-50 text-blue-600",
+                        iconBorder: "border-blue-100"
+                    }
+                ]
+            },
+            3: {
+                title: "Keselamatan & Kawalan Kualiti",
+                desc: "Penerapan standard pematuhan global dan domestik untuk memastikan setiap sajian bebas daripada hazard biologi.",
+                svg: `<svg viewBox="0 0 100 100" class="w-24 h-24 text-purple-600"><path d="M50 20 C25 20 25 35 25 50 C25 70 50 85 50 85 C50 85 75 70 75 50 C75 35 75 20 50 20 Z" fill="#a855f7" fill-opacity="0.08" stroke="#a855f7" stroke-width="2.5"/><path d="M38 52 L46 60 L62 42" fill="none" stroke="#a855f7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="50" r="30" fill="none" stroke="#c084fc" stroke-width="1" stroke-dasharray="4 4"/></svg>`,
+                columns: [
+                    {
+                        title: "Rantaian Sejuk Beku",
+                        desc: "Pemeliharaan suhu storan (0°C - 5°C) sepanjang logistik bagi menghentikan pembiakan mikroorganisma patogenik.",
+                        icon: "fa-solid fa-snowflake",
+                        iconBg: "bg-purple-50 text-purple-600",
+                        iconBorder: "border-purple-100"
+                    },
+                    {
+                        title: "Standard Pematuhan",
+                        desc: "Mematuhi Akta Makanan 1983 Malaysia, Standard Halal JAKIM, HACCP, GMP, serta audit ISO 22000.",
+                        icon: "fa-solid fa-file-shield",
+                        iconBg: "bg-purple-50 text-purple-600",
+                        iconBorder: "border-purple-100"
+                    },
+                    {
+                        title: "Analisis & Kawalan",
+                        desc: "Prosedur saringan makmal biologi dan penjejakan kod batch bagi membolehkan penarikan balik sekiranya berlaku isu.",
+                        icon: "fa-solid fa-flask-vial",
+                        iconBg: "bg-purple-50 text-purple-600",
+                        iconBorder: "border-purple-100"
+                    }
+                ]
+            },
+            4: {
+                title: "Inovasi & IoT (Internet of Things)",
+                desc: "Integrasi sistem perkakasan pintar dan perisian penderia masa nyata demi automasi pemantauan kualiti.",
+                svg: `<svg viewBox="0 0 100 100" class="w-24 h-24 text-amber-600"><rect x="30" y="30" width="40" height="40" rx="6" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-width="2.5"/><circle cx="50" cy="50" r="10" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1.5"/><line x1="50" y1="15" x2="50" y2="30" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><line x1="50" y1="70" x2="50" y2="85" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><line x1="15" y1="50" x2="30" y2="50" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="50" x2="85" y2="50" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><circle cx="50" cy="15" r="3" fill="#d97706"/><circle cx="50" cy="85" r="3" fill="#d97706"/><circle cx="15" cy="50" r="3" fill="#d97706"/><circle cx="85" cy="50" r="3" fill="#d97706"/></svg>`,
+                columns: [
+                    {
+                        title: "Penderia Suhu Pintar",
+                        desc: "Alat IoT dipasang pada kontena bagi mengesan perubahan suhu secara langsung dan memberi isyarat amaran awal.",
+                        icon: "fa-solid fa-temperature-half",
+                        iconBg: "bg-amber-50 text-amber-600",
+                        iconBorder: "border-amber-100"
+                    },
+                    {
+                        title: "Penjejakan Kod Batch",
+                        desc: "Penggunaan tag RFID dan kod QR untuk mengetahui pergerakan batch bekalan dengan telus serta tepat.",
+                        icon: "fa-solid fa-qrcode",
+                        iconBg: "bg-amber-50 text-amber-600",
+                        iconBorder: "border-amber-100"
+                    },
+                    {
+                        title: "Tindakan Automatik",
+                        desc: "Sistem pencetus digital yang bertindak secara autonomi untuk mengasingkan produk apabila parameter terlanggar.",
+                        icon: "fa-solid fa-robot",
+                        iconBg: "bg-amber-50 text-amber-600",
+                        iconBorder: "border-amber-100"
+                    }
+                ]
+            },
+            5: {
+                title: "Kelestarian & Masa Depan",
+                desc: "Penerapan strategi mesra alam untuk mengurangkan impak karbon dan menjamin ketersediaan makanan generasi hadapan.",
+                svg: `<svg viewBox="0 0 100 100" class="w-24 h-24 text-emerald-600"><circle cx="50" cy="50" r="30" fill="#10b981" fill-opacity="0.08" stroke="#10b981" stroke-width="2"/><path d="M50 20 C65 20 80 35 80 50 C80 65 65 80 50 80 C35 80 20 65 20 50 C20 35 35 20 50 20 Z" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M50 35 C50 35 65 45 65 60 C65 60 50 65 50 65 C50 65 35 60 35 60 C35 45 50 35 50 35 Z" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="2"/><line x1="50" y1="35" x2="50" y2="65" stroke="#10b981" stroke-width="1.5"/></svg>`,
+                columns: [
+                    {
+                        title: "Eco-Packaging",
+                        desc: "Peralihan kepada pembungkusan biodegradasi dan boleh dikitar semula bagi meminimumkan pencemaran plastik.",
+                        icon: "fa-solid fa-leaf",
+                        iconBg: "bg-emerald-50 text-emerald-600",
+                        iconBorder: "border-emerald-100"
+                    },
+                    {
+                        title: "Pengurangan Sisa",
+                        desc: "Proses upcycling sisa pemprosesan makanan kepada bahan produk sekunder berharga atau tenaga hijau biofuel.",
+                        icon: "fa-solid fa-recycle",
+                        iconBg: "bg-emerald-50 text-emerald-600",
+                        iconBorder: "border-emerald-100"
+                    },
+                    {
+                        title: "Tanggungjawab Korporat",
+                        desc: "Pengurangan pembaziran tenaga dalam sistem logistik bagi menjayakan sasaran sifar karbon industri makanan.",
+                        icon: "fa-solid fa-hand-holding-heart",
+                        iconBg: "bg-emerald-50 text-emerald-600",
+                        iconBorder: "border-emerald-100"
+                    }
+                ]
+            }
+        };
+
+        function renderSummaryPageBtns() {
+            const paginationContainer = document.getElementById('summaryPagination');
+            if (!paginationContainer) return;
+            paginationContainer.innerHTML = '';
+
+            for (let i = 1; i <= 5; i++) {
+                const isCurrent = (currentSummaryPage === i);
+                const isVisited = visitedSummaryPages.includes(i);
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.onclick = () => changeSummaryPage(i);
+
+                // Class assignments
+                let btnClass = "px-4 py-2.5 rounded-xl border text-xs font-bold transition-all duration-200 shadow-sm flex items-center space-x-2 ";
+                if (isCurrent) {
+                    btnClass += "bg-teal-600 border-teal-600 text-white shadow-md shadow-teal-100 scale-105 z-10";
+                } else if (isVisited) {
+                    btnClass += "bg-emerald-50/60 border-emerald-200 text-emerald-800 hover:bg-emerald-50 hover:border-emerald-300";
+                } else {
+                    btnClass += "bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300";
+                }
+                btn.className = btnClass;
+
+                // Inner content
+                let badgeClass = "w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-extrabold ";
+                if (isCurrent) {
+                    badgeClass += "bg-white text-teal-600";
+                } else if (isVisited) {
+                    badgeClass += "bg-emerald-200 text-emerald-800";
+                } else {
+                    badgeClass += "bg-slate-100 text-slate-500";
+                }
+
+                const badgeContent = isVisited ? '<i class="fa-solid fa-check"></i>' : i;
+                const pageTitles = ["Konsep", "Rantaian", "Kawalan", "Inovasi", "Kelestarian"];
+
+                btn.innerHTML = `
+                    <span class="${badgeClass}">${badgeContent}</span>
+                    <span>${pageTitles[i - 1]}</span>
+                `;
+
+                paginationContainer.appendChild(btn);
+            }
+        }
+
+        function changeSummaryPage(page) {
+            currentSummaryPage = page;
+            if (!visitedSummaryPages.includes(page)) {
+                visitedSummaryPages.push(page);
+            }
+
+            const pData = summaryPagesData[page];
+            if (pData) {
+                document.getElementById('summaryPageSub').innerText = `Halaman ${page} Dari 5`;
+                document.getElementById('summaryPageTitle').innerText = pData.title;
+                document.getElementById('summaryPageDesc').innerText = pData.desc;
+                document.getElementById('summarySvgContainer').innerHTML = pData.svg;
+
+                const colsGrid = document.getElementById('summaryColumnsGrid');
+                colsGrid.innerHTML = '';
+                pData.columns.forEach(col => {
+                    const colDiv = document.createElement('div');
+                    colDiv.className = "bg-slate-50/50 hover:bg-slate-50 border border-slate-200/60 rounded-xl p-4 space-y-2.5 transition-all hover:shadow-sm";
+                    colDiv.innerHTML = `
+                        <div class="flex items-center space-x-2.5">
+                            <div class="w-8 h-8 rounded-full ${col.iconBg || 'bg-teal-50 text-teal-600'} flex items-center justify-center text-xs shrink-0 border ${col.iconBorder || 'border-teal-100'}">
+                                <i class="${col.icon}"></i>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-800">${col.title}</h4>
+                        </div>
+                        <p class="text-[11px] text-slate-500 leading-relaxed">${col.desc}</p>
+                    `;
+                    colsGrid.appendChild(colDiv);
+                });
+            }
+
+            renderSummaryPageBtns();
+
+            const totalViewed = visitedSummaryPages.length;
+            const progressTracker = document.getElementById('summaryProgressTracker');
+            if (progressTracker) {
+                progressTracker.innerText = `Halaman dilawati: ${totalViewed} / 5`;
+            }
+
+            if (totalViewed === 5) {
+                unlockNextScreen();
+
+                const statusIcon = document.getElementById('summaryStatusIcon');
+                const statusTitle = document.getElementById('summaryStatusTitle');
+                const statusDesc = document.getElementById('summaryStatusDesc');
+
+                if (statusIcon) {
+                    statusIcon.className = "w-9 h-9 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100 shadow-sm";
+                    statusIcon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                }
+                if (statusTitle) {
+                    statusTitle.innerText = "Status Rumusan: Lengkap & Selesai!";
+                    statusTitle.className = "text-xs font-bold text-emerald-800";
+                }
+                if (statusDesc) {
+                    statusDesc.innerText = "Anda telah melawat kesemua 5 halaman. Penilaian Akhir kini dinyahkunci.";
+                    statusDesc.className = "text-[11px] text-emerald-600 leading-none mt-0.5";
+                }
+            } else {
+                const statusIcon = document.getElementById('summaryStatusIcon');
+                const statusTitle = document.getElementById('summaryStatusTitle');
+                const statusDesc = document.getElementById('summaryStatusDesc');
+
+                if (statusIcon) {
+                    statusIcon.className = "w-9 h-9 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-100 shadow-sm";
+                    statusIcon.innerHTML = '<i class="fa-solid fa-lock"></i>';
+                }
+                if (statusTitle) {
+                    statusTitle.innerText = `Status Rumusan: Belum Lengkap (${totalViewed}/5 Dilawati)`;
+                    statusTitle.className = "text-xs font-bold text-amber-800";
+                }
+                if (statusDesc) {
+                    statusDesc.innerText = "Sila layari kesemua 5 halaman di atas untuk menyahkunci Penilaian Akhir.";
+                    statusDesc.className = "text-[11px] text-amber-600 leading-none mt-0.5";
+                }
+            }
+
+            updateGlobalNavigationUI();
+        }
+
+        function allSummaryPagesViewed() {
+            return visitedSummaryPages.length === 5;
         }
 
         // ==========================================
@@ -1972,14 +2607,14 @@
 
         function renderExamQuestion() {
             examSelectedAnsIdx = null;
-            
+
             // Strictly reset Action Button to "Hantar Jawapan" and point onclick back to submitExamAnswer
             const actionBtn = document.getElementById('examActionBtn');
             actionBtn.innerText = "Hantar Jawapan";
             actionBtn.onclick = submitExamAnswer;
             actionBtn.disabled = true;
             actionBtn.className = "bg-slate-100 text-slate-400 px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-not-allowed shadow-sm";
-            
+
             document.getElementById('examFeedback').className = "hidden p-4 rounded-xl border text-xs leading-normal";
 
             const qData = examQuestions[examCurrentIdx];
@@ -2029,7 +2664,7 @@
                 document.getElementById('examFeedback').innerHTML = `<i class="fa-solid fa-circle-check mr-1.5 text-emerald-600"></i><strong>TEPAT!</strong> ${qData.f}`;
             } else {
                 document.getElementById('examFeedback').className = "p-4 rounded-xl border bg-red-50 border-red-200 text-red-800 text-xs leading-normal shadow-sm";
-                document.getElementById('examFeedback').innerHTML = `<i class="fa-solid fa-circle-xmark mr-1.5 text-red-650 text-red-600"></i><strong>KURANG TEPAT.</strong> Alternatif tindakan tidak memenuhi standard kualiti yang ketat.`;
+                document.getElementById('examFeedback').innerHTML = `<i class="fa-solid fa-circle-xmark mr-1.5 text-red-600"></i><strong>KURANG TEPAT.</strong> Alternatif tindakan tidak memenuhi standard kualiti yang ketat.`;
             }
 
             const actionBtn = document.getElementById('examActionBtn');
@@ -2050,7 +2685,7 @@
         function processExamFinished() {
             examActive = false;
             const finalPercent = (examScore / 5) * 100;
-            
+
             document.getElementById('examQuestionBox').classList.add('hidden');
             const resultBox = document.getElementById('examResultBox');
             resultBox.classList.remove('hidden');
@@ -2064,21 +2699,21 @@
                     <p class="text-xs text-slate-500 leading-relaxed">Tahniah! Anda telah memperoleh markah <span class="text-emerald-600 font-bold">${finalPercent}% (${examScore} / 5)</span>. Sesi pembelajaran anda disahkan lengkap.</p>
                     <p class="text-xs text-slate-400">Sila klik Seterusnya pada navigasi bawah untuk melihat Sijil Penghargaan.</p>
                 `;
-                
+
                 // Update Outro screen values
                 document.getElementById('outroScoreLabel').innerText = `${finalPercent}%`;
                 document.getElementById('outroTimeLabel').innerText = document.getElementById('globalTimer').innerText;
                 document.getElementById('outroWelcomeText').innerText = `Tahniah ${name}! Anda telah berjaya melengkapkan keseluruhan modul pembelajaran Teknologi Makanan.`;
-                
+
                 unlockNextScreen();
             } else {
                 // Failed (retry is kept here perfectly)
                 examFinished = false;
                 resultBox.innerHTML = `
-                    <div class="w-14 h-14 bg-red-50 text-red-650 rounded-full flex items-center justify-center text-2xl mx-auto"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <div class="w-14 h-14 bg-red-50 text-red-600 rounded-full flex items-center justify-center text-2xl mx-auto"><i class="fa-solid fa-triangle-exclamation"></i></div>
                     <h3 class="text-lg font-bold text-slate-900">Keputusan: TIDAK LULUS</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">Anda mendapat markah <span class="text-red-650 font-bold">${finalPercent}% (${examScore} / 5)</span>. Minimum 80% diperlukan untuk lulus kriteria persijilan EPSA.</p>
-                    <button onclick="startActualExam()" class="w-full bg-slate-105 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider border border-slate-200 shadow-sm transition-colors">Ulang Penilaian Semula</button>
+                    <p class="text-xs text-slate-500 leading-relaxed">Anda mendapat markah <span class="text-red-600 font-bold">${finalPercent}% (${examScore} / 5)</span>. Minimum 80% diperlukan untuk lulus kriteria persijilan EPSA.</p>
+                    <button onclick="startActualExam()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider border border-slate-200 shadow-sm transition-colors">Ulang Penilaian Semula</button>
                 `;
                 updateGlobalNavigationUI();
             }
@@ -2091,7 +2726,7 @@
             const finalPercent = (examScore / 5) * 100;
             document.getElementById('certStudentName').innerText = name;
             document.getElementById('certScore').innerText = `${finalPercent > 0 ? finalPercent : 80}%`;
-            
+
             const today = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('certDate').innerText = today.toLocaleDateString('ms-MY', options);
@@ -2117,6 +2752,8 @@
             quizCurrentIdx = 0;
             quizScore = 0;
             matchedPairs = {};
+            visitedSummaryPages = [];
+            currentSummaryPage = 1;
             examCurrentIdx = 0;
             examScore = 0;
             startTime = Date.now();
@@ -2149,7 +2786,7 @@
             selectedMatchItemId = null;
             matchedPairs = {};
             matchTaskFinished = false;
-            document.getElementById('matchSuccessGuide').innerHTML = "Sila heret dan letakkan kesemua <span class='text-teal-655 font-bold text-teal-600'>5 aktiviti</span> secara betul ke dalam zon sasaran.";
+            document.getElementById('matchSuccessGuide').innerHTML = "Sila heret dan letakkan kesemua <span class='font-bold text-teal-600'>5 aktiviti</span> secara betul ke dalam zon sasaran.";
             document.getElementById('matchLinkStatus').innerHTML = '<i class="fa-solid fa-link text-slate-400"></i>';
             renderMatchGame();
         }
@@ -2165,7 +2802,7 @@
             document.getElementById('examResultBox').classList.add('hidden');
         }
 
-        window.onload = function() {
+        window.onload = function () {
             renderSidebar();
             updateGlobalNavigationUI();
             renderQuizQuestion();
@@ -2173,4 +2810,5 @@
         };
     </script>
 </body>
+
 </html>
