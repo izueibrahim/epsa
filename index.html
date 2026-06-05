@@ -3108,6 +3108,11 @@
             consoleDiv.className = "fixed bottom-4 right-4 z-[9999] w-80 bg-slate-900/95 border border-slate-700/50 rounded-2xl shadow-2xl text-slate-100 flex flex-col overflow-hidden transition-all duration-300 font-sans backdrop-blur-md";
             consoleDiv.style.maxHeight = "380px";
             
+            // Allow hiding via localStorage or URL query parameter (?console=false)
+            if (localStorage.getItem('show_scorm_console') === 'false' || new URLSearchParams(window.location.search).get('console') === 'false') {
+                consoleDiv.style.display = 'none';
+            }
+            
             consoleDiv.innerHTML = `
                 <div class="bg-slate-800/80 border-b border-slate-700/50 px-4 py-2.5 flex items-center justify-between cursor-pointer select-none" onclick="toggleConsoleMin()">
                     <div class="flex items-center space-x-2">
@@ -3228,6 +3233,22 @@
             
             renderQuizQuestion();
             renderMatchGame();
+
+            // Keyboard shortcut to toggle console visibility (Ctrl + Shift + C or backtick ` key)
+            window.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey && e.shiftKey && e.code === 'KeyC') || e.key === '`') {
+                    const consoleDiv = document.getElementById('scormSimulatorOverlay');
+                    if (consoleDiv) {
+                        if (consoleDiv.style.display === 'none') {
+                            consoleDiv.style.display = 'flex';
+                            localStorage.setItem('show_scorm_console', 'true');
+                        } else {
+                            consoleDiv.style.display = 'none';
+                            localStorage.setItem('show_scorm_console', 'false');
+                        }
+                    }
+                }
+            });
         };
     </script>
 </body>
