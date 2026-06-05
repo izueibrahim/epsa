@@ -2905,7 +2905,10 @@
             LMSGetDiagnostic: function(err) { return "No diagnostic info"; }
         };
 
+        let isUpdatingDisplay = false;
         function updateScormVarDisplay() {
+            if (isUpdatingDisplay) return;
+            isUpdatingDisplay = true;
             const statusEl = document.getElementById('scormValStatus');
             const locEl = document.getElementById('scormValLoc');
             const scoreEl = document.getElementById('scormValScore');
@@ -2917,6 +2920,7 @@
                 if (scoreEl) scoreEl.innerText = scormAPI.LMSGetValue("cmi.core.score.raw") + "%";
                 if (nameEl) nameEl.innerText = scormAPI.LMSGetValue("cmi.core.student_name");
             }
+            isUpdatingDisplay = false;
         }
 
         function findAPI(win) {
