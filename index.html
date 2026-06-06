@@ -8,19 +8,11 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- ╔══════════════════════════════════════════════════════════════╗
-         ║              DESIGN SYSTEM — TAILWIND CONFIG                ║
-         ║  Change brand colors, fonts, and radius here.               ║
-         ║  All teal-* classes across the page update automatically.   ║
-         ╚══════════════════════════════════════════════════════════════╝ -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        // ── PRIMARY BRAND ─────────────────────────────────────
-                        // Replace every shade below to change the brand palette.
-                        // e.g. swap teal for indigo, rose, violet, etc.
                         teal: {
                             50: '#f0fdfa',
                             100: '#ccfbf1',
@@ -544,8 +536,7 @@
                             </button>
                             <div id="obj-content-1"
                                 class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Memahami definisi teknologi makanan serta peranannya dalam penghasilan, pemprosesan, dan
-                                pengurusan makanan secara saintifik.
+                                 Memahami definisi teknologi makanan serta peranannya dalam penghasilan, pemprosesan dan pengurusan makanan.
                             </div>
                         </div>
 
@@ -564,8 +555,7 @@
                             </button>
                             <div id="obj-content-2"
                                 class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Mengenal pasti proses utama dalam rantaian pengeluaran makanan daripada bahan mentah
-                                hingga pengedaran berpusat.
+                                Mengenal pasti proses utama dalam rantaian pengeluaran makanan daripada bahan mentah hingga pengedaran.
                             </div>
                         </div>
 
@@ -584,8 +574,7 @@
                             </button>
                             <div id="obj-content-3"
                                 class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Memahami kepentingan keselamatan makanan, kawalan kualiti, pemantauan rantaian sejuk
-                                beku, dan pematuhan standard industri (HACCP/ISO).
+                                 Memahami kepentingan keselamatan makanan, kawalan kualiti dan pematuhan standard industri.
                             </div>
                         </div>
 
@@ -598,14 +587,13 @@
                                     <div
                                         class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">
                                         4</div>
-                                    <span class="text-sm font-bold text-slate-800">Aplikasi Industri & Inovasi</span>
+                                    <span class="text-sm font-bold text-slate-800">Aplikasi Aplikasi Industri</span>
                                 </div>
                                 <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-4"></i>
                             </button>
                             <div id="obj-content-4"
                                 class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Meneroka bagaimana teknologi menyokong kecekapan operasi and pembangunan formulasi
-                                produk makanan baharu yang lebih mampan.
+                                Meneroka bagaimana teknologi menyokong kecekapan operasi dan pembangunan produk baharu.
                             </div>
                         </div>
                     </div>
@@ -1950,40 +1938,40 @@
         let viewedProcesses = [1];
         const processData = {
             1: {
-                label: "Bahan Mentah",
-                title: "Fasa 1: Bahan Mentah",
+                label: "Fasa 1",
+                title: "Bahan Mentah",
                 desc: "Pemilihan bahan mentah yang berkualiti merupakan langkah awal dalam memastikan keselamatan dan kualiti produk makanan.",
                 bullets: ["Saringan kualiti fizikal awal", "Kepatuhan standard pembekal", "Ujian mikrobiologi primer"],
                 color: "bg-teal-800",
                 svgPath: '<svg viewBox="0 0 100 100" class="w-24 h-24"><path d="M50 15 Q30 35 30 55 A20 20 0 0 0 70 55 Q70 35 50 15 Z" fill="#0d9488" fill-opacity="0.15" stroke="#0d9488" stroke-width="3"/><circle cx="50" cy="55" r="8" fill="#10b981"/></svg>'
             },
             2: {
-                label: "Pemprosesan",
-                title: "Fasa 2: Pemprosesan",
+                label: "Fasa 2",
+                title: "Pemprosesan",
                 desc: "Fasa ini melibatkan penggunaan teknologi seperti pasteurisasi dan pensterilan untuk membasmi kuman merbahaya tanpa menjejaskan kualiti.",
                 bullets: ["Kawalan takat terma kinetik", "Sistem pasteurisasi automatik", "Pencegahan pembiakan bakteria"],
                 color: "bg-blue-800",
                 svgPath: '<svg viewBox="0 0 100 100" class="w-24 h-24"><rect x="25" y="25" width="50" height="50" rx="6" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="3"/><circle cx="50" cy="50" r="12" fill="#3b82f6"/></svg>'
             },
             3: {
-                label: "Pembungkusan",
-                title: "Fasa 3: Pembungkusan",
+                label: "Fasa 3",
+                title: "Pembungkusan",
                 desc: "Pembungkusan vakum atau gas nitrogen membantu mengekalkan kesegaran makanan serta melindungi dari pencemaran luar.",
                 bullets: ["Sistem pengedap udara nitrogen", "Pengekalan nutrisi makanan", "Saringan kebocoran mikro"],
                 color: "bg-purple-800",
                 svgPath: '<svg viewBox="0 0 100 100" class="w-24 h-24"><rect x="20" y="20" width="60" height="60" rx="4" fill="#a855f7" fill-opacity="0.15" stroke="#a855f7" stroke-width="3"/><line x1="20" y1="50" x2="80" y2="50" stroke="#a855f7" stroke-width="2"/></svg>'
             },
             4: {
-                label: "Penyimpanan",
-                title: "Fasa 4: Penyimpanan",
+                label: "Fasa 4",
+                title: "Penyimpanan",
                 desc: "Rantaian sejuk dikekalkan dalam suhu 0°C - 5°C bagi produk sejuk beku demi menjamin integriti biologi makanan.",
                 bullets: ["Pemeliharaan suhu rantaian sejuk", "Pemantauan telemetri digital", "Kawalan kestabilan kelembapan"],
                 color: "bg-amber-800",
                 svgPath: '<svg viewBox="0 0 100 100" class="w-24 h-24"><circle cx="50" cy="50" r="30" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="3"/><path d="M50 20 L50 80 M20 50 L80 50" stroke="#f59e0b" stroke-width="2"/></svg>'
             },
             5: {
-                label: "Pengedaran",
-                title: "Fasa 5: Pengedaran",
+                label: "Fasa 5",
+                title: "Pengedaran",
                 desc: "Logistik pintar membolehkan pengesanan status batch dan suhu dalam masa nyata sehingga sampai kepada pengguna akhir.",
                 bullets: ["Penjejakan logistik masa nyata", "Pengekalan standard kualiti lori", "Audit kebersihan storan transit"],
                 color: "bg-indigo-800",
