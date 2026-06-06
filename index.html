@@ -347,12 +347,12 @@
             <div class="w-full flex-1 flex flex-col min-h-0">
 
                 <!-- SCREEN 1: LANDING / INTRO -->
-                <div id="screen-1" class="screen-view py-8 px-6 md:px-10 relative rounded-3xl overflow-hidden"
+                <div id="screen-1" class="screen-view relative overflow-hidden"
                     style="background-image: url('public/bg-intro.png'); background-size: cover; background-position: center;">
                     <!-- Overlay to ensure text readability against the background image -->
-                    <div class="absolute inset-0"></div>
+                    <div class="absolute inset-0 bg-white/70 backdrop-blur-[2px]"></div>
 
-                    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center py-8 px-6 md:px-10">
                         <div class="lg:col-span-7 space-y-6">
                             <div
                                 class="inline-flex items-center space-x-2 bg-teal-50 border border-teal-100 px-3 py-1 rounded-full text-teal-700 text-xs font-semibold">
@@ -1727,7 +1727,9 @@
             if (window.location.hash !== '#p-' + screenId) {
                 window.location.hash = 'p-' + screenId;
             }
+            // Persist current screen to sessionStorage AND localStorage immediately
             try { sessionStorage.setItem('epsa_refresh_screen', screenId); } catch (e) { }
+            try { localStorage.setItem('epsa_current_screen', String(screenId)); } catch (e) { }
         }
 
         function navigateBack() {
@@ -1956,7 +1958,7 @@
                 desc: "Pemilihan bahan mentah yang berkualiti merupakan langkah awal dalam memastikan keselamatan dan kualiti produk makanan.",
                 bullets: ["Saringan kualiti fizikal awal", "Kepatuhan standard pembekal", "Ujian mikrobiologi primer"],
                 color: "bg-teal-800",
-                svgPath: '<img src="public/bahan-mentah.png" class="max-w-full object-contain rounded-lg" alt="Bahan Mentah">'
+                svgPath: '<img src="public/bahan-mentah.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             2: {
                 label: "Fasa 2",
@@ -1964,7 +1966,7 @@
                 desc: "Fasa ini melibatkan penggunaan teknologi seperti pasteurisasi dan pensterilan untuk membasmi kuman merbahaya tanpa menjejaskan kualiti.",
                 bullets: ["Kawalan takat terma kinetik", "Sistem pasteurisasi automatik", "Pencegahan pembiakan bakteria"],
                 color: "bg-blue-800",
-                svgPath: '<img src="public/bahan-mentah.png" class="max-w-full object-contain rounded-lg" alt="Bahan Mentah">'
+                svgPath: '<img src="public/bahan-mentah.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             3: {
                 label: "Fasa 3",
@@ -1972,7 +1974,7 @@
                 desc: "Pembungkusan vakum atau gas nitrogen membantu mengekalkan kesegaran makanan serta melindungi dari pencemaran luar.",
                 bullets: ["Sistem pengedap udara nitrogen", "Pengekalan nutrisi makanan", "Saringan kebocoran mikro"],
                 color: "bg-purple-800",
-                svgPath: '<img src="public/bahan-mentah.png" class="max-w-full object-contain rounded-lg" alt="Bahan Mentah">'
+                svgPath: '<img src="public/bahan-mentah.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             4: {
                 label: "Fasa 4",
@@ -1980,7 +1982,7 @@
                 desc: "Rantaian sejuk dikekalkan dalam suhu 0°C - 5°C bagi produk sejuk beku demi menjamin integriti biologi makanan.",
                 bullets: ["Pemeliharaan suhu rantaian sejuk", "Pemantauan telemetri digital", "Kawalan kestabilan kelembapan"],
                 color: "bg-amber-800",
-                svgPath: '<img src="public/bahan-mentah.png" class="max-w-full object-contain rounded-lg" alt="Bahan Mentah">'
+                svgPath: '<img src="public/bahan-mentah.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             5: {
                 label: "Fasa 5",
@@ -1988,7 +1990,7 @@
                 desc: "Logistik pintar membolehkan pengesanan status batch dan suhu dalam masa nyata sehingga sampai kepada pengguna akhir.",
                 bullets: ["Penjejakan logistik masa nyata", "Pengekalan standard kualiti lori", "Audit kebersihan storan transit"],
                 color: "bg-indigo-800",
-                svgPath: '<img src="public/bahan-mentah.png" class="max-w-full object-contain rounded-lg" alt="Bahan Mentah">'
+                svgPath: '<img src="public/bahan-mentah.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             }
         };
 
@@ -3265,8 +3267,10 @@
             consoleDiv.className = "fixed bottom-4 right-4 z-[9999] w-80 bg-slate-900/95 border border-slate-700/50 rounded-2xl shadow-2xl text-slate-100 flex flex-col overflow-hidden transition-all duration-300 font-sans backdrop-blur-md";
             consoleDiv.style.maxHeight = "380px";
 
-            // Allow hiding via localStorage or URL query parameter (?console=false)
-            if (localStorage.getItem('show_scorm_console') === 'false' || new URLSearchParams(window.location.search).get('console') === 'false') {
+            // Hide console by default — only show if explicitly enabled via localStorage or URL
+            if (localStorage.getItem('show_scorm_console') === 'true' && new URLSearchParams(window.location.search).get('console') !== 'false') {
+                // keep visible
+            } else {
                 consoleDiv.style.display = 'none';
             }
 
@@ -3426,6 +3430,19 @@
                 } catch (e) { }
             }
 
+            // Final fallback to localStorage (survives even session ends)
+            if (targetScreenId === 1) {
+                try {
+                    const saved = localStorage.getItem('epsa_current_screen');
+                    if (saved) {
+                        const screenId = parseInt(saved);
+                        if (!isNaN(screenId) && screenId > 1 && screenId <= 13) {
+                            targetScreenId = screenId;
+                        }
+                    }
+                } catch (e) { }
+            }
+
             // Ensure the target screen is marked as visited
             if (!visitedScreens.includes(targetScreenId)) {
                 visitedScreens.push(targetScreenId);
@@ -3484,10 +3501,17 @@
             var hash = window.location.hash;
             if (hash && hash.startsWith('#p-')) {
                 targetId = parseInt(hash.replace('#p-', ''));
-            } else {
+            }
+            if (targetId <= 1) {
                 try {
                     var saved = sessionStorage.getItem('epsa_refresh_screen');
                     if (saved) targetId = parseInt(saved);
+                } catch (e) { }
+            }
+            if (targetId <= 1) {
+                try {
+                    var saved2 = localStorage.getItem('epsa_current_screen');
+                    if (saved2) targetId = parseInt(saved2);
                 } catch (e) { }
             }
             if (!isNaN(targetId) && targetId > 1 && targetId <= 13) {
