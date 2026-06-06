@@ -7,37 +7,133 @@
     <title>Teknologi Makanan</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ╔══════════════════════════════════════════════════════════════╗
+         ║              DESIGN SYSTEM — TAILWIND CONFIG                ║
+         ║  Change brand colors, fonts, and radius here.               ║
+         ║  All teal-* classes across the page update automatically.   ║
+         ╚══════════════════════════════════════════════════════════════╝ -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // ── PRIMARY BRAND ─────────────────────────────────────
+                        // Replace every shade below to change the brand palette.
+                        // e.g. swap teal for indigo, rose, violet, etc.
+                        teal: {
+                            50:  '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',  // ← MAIN BRAND (buttons, highlights)
+                            700: '#0f766e',  // ← HOVER STATE
+                            800: '#115e59',
+                            900: '#134e4a',
+                            950: '#042f2e',
+                        },
+                        // ── NEUTRAL / UI ──────────────────────────────────────
+                        // Slate is the UI neutral. Swap for gray, zinc, stone, etc.
+                        slate: {
+                            50:  '#f8fafc',  // page background
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',  // borders
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',  // muted text
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',  // headings
+                            950: '#020617',
+                        },
+                    },
+                    fontFamily: {
+                        // ── TYPOGRAPHY ────────────────────────────────────────
+                        sans:  ['Inter', 'ui-sans-serif', 'sans-serif'],
+                        serif: ['Playfair Display', 'ui-serif', 'serif'],
+                        mono:  ['ui-monospace', 'monospace'],
+                    },
+                    borderRadius: {
+                        // ── SHAPE / ROUNDNESS ─────────────────────────────────
+                        // Increase all values for a rounder look, decrease for sharp.
+                        sm:    '0.25rem',
+                        DEFAULT:'0.375rem',
+                        md:    '0.5rem',
+                        lg:    '0.5rem',
+                        xl:    '0.75rem',
+                        '2xl': '1rem',
+                        '3xl': '1.5rem',
+                        full:  '9999px',
+                    },
+                }
+            }
+        }
+    </script>
+
     <!-- Google Fonts: Inter & Playfair Display for certificate -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap"
         rel="stylesheet">
     <!-- FontAwesome Icons for Industrial look -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        /* ════════════════════════════════════════════════════════════
+           CSS DESIGN TOKENS — mirrors the Tailwind config above.
+           Use these variables in any custom CSS in this file.
+           ════════════════════════════════════════════════════════════ */
+        :root {
+            /* Brand */
+            --color-primary:        #0d9488;   /* teal-600  – main CTA, active states   */
+            --color-primary-hover:  #0f766e;   /* teal-700  – button hover              */
+            --color-primary-light:  #f0fdfa;   /* teal-50   – light backgrounds         */
+            --color-primary-text:   #115e59;   /* teal-800  – dark brand text           */
+            --color-primary-muted:  #ccfbf1;   /* teal-100  – badges, chips             */
+
+            /* Neutral surface */
+            --color-bg:             #f8fafc;   /* slate-50  – page background           */
+            --color-surface:        #ffffff;   /* white     – card/panel surface        */
+            --color-border:         #e2e8f0;   /* slate-200 – lines, dividers           */
+            --color-text:           #0f172a;   /* slate-900 – primary text              */
+            --color-text-muted:     #64748b;   /* slate-500 – secondary / hint text     */
+
+            /* Typography */
+            --font-body:            'Inter', ui-sans-serif, sans-serif;
+            --font-display:         'Playfair Display', ui-serif, serif;
+            --font-mono:            ui-monospace, monospace;
+            --font-size-base:       0.875rem;  /* 14px */
+
+            /* Shape */
+            --radius-sm:            0.25rem;
+            --radius:               0.5rem;
+            --radius-lg:            0.75rem;
+            --radius-xl:            1rem;
+            --radius-2xl:           1.5rem;
+
+            /* Elevation / Shadow */
+            --shadow-sm:  0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow:     0 1px 3px 0 rgb(0 0 0 / 0.10), 0 1px 2px -1px rgb(0 0 0 / 0.10);
+            --shadow-md:  0 4px 6px -1px rgb(0 0 0 / 0.10), 0 2px 4px -2px rgb(0 0 0 / 0.10);
+            --shadow-lg:  0 10px 15px -3px rgb(0 0 0 / 0.10), 0 4px 6px -4px rgb(0 0 0 / 0.10);
+
+            /* Sidebar */
+            --sidebar-width:        20rem;     /* 320px */
+            --header-height:        4rem;      /* 64px  */
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            /* Cool Slate 50 - Ultra clean background */
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
         }
 
-        /* Custom Premium Scrollbar for light mode */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0d9488;
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--color-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: var(--radius); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
 
         /* Pulsing animation for hotspots */
         @keyframes pulse-ring {
@@ -77,13 +173,13 @@
         .dragging {
             opacity: 0.5;
             border-style: dashed;
-            border-color: #0d9488;
+            border-color: var(--color-primary);
             transform: scale(0.98);
         }
 
         .drag-over {
-            background-color: #f0fdf4 !important;
-            border-color: #10b981 !important;
+            background-color: var(--color-primary-light) !important;
+            border-color: var(--color-primary) !important;
             border-style: solid !important;
         }
 
@@ -93,6 +189,52 @@
             text-orientation: mixed;
             transform: rotate(180deg);
             white-space: nowrap;
+        }
+
+        /* Sidebar responsive */
+        #sidebarMenuContainer {
+            width: 0;
+            opacity: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        #sidebarMenuContainer.sidebar-open {
+            width: var(--sidebar-width);
+            opacity: 1;
+            pointer-events: auto;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 767px) {
+            #sidebarMenuContainer {
+                position: fixed;
+                left: 0;
+                top: var(--header-height);
+                bottom: 0;
+                z-index: 40;
+            }
+
+            #sidebarMenuContainer.sidebar-open {
+                width: 80vw;
+                max-width: var(--sidebar-width);
+                box-shadow: var(--shadow-lg);
+            }
+        }
+
+        /* Active screen fills container and scrolls internally */
+        .screen-view:not(.hidden) {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Screens with natural-height content: vertically center in viewport */
+        #screen-1, #screen-2, #screen-3, #screen-11 {
+            justify-content: center;
         }
     </style>
 </head>
@@ -114,21 +256,21 @@
             <div class="h-6 w-px bg-slate-200"></div>
             <div>
                 <span class="text-[10px] text-slate-400 block uppercase tracking-widest font-bold"></span>
-                <span class="text-xs md:text-sm font-bold text-slate-800">Modul Interaktif: Teknologi Makanan</span>
+                <span class="text-xs md:text-sm font-bold text-slate-800">Teknologi Makanan</span>
             </div>
         </div>
 
         <!-- Live Global Metrics in light mode -->
-        <div class="hidden md:flex items-center space-x-6">
+        <!-- <div class="hidden md:flex items-center space-x-6">
             <div class="text-right">
                 <span class="text-[10px] text-slate-400 block uppercase font-bold">Sesi Pengguna</span>
                 <span class="text-xs font-semibold text-teal-600" id="userNameLabel">Pegawai Kualiti EPSA</span>
-            </div>
-            <div class="h-8 w-px bg-slate-200"></div>
+            </div> -->
+            <!-- <div class="h-8 w-px bg-slate-200"></div>
             <div class="text-right">
                 <span class="text-[10px] text-slate-400 block uppercase font-bold">Masa Belajar</span>
                 <span class="text-xs font-mono font-bold text-slate-700" id="globalTimer">00:00</span>
-            </div>
+            </div> -->
             <div class="h-8 w-px bg-slate-200"></div>
             <div>
                 <span class="text-[10px] text-slate-400 block uppercase font-bold mb-0.5">Kemajuan Modul</span>
@@ -148,7 +290,7 @@
 
         <!-- PERSISTENT LEFT SIDEBAR NAVIGATION (Modern Light Clean - Supports Toggle) -->
         <aside id="sidebarMenuContainer"
-            class="w-80 bg-white border-r border-slate-200 flex flex-col justify-between overflow-y-auto transition-all duration-300 ease-in-out shrink-0">
+            class="bg-white border-r border-slate-200 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0">
             <div class="p-4">
                 <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-widest px-2 mb-3">Laluan Pembelajaran
                     (Linear)</h3>
@@ -173,13 +315,13 @@
         </aside>
 
         <!-- MAIN INTERACTIVE WORKSPACE CANVAS -->
-        <main class="flex-1 bg-slate-50 flex flex-col justify-between overflow-y-auto relative p-4 md:p-8">
+        <main class="flex-1 bg-slate-50 flex flex-col overflow-hidden relative py-4 md:py-5 px-4 md:px-[100px]">
 
             <!-- SCREEN BOX CONTAINER -->
-            <div class="max-w-5xl mx-auto w-full flex-1 flex flex-col justify-center">
+            <div class="w-full flex-1 flex flex-col min-h-0">
 
                 <!-- SCREEN 1: LANDING / INTRO -->
-                <div id="screen-1" class="screen-view space-y-8 py-6">
+                <div id="screen-1" class="screen-view py-6">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                         <div class="lg:col-span-7 space-y-6">
                             <div
@@ -193,9 +335,7 @@
                             <p class="text-lg text-teal-800 font-medium">Keselamatan, Kualiti dan Inovasi dalam Industri
                                 Makanan</p>
                             <p class="text-slate-600 leading-relaxed text-sm md:text-base">
-                                Modul ini memperkenalkan konsep teknologi makanan serta peranannya dalam memastikan
-                                penghasilan makanan yang selamat, berkualiti, dan memenuhi keperluan industri moden
-                                berdasarkan kajian kes MARDI, KKM dan FAO.
+                                Modul ini memperkenalkan konsep teknologi makanan serta peranannya dalam memastikan penghasilan makanan yang selamat, berkualiti dan memenuhi keperluan industri moden.
                             </p>
 
                             <div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-200">
@@ -257,15 +397,15 @@
                 </div>
 
                 <!-- SCREEN 2: LEARNING JOURNEY / TABLE OF CONTENT -->
-                <div id="screen-2" class="screen-view space-y-6 py-4 hidden">
-                    <div class="text-center max-w-2xl mx-auto space-y-2">
+                <div id="screen-2" class="screen-view space-y-4 py-4 hidden">
+                    <div class="text-center space-y-2">
                         <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Kandungan Modul</h2>
                         <p class="text-slate-500 text-sm">Modul ini mengandungi beberapa komponen pembelajaran
                             interaktif yang direka untuk memberikan pengalaman pembelajaran yang berstruktur dan
                             praktikal.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mt-6 font-medium">
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 font-medium">
                         <!-- TOC Card 1 -->
                         <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
                             onclick="goToScreen(4)">
@@ -351,7 +491,7 @@
                 </div>
 
                 <!-- SCREEN 3: LEARNING OBJECTIVES (Accordion single active) -->
-                <div id="screen-3" class="screen-view space-y-6 py-4 hidden">
+                <div id="screen-3" class="screen-view space-y-4 py-4 hidden">
                     <div class="space-y-1">
                         <h2 class="text-2xl font-extrabold text-slate-900">Objektif Pembelajaran</h2>
                         <p class="text-slate-500 text-sm">Sila klik pada mana-mana objektif pembelajaran di bawah untuk
@@ -539,7 +679,7 @@
                     </div>
 
                     <!-- Layout based on image -->
-                    <div class="flex h-[480px] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-md">
+                    <div class="flex flex-1 min-h-[280px] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-md">
                         <!-- Left Side: ACTIVE TAB LABEL -->
                         <div id="active-side-tab"
                             class="w-12 bg-slate-800 flex items-center justify-center transition-all duration-300 text-center">
@@ -548,7 +688,7 @@
                         </div>
 
                         <!-- Center: CONTENT AREA (Text Left, Image Right) -->
-                        <div class="flex-1 flex flex-col p-10 bg-slate-50/30">
+                        <div class="flex-1 flex flex-col p-6 bg-slate-50/30">
                             <div class="flex h-full gap-10">
                                 <!-- Text Left -->
                                 <div class="w-1/2 space-y-6">
@@ -595,10 +735,10 @@
                     </div>
 
                     <!-- Layout: 70% Graphic, 30% Info panel -->
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch flex-1">
 
                         <div
-                            class="lg:col-span-8 bg-white rounded-xl overflow-hidden border border-slate-200 p-4 relative min-h-[340px] flex items-center justify-center shadow-sm">
+                            class="lg:col-span-8 bg-white rounded-xl overflow-hidden border border-slate-200 p-4 relative flex items-center justify-center shadow-sm">
                             <svg viewBox="0 0 800 400" class="w-full h-auto text-slate-300">
                                 <rect x="10" y="10" width="780" height="380" rx="12" fill="#f8fafc" stroke="#e2e8f0"
                                     stroke-width="2" />
@@ -725,7 +865,7 @@
                             Dapatkan Maklum Balas</div>
                     </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch flex-1">
                         <!-- Left Panel -->
                         <div
                             class="lg:col-span-4 bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between shadow-sm">
@@ -839,7 +979,7 @@
                     </div>
 
                     <!-- Right Content Area -->
-                    <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm min-h-[250px] flex flex-col md:flex-row gap-6 items-center"
+                    <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex-1 flex flex-col md:flex-row gap-6 items-center"
                         id="tabContentArea">
                         <div class="space-y-4 flex-1">
                             <h3 class="text-lg font-bold text-slate-900" id="tab-title-disp">Peranan Teknologi dalam
@@ -880,7 +1020,7 @@
 
                 <!-- SCREEN 9: QUICK KNOWLEDGE CHECK -->
                 <div id="screen-9" class="screen-view space-y-6 py-4 hidden">
-                    <div class="text-center max-w-xl mx-auto space-y-1">
+                    <div class="text-center space-y-1">
                         <span
                             class="text-[10px] bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Cabaran
                             Pantas</span>
@@ -889,7 +1029,7 @@
                             telah anda pelajari.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch max-w-4xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch flex-1">
                         <!-- Left Clipboard -->
                         <div
                             class="md:col-span-4 bg-white border border-slate-200 rounded-xl p-5 flex flex-col items-center justify-center text-center shadow-sm">
@@ -958,7 +1098,7 @@
 
                 <!-- SCREEN 10: DRAG & DROP CLASSIFICATION -->
                 <div id="screen-10" class="screen-view space-y-4 py-4 hidden">
-                    <div class="text-center max-w-xl mx-auto space-y-1">
+                    <div class="text-center space-y-1">
                         <span
                             class="text-[10px] bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Aktiviti
                             Padanan</span>
@@ -968,7 +1108,7 @@
                     </div>
 
                     <!-- Clean Premium Table Match Layout -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch max-w-4xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch flex-1">
                         <!-- Left column: Draggable Cards -->
                         <div class="md:col-span-5 space-y-2">
                             <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest px-1">Pilihan Aktiviti
@@ -1017,7 +1157,7 @@
                 <!-- SCREEN 11: LEARNING SUMMARY / RUMUSAN -->
                 <div id="screen-11" class="screen-view space-y-6 py-4 hidden">
                     <!-- Header -->
-                    <div class="text-center max-w-xl mx-auto space-y-1">
+                    <div class="text-center space-y-1">
                         <span
                             class="text-[10px] bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Rumusan</span>
                         <h2 class="text-2xl font-extrabold text-slate-900">Rumusan Pembelajaran</h2>
@@ -1032,7 +1172,7 @@
 
                     <!-- Main Paginated Summary Content Card -->
                     <div id="summaryCard"
-                        class="bg-white border border-slate-200 rounded-2xl shadow-md p-6 md:p-8 space-y-6 transition-all duration-300">
+                        class="bg-white border border-slate-200 rounded-2xl shadow-md p-6 space-y-4 transition-all duration-300">
                         <!-- Top Panel: Title & Large Icon/SVG Graphic -->
                         <div
                             class="flex flex-col md:flex-row items-center md:items-start justify-between gap-6 pb-6 border-b border-slate-100">
@@ -1097,7 +1237,7 @@
 
                     <!-- Intro Screen of Exam -->
                     <div id="examIntroBox"
-                        class="bg-white border border-slate-200 rounded-xl p-6 text-center space-y-6 max-w-xl mx-auto shadow-sm">
+                        class="bg-white border border-slate-200 rounded-xl p-6 text-center space-y-6 max-w-2xl mx-auto shadow-sm">
                         <div
                             class="w-16 h-16 bg-slate-100 text-slate-600 rounded-full flex items-center justify-center text-2xl mx-auto border border-slate-200">
                             <i class="fa-solid fa-clipboard-list"></i>
@@ -1134,7 +1274,7 @@
 
                     <!-- Actual Exam Question Container -->
                     <div id="examQuestionBox"
-                        class="hidden max-w-xl mx-auto bg-white border border-slate-200 rounded-xl p-6 space-y-6 shadow-sm">
+                        class="hidden max-w-2xl mx-auto bg-white border border-slate-200 rounded-xl p-6 space-y-6 shadow-sm">
                         <div class="flex justify-between items-center text-xs border-b border-slate-200 pb-3">
                             <span class="text-slate-500 font-semibold" id="examProgressLabel">Soalan 1 dari 5</span>
                             <span class="text-teal-600 font-mono font-bold" id="examTimerLabel">Sesi Ujian Aktif</span>
@@ -1165,7 +1305,7 @@
 
                     <!-- Non-destructive Exam Result Container -->
                     <div id="examResultBox"
-                        class="hidden text-center space-y-4 py-6 max-w-xl mx-auto bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                        class="hidden text-center space-y-4 py-6 max-w-2xl mx-auto bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
                         <!-- Injected on finished -->
                     </div>
                 </div>
@@ -1173,7 +1313,7 @@
                 <!-- SCREEN 13: MODULE COMPLETION / OUTRO -->
                 <div id="screen-13" class="screen-view space-y-6 py-4 hidden">
                     <div
-                        class="bg-white border border-slate-200 rounded-2xl p-8 max-w-2xl mx-auto text-center space-y-6 shadow-xl relative overflow-hidden">
+                        class="bg-white border border-slate-200 rounded-2xl p-8 max-w-3xl mx-auto text-center space-y-4 flex-1 shadow-xl relative overflow-hidden flex flex-col justify-center">
 
                         <div class="absolute inset-0 pointer-events-none opacity-40">
                             <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -1244,7 +1384,7 @@
 
             <!-- FOOTER NAVIGATION TOOLBAR -->
             <footer
-                class="mt-8 border-t border-slate-200 pt-4 flex items-center justify-between max-w-5xl mx-auto w-full text-xs text-slate-400 font-medium">
+                class="shrink-0 border-t border-slate-200 pt-3 pb-1 mt-2 flex items-center justify-between w-full text-xs text-slate-400 font-medium">
                 <div class="flex items-center space-x-2">
                     <span class="font-bold text-slate-700">Demo © 2026</span>
                     <span>•</span>
@@ -1455,7 +1595,7 @@
         let currentScreenIdx = 0;
         // Strictly linear state initialization
         let visitedScreens = [1];
-        let sidebarCollapsed = false;
+        let sidebarCollapsed = true;
         let startTime = Date.now();
         let name = "Pegawai Kualiti EPSA";
 
@@ -1478,13 +1618,10 @@
         function toggleSidebar() {
             const container = document.getElementById('sidebarMenuContainer');
             if (sidebarCollapsed) {
-                container.style.width = '20rem'; // 80 in tailwind
-                container.style.opacity = '1';
-                container.style.pointerEvents = 'auto';
+                renderSidebar();
+                container.classList.add('sidebar-open');
             } else {
-                container.style.width = '0px';
-                container.style.opacity = '0';
-                container.style.pointerEvents = 'none';
+                container.classList.remove('sidebar-open');
             }
             sidebarCollapsed = !sidebarCollapsed;
         }
@@ -3225,11 +3362,8 @@
 
         window.onload = function () {
             initSCORM();
-            
-            if (currentScreenIdx === 0) {
-                renderSidebar();
-                updateGlobalNavigationUI();
-            }
+            renderSidebar();
+            updateGlobalNavigationUI();
             
             renderQuizQuestion();
             renderMatchGame();
