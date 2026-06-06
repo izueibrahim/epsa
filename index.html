@@ -257,6 +257,11 @@
         #screen-11 {
             justify-content: center;
         }
+
+        /* Video screen: player fills remaining height, controls never scroll off */
+        #screen-4:not(.hidden) {
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -609,81 +614,53 @@
                 </div>
 
                 <!-- SCREEN 4: INTRO VIDEO -->
-                <div id="screen-4" class="screen-view space-y-6 py-4 hidden">
-                    <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <div id="screen-4" class="screen-view py-4 hidden gap-3">
+                    <!-- Header row -->
+                    <div class="shrink-0 flex justify-between items-center border-b border-slate-200 pb-3">
                         <div class="space-y-1">
                             <h2 class="text-xl font-bold text-slate-900">Video Pengenalan Eksklusif</h2>
                             <p class="text-xs text-slate-500">Penerangan ringkas korporat mengenai teknologi industri
                                 makanan moden.</p>
                         </div>
-                        <span
-                            class="text-[11px] bg-slate-100 border border-slate-200 px-2.5 py-1 rounded text-slate-600">Tempoh:
-                            <span class="font-mono">0:25</span></span>
+                        <!-- <span class="text-[11px] bg-slate-100 border border-slate-200 px-2.5 py-1 rounded text-slate-600">
+                            Tempoh: <span class="font-mono" id="videoDurationBadge">—</span>
+                        </span> -->
                     </div>
 
-                    <!-- Video Simulator Frame -->
-                    <div
-                        class="relative bg-slate-900 aspect-video rounded-xl overflow-hidden border border-slate-200 shadow-xl flex flex-col justify-between">
-                        <div class="absolute inset-0 flex items-center justify-center p-6 bg-cover bg-center"
-                            style="background-image: linear-gradient(to bottom, rgba(15,23,42,0.8) 0%, rgba(15,23,42,0.95) 100%);">
+                    <!-- Video player: flex-1 so it fills all remaining height; controls always visible -->
+                    <div class="flex-1 min-h-0 flex flex-col bg-slate-900 rounded-xl overflow-hidden border border-slate-200 shadow-xl">
+                        <!-- Video fills height, object-contain preserves 16:9 with letterbox -->
+                        <video id="introVideo"
+                            class="flex-1 min-h-0 w-full object-contain bg-black"
+                            ontimeupdate="updateIntroVideoUI()"
+                            onloadedmetadata="updateIntroVideoUI()"
+                            onended="onIntroVideoEnded()">
+                            <source src="public/intro.mp4" type="video/mp4">
+                        </video>
 
-                            <div class="text-center space-y-4 max-w-lg" id="videoGraphicContainer">
-                                <div
-                                    class="w-16 h-16 bg-teal-500/10 text-teal-400 rounded-full flex items-center justify-center text-2xl mx-auto border border-teal-500/30 animate-pulse">
-                                    <i class="fa-solid fa-industry"></i>
-                                </div>
-                                <h3 class="text-lg font-bold text-slate-200" id="videoSceneTitle">Teknologi Makanan</h3>
-                                <p class="text-xs text-slate-400" id="videoSceneDesc">Mula meneroka bagaimana teknologi
-                                    menyokong kecekapan, kualiti dan inovasi dalam industri makanan.</p>
-                            </div>
-                        </div>
-
-                        <!-- Mid Screen Big Play Button Overlay -->
-                        <div class="absolute inset-0 flex items-center justify-center z-10" id="bigPlayOverlay">
-                            <button onclick="toggleSimulatedVideo()"
-                                class="w-16 h-16 rounded-full bg-teal-600 hover:bg-teal-500 text-white flex items-center justify-center text-xl shadow-lg transform hover:scale-105 transition-all">
-                                <i class="fa-solid fa-play ml-1"></i>
+                        <!-- Controls Bar — always pinned at bottom, never scrolls away -->
+                        <div class="shrink-0 bg-slate-950 border-t border-slate-800 px-4 py-2.5 flex items-center gap-3">
+                            <!-- Play / Pause -->
+                            <button onclick="toggleIntroVideo()"
+                                class="text-white hover:text-teal-400 focus:outline-none text-sm transition-colors shrink-0 w-5 text-center"
+                                id="videoPlayBtn">
+                                <i class="fa-solid fa-play"></i>
                             </button>
-                        </div>
-
-                        <!-- Subtitle Box -->
-                        <div class="z-10 w-full px-8 text-center bg-slate-950/85 backdrop-blur-sm border-t border-slate-800/50 py-3 text-xs text-teal-300 font-medium"
-                            id="videoSubtitles">
-                            Sila klik butang main untuk memulakan video pengenalan.
-                        </div>
-
-                        <!-- Custom Controls Bar -->
-                        <div
-                            class="z-10 bg-slate-950 border-t border-slate-800 px-4 py-2.5 flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <button onclick="toggleSimulatedVideo()"
-                                    class="text-white hover:text-teal-400 focus:outline-none text-sm transition-colors"
-                                    id="videoPlayBtn">
-                                    <i class="fa-solid fa-play"></i>
-                                </button>
-                                <span class="text-[11px] font-mono text-slate-400" id="videoTimeText">0:00 / 0:25</span>
+                            <!-- Time -->
+                            <span class="text-[11px] font-mono text-slate-400 shrink-0" id="videoTimeText">0:00 / 0:00</span>
+                            <!-- Progress Bar — no CSS transition: prevents jump-back visual artifact on timeupdate -->
+                            <div class="flex-1 bg-slate-800 rounded-full h-1.5 relative cursor-pointer"
+                                id="videoProgressBar" onclick="seekIntroVideo(event)">
+                                <div class="bg-teal-500 h-1.5 rounded-full" id="videoProgressFill" style="width: 0%"></div>
                             </div>
-
-                            <!-- Video Progress Bar -->
-                            <div class="flex-1 mx-4 bg-slate-800 rounded-full h-1.5 overflow-hidden relative cursor-pointer"
-                                onclick="scrubVideo(event)">
-                                <div class="bg-teal-500 h-1.5 transition-all duration-300" id="videoProgressFill"
-                                    style="width: 0%"></div>
-                            </div>
-
-                            <div class="flex items-center space-x-3">
-                                <button onclick="skipVideo()"
-                                    class="text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded border border-slate-700"
-                                    title="Langkau tontonan video">
-                                    <span class="text-[10px] font-semibold">Langkau Video</span>
-                                </button>
-                                <button onclick="toggleAudioSpeech()"
-                                    class="text-slate-400 hover:text-white text-xs flex items-center space-x-1 bg-slate-900 px-2.5 py-1 rounded border border-slate-800"
-                                    title="Mainkan Transkrip Suara (BM)">
-                                    <i class="fa-solid fa-volume-high text-teal-400"></i>
-                                    <span class="text-[10px]">Audio BM</span>
-                                </button>
-                            </div>
+                            <!-- Speed Cycle -->
+                            <button onclick="cycleVideoSpeed()" id="videoSpeedBtn"
+                                class="shrink-0 text-[10px] font-bold text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700 w-10 transition-colors"
+                                title="Tukar kelajuan video">1x</button>
+                            <!-- Skip -->
+                            <button onclick="skipVideo()"
+                                class="shrink-0 text-[10px] font-semibold text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition-colors"
+                                title="Langkau tontonan video">Langkau</button>
                         </div>
                     </div>
                 </div>
@@ -724,9 +701,9 @@
                                 </div>
                                 <!-- Image Right -->
                                 <div
-                                    class="w-1/2 bg-white border border-slate-200 rounded-2xl shadow-inner flex items-center justify-center p-6">
-                                    <div id="proc-img-disp" class="w-full h-full flex items-center justify-center">
-                                        <!-- SVG Injected here -->
+                                    class="w-full bg-white border border-slate-200 rounded-2xl shadow-inner flex items-center justify-center p-6">
+                                    <div id="proc-img-disp" class="w-full flex items-center justify-center">
+                                        <!-- SVG / Image Injected here -->
                                     </div>
                                 </div>
                             </div>
@@ -1884,14 +1861,66 @@
         }
 
         function skipVideo() {
-            videoProgress = 25;
-            videoPlaying = false;
-            clearInterval(videoInterval);
-            document.getElementById('videoPlayBtn').innerHTML = '<i class="fa-solid fa-rotate-left"></i>';
-            document.getElementById('bigPlayOverlay').classList.remove('hidden');
+            const vid = document.getElementById('introVideo');
+            if (vid) { vid.pause(); }
             introVideoCompleted = true;
-            updateVideoFrameUI();
             unlockNextScreen();
+        }
+
+        function onIntroVideoEnded() {
+            introVideoCompleted = true;
+            updateIntroVideoUI();
+            unlockNextScreen();
+        }
+
+        function toggleIntroVideo() {
+            const vid = document.getElementById('introVideo');
+            if (!vid) return;
+            if (vid.paused) { vid.play(); } else { vid.pause(); }
+        }
+
+        const videoSpeeds = [0.75, 1, 1.25, 1.5, 2];
+        let videoSpeedIdx = 1; // default 1×
+
+        function cycleVideoSpeed() {
+            videoSpeedIdx = (videoSpeedIdx + 1) % videoSpeeds.length;
+            const speed = videoSpeeds[videoSpeedIdx];
+            const vid = document.getElementById('introVideo');
+            if (vid) vid.playbackRate = speed;
+            const btn = document.getElementById('videoSpeedBtn');
+            if (btn) btn.innerText = speed + 'x';
+        }
+
+        // Seek by clicking the progress bar — reads real video currentTime, no race condition
+        function seekIntroVideo(event) {
+            const vid = document.getElementById('introVideo');
+            if (!vid || !vid.duration) return;
+            const bar = event.currentTarget;
+            const rect = bar.getBoundingClientRect();
+            const pct = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+            vid.currentTime = pct * vid.duration;
+            updateIntroVideoUI();
+        }
+
+        // Called by ontimeupdate / onloadedmetadata — updates all UI from real video state
+        function updateIntroVideoUI() {
+            const vid = document.getElementById('introVideo');
+            if (!vid) return;
+            const playBtn = document.getElementById('videoPlayBtn');
+            if (playBtn) {
+                playBtn.innerHTML = (vid.paused || vid.ended)
+                    ? '<i class="fa-solid fa-play"></i>'
+                    : '<i class="fa-solid fa-pause"></i>';
+            }
+            const cur = vid.currentTime || 0;
+            const dur = isFinite(vid.duration) ? vid.duration : 0;
+            const fill = document.getElementById('videoProgressFill');
+            if (fill) fill.style.width = dur > 0 ? `${(cur / dur) * 100}%` : '0%';
+            const fmt = s => `${Math.floor(s / 60)}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
+            const timeEl = document.getElementById('videoTimeText');
+            if (timeEl) timeEl.innerText = `${fmt(cur)} / ${fmt(dur)}`;
+            const badge = document.getElementById('videoDurationBadge');
+            if (badge && dur > 0) badge.innerText = fmt(dur);
         }
 
         function updateVideoFrameUI() {
@@ -1949,7 +1978,7 @@
                 desc: "Pemilihan bahan mentah yang berkualiti merupakan langkah awal dalam memastikan keselamatan dan kualiti produk makanan.",
                 bullets: ["Saringan kualiti fizikal awal", "Kepatuhan standard pembekal", "Ujian mikrobiologi primer"],
                 color: "bg-teal-800",
-                svgPath: '<svg viewBox="0 0 100 100" class="w-24 h-24"><path d="M50 15 Q30 35 30 55 A20 20 0 0 0 70 55 Q70 35 50 15 Z" fill="#0d9488" fill-opacity="0.15" stroke="#0d9488" stroke-width="3"/><circle cx="50" cy="55" r="8" fill="#10b981"/></svg>'
+                svgPath: '<img src="public/bahan-mentah.png" class="max-w-full max-h-[180px] object-contain rounded-lg" alt="Bahan Mentah">'
             },
             2: {
                 label: "Fasa 2",
@@ -3365,13 +3394,25 @@
         }
 
         window.onunload = window.onbeforeunload = function () {
-            if (scormActive && scormAPI) {
+            if (!scormAPI) return;
+            if (scormActive) {
+                // Real SCORM LMS: commit session time and finish
                 var sessionTime = Date.now() - startTime;
                 scormAPI.LMSSetValue("cmi.core.session_time", formatCMITime(sessionTime));
                 scormAPI.LMSCommit("");
                 scormAPI.LMSFinish("");
+            } else if (!isInitializing) {
+                // Mock mode: flush latest state to localStorage so a reload restores it
+                saveScormProgress();
             }
         };
+
+        // Also save whenever the user hides the tab (switch tabs, minimise, etc.)
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'hidden' && !isInitializing) {
+                saveScormProgress();
+            }
+        });
 
         window.onload = function () {
             initSCORM();
@@ -3415,6 +3456,12 @@
             // Synchronously navigate to target screen
             goToScreen(targetScreenId);
 
+            // Mark init done immediately after navigation so saveScormProgress works from here on.
+            // Doing this before renderSidebar/renderQuizQuestion ensures state is committed even
+            // if a later error occurs in those functions.
+            isInitializing = false;
+            saveScormProgress();
+
             // Listen for subsequent hash changes
             window.addEventListener('hashchange', function () {
                 var currentHash = window.location.hash;
@@ -3434,10 +3481,6 @@
 
             renderQuizQuestion();
             renderMatchGame();
-
-            // Done with loading/init. Future progress can now be saved.
-            isInitializing = false;
-            saveScormProgress();
 
             // Keyboard shortcut to toggle console visibility (Ctrl + Shift + C or backtick ` key)
             window.addEventListener('keydown', function (e) {
