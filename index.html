@@ -397,7 +397,10 @@
                 </div>
 
                 <!-- SCREEN 2: LEARNING JOURNEY / TABLE OF CONTENT -->
-                <div id="screen-2" class="screen-view space-y-4 py-4 hidden">
+                <div id="screen-2" class="screen-view space-y-4 py-4 hidden relative overflow-hidden"
+                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
+                    <div class="absolute inset-0"></div>
+                    <div class="relative z-10 space-y-4">
                     <div class="text-center space-y-2">
                         <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Kandungan Modul</h2>
                         <p class="text-slate-500 text-sm">Modul ini mengandungi beberapa komponen pembelajaran
@@ -488,10 +491,14 @@
                         <span class="text-xs md:text-sm text-slate-655">Sila ikuti urutan pembelajaran linear.
                             Selesaikan aktiviti untuk melayakkan diri ke halaman seterusnya.</span>
                     </div>
+                    </div>
                 </div>
 
                 <!-- SCREEN 3: LEARNING OBJECTIVES (Accordion single active) -->
-                <div id="screen-3" class="screen-view space-y-4 py-4 hidden">
+                <div id="screen-3" class="screen-view space-y-4 py-4 hidden relative overflow-hidden"
+                    style="background-image: url('public/bg-objektif.png'); background-size: cover; background-position: center;">
+                    <div class="absolute inset-0"></div>
+                    <div class="relative z-10 space-y-4">
                     <div class="space-y-1">
                         <h2 class="text-2xl font-extrabold text-slate-900">Objektif Pembelajaran</h2>
                         <p class="text-slate-500 text-sm">Sila klik pada mana-mana objektif pembelajaran di bawah untuk
@@ -586,6 +593,7 @@
                         <span class="text-xs text-slate-550" id="objectiveGuide">Sila klik dan buka kesemua <span
                                 class="font-bold text-teal-600">4 objektif</span> di atas untuk mengaktifkan butang
                             Seterusnya di bawah.</span>
+                    </div>
                     </div>
                 </div>
 
@@ -2087,7 +2095,7 @@
                             <span class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-md font-bold text-slate-600 shrink-0">C</span>
                             <div>
                                 <h4 class="text-md font-bold text-slate-800">Tukar pembungkusan dan teruskan penghantaran</h4>
-                                <p class="text-[10px] text-slate-500 mt-1">Membuat penukaran kotak luaran yang bersih tanpa menguji kemerosotan biologi dalaman.</p>
+                                <p class="text-md text-slate-500 mt-1">Membuat penukaran kotak luaran yang bersih tanpa menguji kemerosotan biologi dalaman.</p>
                             </div>
                         </button>
                     </div>
