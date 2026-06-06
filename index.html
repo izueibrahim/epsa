@@ -1624,6 +1624,7 @@
         ];
 
         let currentScreenIdx = 0;
+        let isInitializing = true;
         // Strictly linear state initialization
         let visitedScreens = [1];
         let sidebarCollapsed = true;
@@ -1779,6 +1780,11 @@
             }
 
             updateGlobalNavigationUI();
+
+            if (window.location.hash !== '#p-' + screenId) {
+                window.location.hash = 'p-' + screenId;
+            }
+            try { sessionStorage.setItem('epsa_refresh_screen', screenId); } catch(e) {}
         }
 
         function navigateBack() {
@@ -3175,22 +3181,10 @@
                     scormLog("error", "Gagal memproses cmi.suspend_data JSON.", e.message);
                 }
             }
-
-            if (location && location.trim() !== "" && location !== "1") {
-                var screenId = parseInt(location);
-                if (screenId > 1 && screenId <= 13) {
-                    setTimeout(() => {
-                        if (confirm("Anda ingin menyambung pembelajaran dari halaman yang terakhir anda layari (Halaman " + screenId + ": " + getScreenTitleById(screenId) + ")?")) {
-                            goToScreen(screenId);
-                        } else {
-                            goToScreen(1);
-                        }
-                    }, 500);
-                }
-            }
         }
 
         function saveScormProgress() {
+            if (isInitializing) return;
             if (scormAPI) {
                 var currentScreenId = screens[currentScreenIdx].id;
                 scormAPI.LMSSetValue("cmi.core.lesson_location", String(currentScreenId));
@@ -3393,11 +3387,69 @@
 
         window.onload = function () {
             initSCORM();
+
+            // Resolve the target screen from hash, SCORM location, or default to 1
+            let targetScreenId = 1;
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#p-')) {
+                const screenId = parseInt(hash.replace('#p-', ''));
+                if (!isNaN(screenId) && screenId >= 1 && screenId <= 13) {
+                    targetScreenId = screenId;
+                }
+            } else if (scormAPI) {
+                const location = scormAPI.LMSGetValue("cmi.core.lesson_location");
+                if (location && location.trim() !== "" && location !== "1") {
+                    const screenId = parseInt(location);
+                    if (!isNaN(screenId) && screenId > 1 && screenId <= 13) {
+                        targetScreenId = screenId;
+                    }
+                }
+            }
+            
+            // Fallback to sessionStorage if both hash and SCORM fail
+            if (targetScreenId === 1) {
+                try {
+                    const saved = sessionStorage.getItem('epsa_refresh_screen');
+                    if (saved) {
+                        const screenId = parseInt(saved);
+                        if (!isNaN(screenId) && screenId > 1 && screenId <= 13) {
+                            targetScreenId = screenId;
+                        }
+                    }
+                } catch(e) {}
+            }
+
+            // Ensure the target screen is marked as visited
+            if (!visitedScreens.includes(targetScreenId)) {
+                visitedScreens.push(targetScreenId);
+            }
+
+            // Synchronously navigate to target screen
+            goToScreen(targetScreenId);
+
+            // Listen for subsequent hash changes
+            window.addEventListener('hashchange', function () {
+                var currentHash = window.location.hash;
+                if (currentHash && currentHash.startsWith('#p-')) {
+                    var screenId = parseInt(currentHash.replace('#p-', ''));
+                    if (!isNaN(screenId) && screenId >= 1 && screenId <= 13) {
+                        var currentScreenId = screens[currentScreenIdx].id;
+                        if (screenId !== currentScreenId && visitedScreens.includes(screenId)) {
+                            goToScreen(screenId);
+                        }
+                    }
+                }
+            });
+
             renderSidebar();
             updateGlobalNavigationUI();
 
             renderQuizQuestion();
             renderMatchGame();
+
+            // Done with loading/init. Future progress can now be saved.
+            isInitializing = false;
+            saveScormProgress();
 
             // Keyboard shortcut to toggle console visibility (Ctrl + Shift + C or backtick ` key)
             window.addEventListener('keydown', function (e) {
@@ -3415,6 +3467,27 @@
                 }
             });
         };
+    </script>
+    <script>
+        // Anti-flash script: Immediately hide screen 1 and show the target screen before window.onload runs.
+        (function() {
+            var targetId = 1;
+            var hash = window.location.hash;
+            if (hash && hash.startsWith('#p-')) {
+                targetId = parseInt(hash.replace('#p-', ''));
+            } else {
+                try {
+                    var saved = sessionStorage.getItem('epsa_refresh_screen');
+                    if (saved) targetId = parseInt(saved);
+                } catch(e) {}
+            }
+            if (!isNaN(targetId) && targetId > 1 && targetId <= 13) {
+                var s1 = document.getElementById('screen-1');
+                if (s1) s1.classList.add('hidden');
+                var target = document.getElementById('screen-' + targetId);
+                if (target) target.classList.remove('hidden');
+            }
+        })();
     </script>
 </body>
 
