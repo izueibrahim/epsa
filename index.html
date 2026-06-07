@@ -1444,74 +1444,68 @@
                 </div>
 
                 <!-- SCREEN 13: MODULE COMPLETION / OUTRO -->
-                <div id="screen-13" class="screen-view space-y-6 hidden"
+                <div id="screen-13" class="screen-view hidden"
                     style="background-image: url('public/bg-penghargaan.png'); background-size: cover; background-position: center; justify-content: center">
-                    <div
-                        class="bg-white border border-slate-200 rounded-2xl p-8 max-w-3xl mx-auto text-center space-y-4 shadow-xl relative overflow-hidden flex flex-col justify-center">
 
-                        <div class="absolute inset-0 pointer-events-none opacity-40">
-                            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="80" cy="80" r="5" fill="#10b981" fill-opacity="0.3" />
-                                <circle cx="580" cy="180" r="6" fill="#3b82f6" fill-opacity="0.3" />
-                                <rect x="120" y="240" width="12" height="12" fill="#f59e0b" fill-opacity="0.2"
-                                    transform="rotate(45)" />
-                                <rect x="520" y="60" width="8" height="8" fill="#ec4899" fill-opacity="0.2"
-                                    transform="rotate(15)" />
-                            </svg>
-                        </div>
+                    <div class="bg-white border border-slate-200 rounded-2xl p-8 max-w-2xl w-full mx-auto text-center space-y-5 shadow-xl relative overflow-hidden">
 
-                        <div
-                            class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto border-4 border-emerald-50">
-                            <i class="fa-solid fa-circle-check animate-bounce"></i>
-                        </div>
-
-                        <div class="space-y-2">
-                            <h2 class="text-3xl font-black text-slate-900">Tahniah!</h2>
-                            <p class="text-slate-500 text-sm" id="outroWelcomeText">Anda telah berjaya melengkapkan
-                                keseluruhan modul pembelajaran Teknologi Makanan.</p>
-                        </div>
-
-                        <!-- Score summary -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 border-y border-slate-200 text-xs">
-                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                                <span
-                                    class="text-slate-400 block uppercase font-bold text-xs tracking-wider mb-1">Status
-                                    Sesi</span>
-                                <span class="font-black text-emerald-600 text-sm uppercase">LULUS</span>
+                            <div class="absolute inset-0 pointer-events-none opacity-30">
+                                <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="80" cy="80" r="5" fill="#10b981" fill-opacity="0.3" />
+                                    <circle cx="580" cy="180" r="6" fill="#3b82f6" fill-opacity="0.3" />
+                                    <rect x="120" y="240" width="12" height="12" fill="#f59e0b" fill-opacity="0.2" transform="rotate(45)" />
+                                    <rect x="520" y="60" width="8" height="8" fill="#ec4899" fill-opacity="0.2" transform="rotate(15)" />
+                                </svg>
                             </div>
-                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                                <span
-                                    class="text-slate-400 block uppercase font-bold text-xs tracking-wider mb-1">Prestasi
-                                    Anda</span>
-                                <span class="font-black text-slate-800 text-sm" id="outroScoreLabel">86%</span>
+
+                            <img src="public/icon-13.png" alt="Selesai" class="w-20 h-20 mx-auto object-contain relative z-10">
+
+                            <div class="space-y-2 relative z-10">
+                                <h2 class="text-4xl font-black text-slate-900">Tahniah!</h2>
+                                <p class="text-slate-500 text-lg" id="outroWelcomeText">Anda telah berjaya melengkapkan keseluruhan modul pembelajaran Teknologi Makanan.</p>
                             </div>
-                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                                <span
-                                    class="text-slate-400 block uppercase font-bold text-xs tracking-wider mb-1">Tempoh
-                                    Pembelajaran</span>
-                                <span class="font-black text-slate-800 text-sm" id="outroTimeLabel">00:00</span>
+
+                            <!-- Score summary -->
+                            <div class="grid grid-cols-3 gap-4 py-4 border-y border-slate-200 relative z-10">
+                                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                    <span class="text-slate-400 block uppercase font-bold text-xs tracking-wider mb-1">Status Sesi</span>
+                                    <span class="font-black text-emerald-600 text-sm uppercase">LULUS</span>
+                                </div>
+                                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                    <span class="text-slate-400 block uppercase font-bold text-xs tracking-wider mb-1">Prestasi Anda</span>
+                                    <span class="font-black text-slate-800 text-sm" id="outroScoreLabel">86%</span>
+                                </div>
+                                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                    <span class="text-slate-400 block uppercase font-bold text-xs tracking-wider mb-1">Masa</span>
+                                    <span class="font-black text-slate-800 text-sm" id="outroTimeLabel">00:00</span>
+                                </div>
+                            </div>
+
+                            <p class="text-sm text-slate-500 leading-relaxed max-w-md mx-auto relative z-10">
+                                Pengetahuan berkaitan keselamatan makanan, kawalan kualiti, kecekapan operasi dan inovasi memainkan peranan penting dalam industri.
+                            </p>
+
+                            <!-- Actions -->
+                            <div class="flex flex-col gap-3 items-center relative z-10">
+                                <div class="flex flex-col sm:flex-row gap-3 justify-center w-full">
+                                    <button onclick="downloadCertificate()"
+                                        class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 shadow-sm">
+                                        <i class="fa-solid fa-download"></i>
+                                        <span>Muat Turun Sijil</span>
+                                    </button>
+                                    <button onclick="restartCourseFromOutro()"
+                                        class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 shadow-sm border border-slate-200">
+                                        <i class="fa-solid fa-rotate-left"></i>
+                                        <span>Ulang Modul</span>
+                                    </button>
+                                </div>
+                                <button onclick="openPenghargaan()"
+                                    class="text-slate-400 hover:text-teal-600 text-xs font-semibold flex items-center gap-1.5 transition-colors px-4 py-2 rounded-lg hover:bg-teal-50">
+                                    <i class="fa-solid fa-medal text-xs"></i>
+                                    <span>Lihat Penghargaan</span>
+                                </button>
                             </div>
                         </div>
-
-                        <p class="text-xs text-slate-500 leading-relaxed max-w-lg mx-auto">
-                            Pengetahuan berkaitan keselamatan makanan, kawalan kualiti, kecekapan operasi dan inovasi
-                            memainkan peranan penting dalam industri.
-                        </p>
-
-                        <!-- Actions -->
-                        <div class="flex flex-col sm:flex-row gap-3 justify-center pt-3 z-10 relative">
-                            <button onclick="downloadCertificate()"
-                                class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 shadow-sm">
-                                <i class="fa-solid fa-download"></i>
-                                <span>Muat Turun Sijil</span>
-                            </button>
-                            <button onclick="restartCourseFromOutro()"
-                                class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 shadow-sm border border-slate-200">
-                                <i class="fa-solid fa-rotate-left"></i>
-                                <span>Ulang Modul</span>
-                            </button>
-                        </div>
-                    </div>
                 </div>
 
             </div>
@@ -1559,6 +1553,15 @@
                     aria-label="Kembali">
                     <i class="fa-solid fa-chevron-left text-xs"></i>
                 </button>
+
+                <!-- PAGE INDICATOR -->
+                <div id="dockPageInfo" class="flex flex-col items-center justify-center min-w-[4.5rem] md:min-w-[7rem] px-1 select-none">
+                    <span class="text-xs font-bold text-slate-600 leading-none tabular-nums tracking-tight">
+                        <span id="dockCurrentStep">1</span><span class="text-slate-300 mx-0.5">/</span><span id="dockTotalSteps">13</span>
+                    </span>
+                    <span id="dockScreenTitle" class="text-[10px] text-slate-400 leading-snug text-center max-w-[5rem] md:max-w-[8rem] truncate mt-0.5 font-medium">Laman Pengenalan</span>
+                </div>
+
                 <button id="globalNextBtn" onclick="navigateNext()"
                     class="flex items-center gap-2 h-11 px-5 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-bold text-sm cursor-pointer transition-all"
                     aria-label="Seterusnya">
@@ -1629,6 +1632,131 @@
         </div>
     </div>
 
+    <!-- PENGHARGAAN MODAL -->
+    <div id="penghargaanModal"
+        class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
+
+            <!-- Modal header -->
+            <div class="bg-gradient-to-r from-teal-700 to-teal-600 px-8 py-6 flex items-start justify-between shrink-0">
+                <div>
+                    <div class="flex items-center gap-2.5 mb-1">
+                        <i class="fa-solid fa-medal text-white/80"></i>
+                        <h2 class="text-white font-black text-xl tracking-wide">Penghargaan</h2>
+                    </div>
+                    <p class="text-teal-100 text-sm leading-snug max-w-md">Pengiktirafan kepada pihak yang terlibat dalam pembangunan modul pembelajaran ini.</p>
+                </div>
+                <button onclick="closePenghargaan()" class="text-white/60 hover:text-white transition-colors ml-4 mt-0.5 shrink-0">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Scrollable body -->
+            <div class="overflow-y-auto flex-1 p-6 space-y-4 bg-slate-50">
+
+                <!-- Course info banner -->
+                <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-teal-600 block mb-1">Nama Kursus</span>
+                            <p class="text-sm font-semibold text-slate-800 leading-snug">Pengenalan Panduan Diet Malaysia</p>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-teal-600 block mb-1">Agensi</span>
+                            <p class="text-sm font-semibold text-slate-800">Kementerian Kesihatan Malaysia (KKM)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credit cards grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-chalkboard-user text-xs"></i>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wide">Pakar Bahan Kursus (SME)</h4>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-400 mt-1.5 shrink-0"></span>YBrs. Dr. Chemah Tamby Chik</li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-400 mt-1.5 shrink-0"></span>Puan Rozalina binti Ismail</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-user-tie text-xs"></i>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wide">Pengurusan Tertinggi</h4>
+                        </div>
+                        <p class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1.5 shrink-0"></span>Puan Rusidah binti Selamat</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm sm:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-palette text-xs"></i>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wide">Pereka Pembelajaran (ID)</h4>
+                        </div>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <li class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange-300 mt-1.5 shrink-0"></span>YBrs. Dr. Firdaus bin Ahmad Fauzi</li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange-300 mt-1.5 shrink-0"></span>Puan Norhaniza binti Rojalai</li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange-300 mt-1.5 shrink-0"></span>Puan Nur Hafizah binti Abd Shukor</li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange-300 mt-1.5 shrink-0"></span>Encik Alves Manual</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-handshake text-xs"></i>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wide">Penyelaras KKM</h4>
+                        </div>
+                        <p class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-300 mt-1.5 shrink-0"></span>Encik Loke Way Yoong</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-people-group text-xs"></i>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wide">Penyelaras INTAN</h4>
+                        </div>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-300 mt-1.5 shrink-0"></span>YBrs. Dr. Radiah binti Amin</li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-300 mt-1.5 shrink-0"></span>Puan Hennes Henyss Lobenden</li>
+                            <li class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-300 mt-1.5 shrink-0"></span>Puan Siti Fazilah binti Saraf</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm sm:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-clipboard-check text-xs"></i>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wide">Penguji KKM</h4>
+                        </div>
+                        <p class="text-sm text-slate-600 flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-300 mt-1.5 shrink-0"></span>Puan Marry</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="px-6 py-4 border-t border-slate-100 flex justify-end shrink-0 bg-white">
+                <button onclick="closePenghargaan()"
+                    class="flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-slate-200">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                    <span>Kembali ke Tahniah</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- CODE SCRIPT LOGIC -->
     <script>
         // Module configuration
@@ -1662,24 +1790,28 @@
                 title: "Peranan Teknologi dalam Industri Makanan",
                 desc: "Teknologi moden membantu meningkatkan kecekapan, konsistensi, dan keselamatan makanan melalui sistem automasi bersepadu, pemantauan kualiti masa nyata, dan analitik data pintar.",
                 icon: "fa-solid fa-industry",
+                image: "public/teknologi.png",
                 points: ["Automasi proses pengeluaran", "Pemantauan masa nyata", "Kawalan kualiti digital yang konsisten"]
             },
             2: {
                 title: "Kepentingan Keselamatan Makanan",
                 desc: "Teknologi memainkan peranan penting dalam memastikan makanan dihasilkan, diproses dan diedarkan dalam keadaan yang selamat bagi mengelakkan pencemaran biologi dan kimia.",
                 icon: "fa-solid fa-shield-halved",
+                image: "public/keselamatan.png",
                 points: ["Kawalan suhu automatik", "Kebersihan operator standard tinggi", "Pencegahan kontaminasi silang"]
             },
             3: {
                 title: "Kawalan Kualiti Standard Industri",
                 desc: "Kawalan kualiti memastikan setiap produk memenuhi piawaian keselamatan, rasa, pembungkusan, dan kualiti yang ketat sebelum diedarkan kepada masyarakat umum.",
                 icon: "fa-solid fa-square-check",
+                image: "public/kualiti.png",
                 points: ["Pemeriksaan produk sebelum pelepasan", "Kepatuhan parameter HACCP", "Konsistensi rupa bentuk produk"]
             },
             4: {
                 title: "Inovasi & Pembangunan Produk Baru",
                 desc: "Teknologi menyokong pembangunan produk baharu serta penambahbaikan proses pengeluaran bagi memenuhi keperluan makanan sihat masa hadapan secara lestari.",
                 icon: "fa-solid fa-lightbulb",
+                image: "public/inovasi.png",
                 points: ["Penyelidikan bahan formulasi baru", "Ujian makmal jangka hayat", "Pengurangan sisa industri makanan"]
             }
         };
@@ -1939,6 +2071,11 @@
                 nextBtn.disabled = false;
                 nextBtn.className = "flex items-center gap-2 h-11 px-5 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold text-sm cursor-pointer transition-all";
             }
+
+            // Page indicator
+            document.getElementById('dockCurrentStep').innerText = currentScreenIdx + 1;
+            document.getElementById('dockTotalSteps').innerText = screens.length;
+            document.getElementById('dockScreenTitle').innerText = screens[currentScreenIdx].title;
 
             // Show Exit button only after course has started (past screen 1)
             document.querySelectorAll('.exit-course-btn').forEach(btn => {
@@ -2517,7 +2654,7 @@
                 </div>
 
                 <div class="w-1/2 rounded-xl overflow-hidden">
-                    <img src="public/teknologi.png" class="w-full h-auto rounded-xl" alt="Teknologi Makanan" />
+                    <img src="${data.image}" class="w-full h-auto rounded-xl" alt="${data.title}" />
                 </div>
             `;
         }
@@ -2795,6 +2932,7 @@
             1: {
                 title: "Konsep Teknologi Makanan Moden",
                 desc: "Asas sains dan aplikasi teknologi pintar bagi memaksimumkan integriti, kualiti, serta jangka hayat rantaian makanan negara.",
+                image: "public/icon-8.png",
                 svg: `<svg viewBox="0 0 100 100" class="w-24 h-24 text-teal-600"><circle cx="50" cy="50" r="35" fill="#0d9488" fill-opacity="0.08" stroke="#0d9488" stroke-width="2.5" stroke-dasharray="4 2"/><circle cx="50" cy="50" r="20" fill="#0d9488" fill-opacity="0.12" stroke="#0d9488" stroke-width="3"/><path d="M50 20 L50 80 M20 50 L80 50 M29 29 L71 71 M29 71 L71 29" stroke="#0d9488" stroke-width="1.5" stroke-dasharray="2 2"/><circle cx="50" cy="50" r="8" fill="#14b8a6"/></svg>`,
                 columns: [
                     {
@@ -2823,6 +2961,7 @@
             2: {
                 title: "Pengurusan Rantaian Bekalan Pintar",
                 desc: "Sistem logistik dan aliran kerja bersepadu daripada pengeluaran bahan mentah hingga pengedaran pengguna akhir.",
+                image: "public/icon-9.png",
                 svg: `<svg viewBox="0 0 100 100" class="w-24 h-24 text-blue-600"><rect x="15" y="40" width="16" height="20" rx="3" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-width="2"/><rect x="42" y="40" width="16" height="20" rx="3" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-width="2"/><rect x="69" y="40" width="16" height="20" rx="3" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-width="2"/><line x1="31" y1="50" x2="42" y2="50" stroke="#3b82f6" stroke-width="2" stroke-dasharray="2 1"/><line x1="58" y1="50" x2="69" y2="50" stroke="#3b82f6" stroke-width="2" stroke-dasharray="2 1"/><path d="M23 40 Q50 15 77 40" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="3 3"/></svg>`,
                 columns: [
                     {
@@ -2851,6 +2990,7 @@
             3: {
                 title: "Keselamatan & Kawalan Kualiti",
                 desc: "Penerapan standard pematuhan global dan domestik untuk memastikan setiap sajian bebas daripada hazard biologi.",
+                image: "public/icon-10.png",
                 svg: `<svg viewBox="0 0 100 100" class="w-24 h-24 text-purple-600"><path d="M50 20 C25 20 25 35 25 50 C25 70 50 85 50 85 C50 85 75 70 75 50 C75 35 75 20 50 20 Z" fill="#a855f7" fill-opacity="0.08" stroke="#a855f7" stroke-width="2.5"/><path d="M38 52 L46 60 L62 42" fill="none" stroke="#a855f7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="50" r="30" fill="none" stroke="#c084fc" stroke-width="1" stroke-dasharray="4 4"/></svg>`,
                 columns: [
                     {
@@ -2879,6 +3019,7 @@
             4: {
                 title: "Inovasi & IoT (Internet of Things)",
                 desc: "Integrasi sistem perkakasan pintar dan perisian penderia masa nyata demi automasi pemantauan kualiti.",
+                image: "public/icon-11.png",
                 svg: `<svg viewBox="0 0 100 100" class="w-24 h-24 text-amber-600"><rect x="30" y="30" width="40" height="40" rx="6" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-width="2.5"/><circle cx="50" cy="50" r="10" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1.5"/><line x1="50" y1="15" x2="50" y2="30" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><line x1="50" y1="70" x2="50" y2="85" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><line x1="15" y1="50" x2="30" y2="50" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><line x1="70" y1="50" x2="85" y2="50" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><circle cx="50" cy="15" r="3" fill="#d97706"/><circle cx="50" cy="85" r="3" fill="#d97706"/><circle cx="15" cy="50" r="3" fill="#d97706"/><circle cx="85" cy="50" r="3" fill="#d97706"/></svg>`,
                 columns: [
                     {
@@ -2907,6 +3048,7 @@
             5: {
                 title: "Kelestarian & Masa Depan",
                 desc: "Penerapan strategi mesra alam untuk mengurangkan impak karbon dan menjamin ketersediaan makanan generasi hadapan.",
+                image: "public/icon-12.png",
                 svg: `<svg viewBox="0 0 100 100" class="w-24 h-24 text-emerald-600"><circle cx="50" cy="50" r="30" fill="#10b981" fill-opacity="0.08" stroke="#10b981" stroke-width="2"/><path d="M50 20 C65 20 80 35 80 50 C80 65 65 80 50 80 C35 80 20 65 20 50 C20 35 35 20 50 20 Z" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M50 35 C50 35 65 45 65 60 C65 60 50 65 50 65 C50 65 35 60 35 60 C35 45 50 35 50 35 Z" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="2"/><line x1="50" y1="35" x2="50" y2="65" stroke="#10b981" stroke-width="1.5"/></svg>`,
                 columns: [
                     {
@@ -2991,7 +3133,9 @@
                 document.getElementById('summaryPageSub').innerText = `Halaman ${page} Dari 5`;
                 document.getElementById('summaryPageTitle').innerText = pData.title;
                 document.getElementById('summaryPageDesc').innerText = pData.desc;
-                document.getElementById('summarySvgContainer').innerHTML = pData.svg;
+                document.getElementById('summarySvgContainer').innerHTML = pData.image
+                    ? `<img src="${pData.image}" class="w-full h-full object-contain" alt="${pData.title}" />`
+                    : pData.svg;
 
                 const colsGrid = document.getElementById('summaryColumnsGrid');
                 colsGrid.innerHTML = '';
@@ -3177,7 +3321,7 @@
                     scormAPI.LMSSetValue("cmi.core.lesson_status", "passed");
                 }
                 resultBox.innerHTML = `
-                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mx-auto"><i class="fa-solid fa-award"></i></div>
+                    <img src="public/icon-6.png" alt="Lulus" class="w-14 h-14 mx-auto object-contain">
                     <h3 class="text-4xl font-bold text-slate-900">Keputusan: LULUS</h3>
                     <p class="text-lg text-slate-500 leading-relaxed">Tahniah! Anda telah memperoleh markah <span class="text-emerald-600 font-bold">${finalPercent}% (${examScore} / 5)</span>. Sesi pembelajaran anda disahkan lengkap.</p>
                     <div class="flex items-center justify-center gap-3 mt-2">
@@ -3271,6 +3415,18 @@
             }
 
             goToScreen(1);
+        }
+
+        function openPenghargaan() {
+            const modal = document.getElementById('penghargaanModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePenghargaan() {
+            const modal = document.getElementById('penghargaanModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
         }
 
         function resetQuizUI() {
