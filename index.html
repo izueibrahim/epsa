@@ -411,7 +411,7 @@
                     <div id="globalProgressBar" class="bg-teal-500 h-2 transition-all duration-500" style="width: 8%">
                     </div>
                 </div>
-                <span class="text-md font-bold text-teal-300" id="globalProgressPercent">8%</span>
+                <span class="text-md font-bold text-teal-300" id="globalProgressPercent">0%</span>
             </div>
         </div>
         </div>
@@ -1352,16 +1352,20 @@
                         </div>
                     </div>
 
+                    <!-- Centered wrapper: keeps header at top, centers exam boxes in remaining space -->
+                    <div class="flex-1 flex items-center justify-center">
+
                     <!-- Intro Screen of Exam -->
                     <div id="examIntroBox"
-                        class="bg-white border border-slate-200 rounded-xl p-6 text-center space-y-6 max-w-2xl mx-auto shadow-sm">
+                        class="bg-white border border-slate-200 rounded-xl p-6 text-center space-y-6 max-w-2xl mx-auto shadow-sm w-full">
                         <div
-                            class="w-16 h-16 bg-slate-100 text-slate-600 rounded-full flex items-center justify-center text-2xl mx-auto border border-slate-200">
-                            <i class="fa-solid fa-clipboard-list"></i>
+                            >
+                            <img src="public/icon-7.png" alt="Penilaian Akhir"
+                                        class="w-12 h-12 mx-auto object-contain">
                         </div>
                         <div class="space-y-2">
-                            <h3 class="text-lg font-bold text-slate-900">Sila Jawab Semua Soalan</h3>
-                            <p class="text-xs text-slate-500 leading-relaxed">
+                            <h3 class="text-4xl font-bold text-slate-900">Sila Jawab Semua Soalan</h3>
+                            <p class="text-lg text-slate-500 leading-relaxed">
                                 Jawab semua soalan. Anda perlu mendapat sekurang-kurangnya 80% (4 betul) untuk lulus
                                 ujian draf EPSA.
                             </p>
@@ -1370,16 +1374,16 @@
                         <!-- Mini score criteria card -->
                         <div class="grid grid-cols-3 gap-2 py-3.5 border-y border-slate-200 text-xs">
                             <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
-                                <span class="text-slate-400 block uppercase text-[9px] font-bold">Jumlah Soalan</span>
-                                <span class="font-bold text-slate-700">5</span>
+                                <span class="text-slate-400 block uppercase text-md font-bold">Jumlah Soalan</span>
+                                <span class="text-lg font-bold text-slate-700">5</span>
                             </div>
                             <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
-                                <span class="text-slate-400 block uppercase text-[9px] font-bold">Had Tempoh</span>
-                                <span class="font-bold text-slate-700">Tiada Had</span>
+                                <span class="text-slate-400 block uppercase text-md font-bold">Had Tempoh</span>
+                                <span class="text-lg font-bold text-slate-700">Tiada Had</span>
                             </div>
                             <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
-                                <span class="text-slate-400 block uppercase text-[9px] font-bold">Markah Lulus</span>
-                                <span class="font-bold text-teal-600">80%</span>
+                                <span class="text-slate-400 block uppercase text-md font-bold">Markah Lulus</span>
+                                <span class="text-lg font-bold text-teal-600">80%</span>
                             </div>
                         </div>
 
@@ -1425,11 +1429,13 @@
                         class="hidden text-center space-y-4 py-6 max-w-2xl mx-auto bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
                         <!-- Injected on finished -->
                     </div>
+
+                    </div><!-- end centered wrapper -->
                 </div>
 
                 <!-- SCREEN 13: MODULE COMPLETION / OUTRO -->
                 <div id="screen-13" class="screen-view space-y-6 hidden"
-                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
+                    style="background-image: url('public/bg-penghargaan.png'); background-size: cover; background-position: center;">
                     <div
                         class="bg-white border border-slate-200 rounded-2xl p-8 max-w-3xl mx-auto text-center space-y-4 flex-1 shadow-xl relative overflow-hidden flex flex-col justify-center">
 
@@ -3083,11 +3089,11 @@
 
             qData.a.forEach((ans, idx) => {
                 const btn = document.createElement('button');
-                btn.className = "w-full text-left bg-white border border-slate-200 hover:border-slate-300 p-3.5 rounded-xl text-xs text-slate-700 focus:outline-none transition-colors flex items-center space-x-3 shadow-sm";
+                btn.className = "w-full text-left bg-white border border-slate-200 hover:border-slate-300 p-3.5 rounded-xl text-md text-slate-700 focus:outline-none transition-colors flex items-center space-x-3 shadow-sm";
                 btn.onclick = () => selectExamOption(idx);
                 btn.id = `exam-opt-${idx}`;
                 btn.innerHTML = `
-                    <span class="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center text-[10px] text-slate-500 font-bold shrink-0">${idx + 1}</span>
+                    <span class="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center text-md text-slate-500 font-bold shrink-0">${idx + 1}</span>
                     <span>${ans.t}</span>
                 `;
                 container.appendChild(btn);
@@ -3096,10 +3102,10 @@
 
         function selectExamOption(idx) {
             examQuestions[examCurrentIdx].a.forEach((_, optIdx) => {
-                document.getElementById(`exam-opt-${optIdx}`).className = "w-full text-left bg-white border border-slate-200 hover:border-slate-300 p-3.5 rounded-xl text-xs text-slate-700 focus:outline-none transition-colors flex items-center space-x-3 shadow-sm";
+                document.getElementById(`exam-opt-${optIdx}`).className = "w-full text-left bg-white border border-slate-200 hover:border-slate-300 p-3.5 rounded-xl text-md text-slate-700 focus:outline-none transition-colors flex items-center space-x-3 shadow-sm";
             });
 
-            document.getElementById(`exam-opt-${idx}`).className = "w-full text-left bg-teal-50 border border-teal-400 p-3.5 rounded-xl text-xs text-teal-800 focus:outline-none transition-colors flex items-center space-x-3 shadow-sm";
+            document.getElementById(`exam-opt-${idx}`).className = "w-full text-left bg-teal-50 border border-teal-400 p-3.5 rounded-xl text-md text-teal-800 focus:outline-none transition-colors flex items-center space-x-3 shadow-sm";
             examSelectedAnsIdx = idx;
 
             const actionBtn = document.getElementById('examActionBtn');
@@ -3117,10 +3123,10 @@
 
             if (isCorrect) {
                 examScore += 1;
-                document.getElementById('examFeedback').className = "p-4 rounded-xl border bg-emerald-50 border-emerald-200 text-emerald-800 text-xs leading-normal shadow-sm";
+                document.getElementById('examFeedback').className = "p-4 rounded-xl border bg-emerald-50 border-emerald-200 text-emerald-800 text-md leading-normal shadow-sm";
                 document.getElementById('examFeedback').innerHTML = `<i class="fa-solid fa-circle-check mr-1.5 text-emerald-600"></i><strong>TEPAT!</strong> ${qData.f}`;
             } else {
-                document.getElementById('examFeedback').className = "p-4 rounded-xl border bg-red-50 border-red-200 text-red-800 text-xs leading-normal shadow-sm";
+                document.getElementById('examFeedback').className = "p-4 rounded-xl border bg-red-50 border-red-200 text-red-800 text-md leading-normal shadow-sm";
                 document.getElementById('examFeedback').innerHTML = `<i class="fa-solid fa-circle-xmark mr-1.5 text-red-600"></i><strong>KURANG TEPAT.</strong> Alternatif tindakan tidak memenuhi standard kualiti yang ketat.`;
             }
 
@@ -3162,8 +3168,8 @@
                 }
                 resultBox.innerHTML = `
                     <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mx-auto"><i class="fa-solid fa-award"></i></div>
-                    <h3 class="text-lg font-bold text-slate-900 font-serif">Keputusan: LULUS</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">Tahniah! Anda telah memperoleh markah <span class="text-emerald-600 font-bold">${finalPercent}% (${examScore} / 5)</span>. Sesi pembelajaran anda disahkan lengkap.</p>
+                    <h3 class="text-4xl font-bold text-slate-900">Keputusan: LULUS</h3>
+                    <p class="text-lg text-slate-500 leading-relaxed">Tahniah! Anda telah memperoleh markah <span class="text-emerald-600 font-bold">${finalPercent}% (${examScore} / 5)</span>. Sesi pembelajaran anda disahkan lengkap.</p>
                     <div class="flex items-center justify-center gap-3 mt-2">
                         <button onclick="downloadCertificate()" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center space-x-2 shadow-sm">
                             <i class="fa-solid fa-download"></i>
