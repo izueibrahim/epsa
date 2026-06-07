@@ -382,21 +382,24 @@
 <body class="text-slate-800 flex flex-col h-screen overflow-hidden">
 
     <!-- TOP HEADER BAR (Ultra Clean Light Theme) -->
-    <header class="bg-black h-16 min-h-16 flex items-center justify-between px-6 z-10 shadow-sm">
+    <header class="bg-white h-16 min-h-16 flex items-center justify-between px-6 z-10 shadow-sm relative">
         <div class="flex items-center space-x-3">
             <!-- Sidebar Toggle Menu Button -->
             <button onclick="toggleSidebar()"
-                class="px-3 py-2 hover:bg-teal-700 rounded-[200px] text-white transition-colors mr-1"
+                class="px-3 py-2 hover:bg-slate-100 rounded-[200px] text-black transition-colors mr-1"
                 title="Buka/Tutup Menu Sisi">
                 <i class="fa-solid fa-bars text-2xl"></i>
             </button>
-            <!-- <div class="bg-teal-600 text-white font-black px-2.5 py-1 rounded text-sm tracking-wider shadow-sm">EPSA
-            </div> -->
-            <div class="h-6 w-px bg-slate-200"></div>
-            <div>
-                <span class="text-[10px] text-white block uppercase tracking-widest font-bold"></span>
-                <span class="text-xs md:text-sm font-bold text-white">Teknologi Makanan</span>
+            <div class="h-6 w-px bg-slate-400"></div>
+            <div class="flex items-center space-x-2">
+                <img src="public/jata-negara.png" class="h-9 w-auto" alt="Jata Negara" />
+                <span class="text-black font-black text-base tracking-widest">EPSA</span>
             </div>
+        </div>
+
+        <!-- Centered module title -->
+        <div class="absolute left-1/2 -translate-x-1/2 pointer-events-none">
+            <span class="text-xs md:text-sm font-bold text-black">Teknologi Makanan</span>
         </div>
 
         <!-- Live Global Metrics in light mode -->
@@ -412,13 +415,13 @@
             </div> -->
         <!-- <div class="h-8 w-px bg-slate-200"></div> -->
         <div>
-            <span class="text-[12px] text-white block uppercase font-bold mb-0.5">Kemajuan Modul</span>
+            <span class="text-[12px] text-black block uppercase font-bold mb-0.5">Kemajuan Modul</span>
             <div class="flex items-center space-x-2">
-                <div class="w-24 bg-white rounded-full h-2 overflow-hidden border border-slate-200">
+                <div class="w-24 bg-slate-200 rounded-full h-2 overflow-hidden border border-slate-200">
                     <div id="globalProgressBar" class="bg-teal-500 h-2 transition-all duration-500" style="width: 8%">
                     </div>
                 </div>
-                <span class="text-md font-bold text-teal-300" id="globalProgressPercent">0%</span>
+                <span class="text-md font-bold text-teal-600" id="globalProgressPercent">0%</span>
             </div>
         </div>
         </div>
