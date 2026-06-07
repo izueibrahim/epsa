@@ -1630,6 +1630,32 @@
             }
         }
 
+        function saveFullState() {
+            try {
+                const state = {
+                    currentScreen: screens[currentScreenIdx].id,
+                    visitedScreens: visitedScreens,
+                    viewedObjectives: viewedObjectives,
+                    introVideoCompleted: introVideoCompleted,
+                    viewedProcesses: viewedProcesses,
+                    visitedHotspots: visitedHotspots,
+                    scenarioStep: scenarioStep,
+                    quizScore: quizScore,
+                    quizFinished: quizFinished,
+                    matchTaskFinished: matchTaskFinished,
+                    matchedPairs: matchedPairs,
+                    visitedSummaryPages: visitedSummaryPages,
+                    currentSummaryPage: currentSummaryPage,
+                    examScore: examScore,
+                    examFinished: examFinished
+                };
+                localStorage.setItem('epsa_full_state', JSON.stringify(state));
+                sessionStorage.setItem('epsa_refresh_screen', String(screens[currentScreenIdx].id));
+            } catch (e) {
+                console.error("Error saving state:", e);
+            }
+        }
+
         function goToScreen(screenId) {
             const targetIdx = screens.findIndex(s => s.id === screenId);
             if (targetIdx === -1) return;
@@ -1670,9 +1696,8 @@
             if (window.location.hash !== '#p-' + screenId) {
                 window.location.hash = 'p-' + screenId;
             }
-            // Persist current screen to sessionStorage AND localStorage immediately
-            try { sessionStorage.setItem('epsa_refresh_screen', screenId); } catch (e) { }
-            try { localStorage.setItem('epsa_current_screen', String(screenId)); } catch (e) { }
+            // Save full state for refresh recovery
+            saveFullState();
         }
 
         function navigateBack() {
@@ -3133,6 +3158,7 @@
 
         function saveScormProgress() {
             if (isInitializing) return;
+            saveFullState();  // Always save full state to localStorage
             if (scormAPI) {
                 var currentScreenId = screens[currentScreenIdx].id;
                 scormAPI.LMSSetValue("cmi.core.lesson_location", String(currentScreenId));
@@ -3350,67 +3376,104 @@
         window.onload = function () {
             initSCORM();
 
-            // Resolve the target screen from hash, SCORM location, or default to 1
-            let targetScreenId = 1;
-            const hash = window.location.hash;
-            if (hash && hash.startsWith('#p-')) {
-                const screenId = parseInt(hash.replace('#p-', ''));
-                if (!isNaN(screenId) && screenId >= 1 && screenId <= 13) {
-                    targetScreenId = screenId;
+            // First, try to restore the complete state from localStorage
+            let fullStateRestored = false;
+            try {
+                const savedState = localStorage.getItem('epsa_full_state');
+                if (savedState) {
+                    const state = JSON.parse(savedState);
+                    visitedScreens = state.visitedScreens || visitedScreens;
+                    viewedObjectives = state.viewedObjectives || viewedObjectives;
+                    introVideoCompleted = state.introVideoCompleted || false;
+                    viewedProcesses = state.viewedProcesses || viewedProcesses;
+                    visitedHotspots = state.visitedHotspots || visitedHotspots;
+                    scenarioStep = state.scenarioStep || 0;
+                    quizScore = state.quizScore || 0;
+                    quizFinished = state.quizFinished || false;
+                    matchTaskFinished = state.matchTaskFinished || false;
+                    matchedPairs = state.matchedPairs || {};
+                    visitedSummaryPages = state.visitedSummaryPages || visitedSummaryPages;
+                    currentSummaryPage = state.currentSummaryPage || 1;
+                    examScore = state.examScore || 0;
+                    examFinished = state.examFinished || false;
+
+                    if (state.currentScreen) {
+                        fullStateRestored = true;
+                    }
                 }
-            } else if (scormAPI) {
-                const location = scormAPI.LMSGetValue("cmi.core.lesson_location");
-                if (location && location.trim() !== "" && location !== "1") {
-                    const screenId = parseInt(location);
-                    if (!isNaN(screenId) && screenId > 1 && screenId <= 13) {
+            } catch (e) {
+                console.error("Error restoring full state:", e);
+            }
+
+            // Resolve the target screen from saved state, hash, SCORM location, or default to 1
+            let targetScreenId = 1;
+
+            // Use saved current screen if full state was restored
+            if (fullStateRestored) {
+                const savedState = JSON.parse(localStorage.getItem('epsa_full_state'));
+                targetScreenId = savedState.currentScreen || 1;
+            } else {
+                // Fall back to hash
+                const hash = window.location.hash;
+                if (hash && hash.startsWith('#p-')) {
+                    const screenId = parseInt(hash.replace('#p-', ''));
+                    if (!isNaN(screenId) && screenId >= 1 && screenId <= 13) {
                         targetScreenId = screenId;
                     }
+                } else if (scormAPI) {
+                    const location = scormAPI.LMSGetValue("cmi.core.lesson_location");
+                    if (location && location.trim() !== "" && location !== "1") {
+                        const screenId = parseInt(location);
+                        if (!isNaN(screenId) && screenId > 1 && screenId <= 13) {
+                            targetScreenId = screenId;
+                        }
+                    }
                 }
-            }
 
-            // Fallback to sessionStorage if both hash and SCORM fail
-            if (targetScreenId === 1) {
-                try {
-                    const saved = sessionStorage.getItem('epsa_refresh_screen');
-                    if (saved) {
-                        const screenId = parseInt(saved);
-                        if (!isNaN(screenId) && screenId > 1 && screenId <= 13) {
-                            targetScreenId = screenId;
+                // Fallback to sessionStorage if both hash and SCORM fail
+                if (targetScreenId === 1) {
+                    try {
+                        const saved = sessionStorage.getItem('epsa_refresh_screen');
+                        if (saved) {
+                            const screenId = parseInt(saved);
+                            if (!isNaN(screenId) && screenId > 1 && screenId <= 13) {
+                                targetScreenId = screenId;
+                            }
                         }
-                    }
-                } catch (e) { }
-            }
+                    } catch (e) { }
+                }
 
-            // Final fallback to localStorage (survives even session ends)
-            if (targetScreenId === 1) {
-                try {
-                    const saved = localStorage.getItem('epsa_current_screen');
-                    if (saved) {
-                        const screenId = parseInt(saved);
-                        if (!isNaN(screenId) && screenId > 1 && screenId <= 13) {
-                            targetScreenId = screenId;
+                // Final fallback to localStorage (survives even session ends)
+                if (targetScreenId === 1) {
+                    try {
+                        const saved = localStorage.getItem('epsa_current_screen');
+                        if (saved) {
+                            const screenId = parseInt(saved);
+                            if (!isNaN(screenId) && screenId > 1 && screenId <= 13) {
+                                targetScreenId = screenId;
+                            }
                         }
-                    }
-                } catch (e) { }
-            }
+                    } catch (e) { }
+                }
 
-            // Since the module is strictly linear, every screen 1..targetScreenId
-            // must have been visited to reach targetScreenId. Restore the full range
-            // so the progress bar reflects actual progress, not just the two endpoints.
-            for (var _i = 1; _i <= targetScreenId; _i++) {
-                if (!visitedScreens.includes(_i)) visitedScreens.push(_i);
-            }
+                // Since the module is strictly linear, every screen 1..targetScreenId
+                // must have been visited to reach targetScreenId. Restore the full range
+                // so the progress bar reflects actual progress, not just the two endpoints.
+                for (var _i = 1; _i <= targetScreenId; _i++) {
+                    if (!visitedScreens.includes(_i)) visitedScreens.push(_i);
+                }
 
-            // Restore interactive gate flags for all screens already passed so the
-            // Next button is never incorrectly locked after a refresh.
-            if (targetScreenId >= 4) introVideoCompleted = true;
-            if (targetScreenId >= 4) viewedObjectives = [1, 2, 3, 4];
-            if (targetScreenId >= 6) viewedProcesses = [1, 2, 3, 4, 5];
-            if (targetScreenId >= 7) visitedHotspots = [1, 2, 3, 4];
-            if (targetScreenId >= 8) scenarioStep = 3;
-            if (targetScreenId >= 10) quizFinished = true;
-            if (targetScreenId >= 11) matchTaskFinished = true;
-            if (targetScreenId >= 12) visitedSummaryPages = [1, 2, 3, 4, 5];
+                // Restore interactive gate flags for all screens already passed so the
+                // Next button is never incorrectly locked after a refresh.
+                if (targetScreenId >= 4) introVideoCompleted = true;
+                if (targetScreenId >= 4) viewedObjectives = [1, 2, 3, 4];
+                if (targetScreenId >= 6) viewedProcesses = [1, 2, 3, 4, 5];
+                if (targetScreenId >= 7) visitedHotspots = [1, 2, 3, 4];
+                if (targetScreenId >= 8) scenarioStep = 3;
+                if (targetScreenId >= 10) quizFinished = true;
+                if (targetScreenId >= 11) matchTaskFinished = true;
+                if (targetScreenId >= 12) visitedSummaryPages = [1, 2, 3, 4, 5];
+            }
 
             // Synchronously navigate to target screen
             goToScreen(targetScreenId);
@@ -3462,22 +3525,42 @@
         // Anti-flash script: Immediately hide screen 1 and show the target screen before window.onload runs.
         (function () {
             var targetId = 1;
-            var hash = window.location.hash;
-            if (hash && hash.startsWith('#p-')) {
-                targetId = parseInt(hash.replace('#p-', ''));
+
+            // First try to restore from full state
+            try {
+                var fullState = localStorage.getItem('epsa_full_state');
+                if (fullState) {
+                    var state = JSON.parse(fullState);
+                    if (state.currentScreen) {
+                        targetId = state.currentScreen;
+                    }
+                }
+            } catch (e) { }
+
+            // Fall back to hash
+            if (targetId <= 1) {
+                var hash = window.location.hash;
+                if (hash && hash.startsWith('#p-')) {
+                    targetId = parseInt(hash.replace('#p-', ''));
+                }
             }
+
+            // Fall back to sessionStorage
             if (targetId <= 1) {
                 try {
                     var saved = sessionStorage.getItem('epsa_refresh_screen');
                     if (saved) targetId = parseInt(saved);
                 } catch (e) { }
             }
+
+            // Fall back to localStorage
             if (targetId <= 1) {
                 try {
                     var saved2 = localStorage.getItem('epsa_current_screen');
                     if (saved2) targetId = parseInt(saved2);
                 } catch (e) { }
             }
+
             if (!isNaN(targetId) && targetId > 1 && targetId <= 13) {
                 var s1 = document.getElementById('screen-1');
                 if (s1) s1.classList.add('hidden');
