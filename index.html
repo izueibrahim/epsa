@@ -248,6 +248,18 @@
             min-height: 0;
             overflow-y: auto;
             overflow-x: hidden;
+            padding: 1rem 1rem 9rem;
+        }
+
+        @media (min-width: 768px) {
+            .screen-view:not(.hidden) {
+                padding: 1.25rem 100px 5.5rem;
+            }
+        }
+
+        /* Full-bleed screens: background stretches edge-to-edge, content padded inside */
+        #screen-1, #screen-2, #screen-3 {
+            padding: 0;
         }
 
         /* Screens with natural-height content: vertically center in viewport */
@@ -261,7 +273,12 @@
 
         /* Video screen: player fills remaining height, controls never scroll off */
         #screen-4:not(.hidden) {
-            overflow: hidden;
+            overflow-y: auto;
+        }
+        @media (min-width: 1024px) {
+            #screen-4:not(.hidden) {
+                overflow: hidden;
+            }
         }
     </style>
 </head>
@@ -270,7 +287,7 @@
 
     <!-- TOP HEADER BAR (Ultra Clean Light Theme) -->
     <header
-        class="bg-black border-b border-slate-200 h-16 min-h-16 flex items-center justify-between px-6 z-10 shadow-sm">
+        class="bg-black h-16 min-h-16 flex items-center justify-between px-6 z-10 shadow-sm">
         <div class="flex items-center space-x-3">
             <!-- Sidebar Toggle Menu Button -->
             <button onclick="toggleSidebar()"
@@ -341,7 +358,7 @@
         </aside>
 
         <!-- MAIN INTERACTIVE WORKSPACE CANVAS -->
-        <main class="flex-1 bg-slate-50 flex flex-col overflow-hidden relative py-4 md:py-5 px-4 md:px-[100px]">
+        <main class="flex-1 bg-slate-50 flex flex-col overflow-hidden relative">
 
             <!-- SCREEN BOX CONTAINER -->
             <div class="w-full flex-1 flex flex-col min-h-0">
@@ -397,10 +414,10 @@
                 </div>
 
                 <!-- SCREEN 2: LEARNING JOURNEY / TABLE OF CONTENT -->
-                <div id="screen-2" class="screen-view space-y-4 py-4 hidden relative overflow-hidden"
+                <div id="screen-2" class="screen-view hidden relative overflow-hidden"
                     style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
                     <div class="absolute inset-0"></div>
-                    <div class="relative z-10 space-y-4">
+                    <div class="relative z-10 space-y-4 px-4 md:px-[100px] py-4 md:py-5">
                     <div class="text-center space-y-2">
                         <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Kandungan Modul</h2>
                         <p class="text-slate-500 text-sm">Modul ini mengandungi beberapa komponen pembelajaran
@@ -495,10 +512,10 @@
                 </div>
 
                 <!-- SCREEN 3: LEARNING OBJECTIVES (Accordion single active) -->
-                <div id="screen-3" class="screen-view space-y-4 py-4 hidden relative overflow-hidden"
+                <div id="screen-3" class="screen-view hidden relative overflow-hidden"
                     style="background-image: url('public/bg-objektif.png'); background-size: cover; background-position: center;">
                     <div class="absolute inset-0"></div>
-                    <div class="relative z-10 space-y-4">
+                    <div class="relative z-10 space-y-4 px-4 md:px-[100px] py-4 md:py-5">
                     <div class="space-y-1">
                         <h2 class="text-2xl font-extrabold text-slate-900">Objektif Pembelajaran</h2>
                         <p class="text-slate-500 text-sm">Sila klik pada mana-mana objektif pembelajaran di bawah untuk
@@ -598,7 +615,7 @@
                 </div>
 
                 <!-- SCREEN 4: INTRO VIDEO -->
-                <div id="screen-4" class="screen-view py-4 hidden gap-3">
+                <div id="screen-4" class="screen-view hidden gap-3">
                     <!-- Header row -->
                     <div class="shrink-0 flex justify-between items-center border-b border-slate-200 pb-3">
                         <div class="space-y-1">
@@ -611,48 +628,124 @@
                         </span> -->
                     </div>
 
-                    <!-- Video player: flex-1 so it fills all remaining height; controls always visible -->
-                    <div
-                        class="flex-1 min-h-0 flex flex-col bg-slate-900 rounded-xl overflow-hidden border border-slate-200 shadow-xl">
-                        <!-- Video fills height, object-contain preserves 16:9 with letterbox -->
-                        <video id="introVideo" class="flex-1 min-h-0 w-full object-contain bg-black"
-                            ontimeupdate="updateIntroVideoUI()" onloadedmetadata="updateIntroVideoUI()"
-                            onended="onIntroVideoEnded()">
-                            <source src="public/intro.mp4" type="video/mp4">
-                        </video>
+                    <!-- Two-column: video (left) + summary (right) -->
+                    <div class="flex flex-col lg:flex-row flex-1 min-h-0 gap-4 overflow-hidden">
 
-                        <!-- Controls Bar — always pinned at bottom, never scrolls away -->
-                        <div
-                            class="shrink-0 bg-slate-950 border-t border-slate-800 px-4 py-2.5 flex items-center gap-3">
-                            <!-- Play / Pause -->
-                            <button onclick="toggleIntroVideo()"
-                                class="text-white hover:text-teal-400 focus:outline-none text-sm transition-colors shrink-0 w-5 text-center"
-                                id="videoPlayBtn">
-                                <i class="fa-solid fa-play"></i>
-                            </button>
-                            <!-- Time -->
-                            <span class="text-[11px] font-mono text-slate-400 shrink-0" id="videoTimeText">0:00 /
-                                0:00</span>
-                            <!-- Progress Bar — no CSS transition: prevents jump-back visual artifact on timeupdate -->
-                            <div class="flex-1 bg-slate-800 rounded-full h-1.5 relative cursor-pointer"
-                                id="videoProgressBar" onclick="seekIntroVideo(event)">
-                                <div class="bg-teal-500 h-1.5 rounded-full" id="videoProgressFill" style="width: 0%">
+                        <!-- LEFT: Video player -->
+                        <div class="flex-1 min-h-0 flex flex-col bg-slate-900 rounded-xl overflow-hidden border border-slate-200 shadow-xl">
+                            <!-- Video fills height -->
+                            <video id="introVideo" class="flex-1 min-h-0 w-full object-contain bg-black"
+                                ontimeupdate="updateIntroVideoUI()" onloadedmetadata="updateIntroVideoUI()"
+                                onended="onIntroVideoEnded()">
+                                <source src="public/intro.mp4" type="video/mp4">
+                            </video>
+                            <!-- Controls Bar -->
+                            <div class="shrink-0 bg-slate-950 border-t border-slate-800 px-4 py-2.5 flex items-center gap-3">
+                                <button onclick="toggleIntroVideo()"
+                                    class="text-white hover:text-teal-400 focus:outline-none text-sm transition-colors shrink-0 w-5 text-center"
+                                    id="videoPlayBtn">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <span class="text-[11px] font-mono text-slate-400 shrink-0" id="videoTimeText">0:00 / 0:00</span>
+                                <div class="flex-1 bg-slate-800 rounded-full h-1.5 relative cursor-pointer"
+                                    id="videoProgressBar" onclick="seekIntroVideo(event)">
+                                    <div class="bg-teal-500 h-1.5 rounded-full" id="videoProgressFill" style="width: 0%"></div>
+                                </div>
+                                <button onclick="cycleVideoSpeed()" id="videoSpeedBtn"
+                                    class="shrink-0 text-[10px] font-bold text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700 w-10 transition-colors"
+                                    title="Tukar kelajuan video">1x</button>
+                                <button onclick="skipVideo()"
+                                    class="shrink-0 text-[10px] font-semibold text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition-colors"
+                                    title="Langkau tontonan video">Langkau</button>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT: Summary panel -->
+                        <div class="w-full lg:w-72 xl:w-80 shrink-0 flex flex-col gap-3 overflow-y-auto">
+
+                            <!-- Main summary card -->
+                            <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+                                <!-- Card header -->
+                                <div class="bg-gradient-to-br from-teal-600 to-teal-800 px-4 py-3.5">
+                                    <h3 class="text-white font-bold text-sm">Ringkasan Video</h3>
+                                    <p class="text-teal-200 text-[11px] mt-0.5">Panduan pembelajaran video ini</p>
+                                </div>
+                                <!-- Card body -->
+                                <div class="p-4 space-y-4 text-sm">
+                                    <!-- Overview -->
+                                    <p class="text-xs text-slate-600 leading-relaxed">
+                                        Video ini memperkenalkan konsep asas teknologi makanan, merangkumi proses industri moden, peralatan pengeluaran, dan amalan keselamatan yang memastikan kualiti produk.
+                                    </p>
+
+                                    <div class="h-px bg-slate-100"></div>
+
+                                    <!-- What you'll learn -->
+                                    <div class="space-y-2.5">
+                                        <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Apa Yang Akan Dipelajari</h4>
+                                        <ul class="space-y-2">
+                                            <li class="flex items-start gap-2">
+                                                <i class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
+                                                <span class="text-xs text-slate-700">Konsep asas teknologi makanan</span>
+                                            </li>
+                                            <li class="flex items-start gap-2">
+                                                <i class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
+                                                <span class="text-xs text-slate-700">Proses automasi industri makanan</span>
+                                            </li>
+                                            <li class="flex items-start gap-2">
+                                                <i class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
+                                                <span class="text-xs text-slate-700">Peralatan moden pengeluaran</span>
+                                            </li>
+                                            <li class="flex items-start gap-2">
+                                                <i class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
+                                                <span class="text-xs text-slate-700">Kawalan kualiti dan keselamatan</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="h-px bg-slate-100"></div>
+
+                                    <!-- Learning outcome -->
+                                    <div class="space-y-2">
+                                        <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Hasil Pembelajaran</h4>
+                                        <p class="text-xs text-slate-600 leading-relaxed bg-teal-50 border border-teal-100 rounded-lg p-3">
+                                            Selepas menonton video ini, anda akan memahami asas teknologi makanan moden dan aliran operasi industri.
+                                        </p>
+                                    </div>
+
+                                    <div class="h-px bg-slate-100"></div>
+
+                                    <!-- Duration + tags -->
+                                    <div class="space-y-3">
+                                        <div class="flex items-center gap-2 text-xs text-slate-500">
+                                            <i class="fa-regular fa-clock text-slate-400 text-xs"></i>
+                                            <span>Tempoh: <span id="summaryVideoDuration" class="font-semibold text-slate-700">—</span></span>
+                                        </div>
+                                        <div class="flex flex-wrap gap-1.5">
+                                            <span class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Automasi</span>
+                                            <span class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Teknologi</span>
+                                            <span class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Keselamatan</span>
+                                            <span class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Industri</span>
+                                            <span class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Kualiti</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Speed Cycle -->
-                            <button onclick="cycleVideoSpeed()" id="videoSpeedBtn"
-                                class="shrink-0 text-[10px] font-bold text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700 w-10 transition-colors"
-                                title="Tukar kelajuan video">1x</button>
-                            <!-- Skip -->
-                            <button onclick="skipVideo()"
-                                class="shrink-0 text-[10px] font-semibold text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700 transition-colors"
-                                title="Langkau tontonan video">Langkau</button>
+
+                            <!-- Progress tip -->
+                            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 flex items-start gap-2.5 shrink-0">
+                                <i class="fa-solid fa-lightbulb text-amber-500 text-xs mt-0.5 shrink-0"></i>
+                                <p class="text-xs text-amber-800 leading-relaxed">Tonton video sehingga tamat untuk mengaktifkan halaman pembelajaran seterusnya.</p>
+                            </div>
+
                         </div>
+                        <!-- end summary panel -->
+
                     </div>
+                    <!-- end two-column -->
                 </div>
 
                 <!-- SCREEN 5: PROCESS EXPLORER (CLICK & REVEAL - ACCORDING TO IMAGE) -->
-                <div id="screen-5" class="screen-view space-y-4 py-4 hidden">
+                <div id="screen-5" class="screen-view space-y-4 hidden">
                     <div class="text-center mb-4">
                         <h2 class="text-2xl font-extrabold text-slate-900">Rantai Pengeluaran Makanan</h2>
                         <p class="text-xs text-slate-500">Klik pada tab di sebelah kanan untuk melihat setiap fasa industri.</p>
@@ -708,7 +801,7 @@
                 </div>
 
                 <!-- SCREEN 6: HOTSPOT FACTORY INTERACTION -->
-                <div id="screen-6" class="screen-view space-y-4 py-4 hidden">
+                <div id="screen-6" class="screen-view space-y-4 hidden">
                     <div class="space-y-1">
                         <h2 class="text-xl font-bold text-slate-900">Terokai Fasiliti Pengeluaran</h2>
                         <p class="text-xs text-slate-500">Klik pada titik penderia hijau (+) di dalam pelan kilang untuk
@@ -790,7 +883,7 @@
                 </div>
 
                 <!-- SCREEN 7: SCENARIO-BASED SIMULATION -->
-                <div id="screen-7" class="screen-view space-y-4 py-4 hidden">
+                <div id="screen-7" class="screen-view space-y-4 hidden">
                     <div class="flex justify-between items-center border-b border-slate-200 pb-2">
                         <div class="space-y-1">
                             <span
@@ -897,7 +990,7 @@
                 </div>
 
                 <!-- SCREEN 8: TABS INTERACTION (KNOWLEDGE EXPLORER) -->
-                <div id="screen-8" class="screen-view space-y-4 py-4 hidden">
+                <div id="screen-8" class="screen-view space-y-4 hidden">
                     <div class="space-y-1">
                         <h2 class="text-xl font-bold text-slate-900">Peranan Teknologi dalam Industri Makanan</h2>
                         <p class="text-md text-slate-500">Klik pada tab di atas untuk meneroka topik lain berkaitan
@@ -960,7 +1053,7 @@
                 </div>
 
                 <!-- SCREEN 9: QUICK KNOWLEDGE CHECK -->
-                <div id="screen-9" class="screen-view space-y-6 py-4 hidden">
+                <div id="screen-9" class="screen-view space-y-6 hidden">
                     <div class="text-center space-y-1">
                         <span
                             class="text-[10px] bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Cabaran
@@ -1011,7 +1104,7 @@
                 </div>
 
                 <!-- SCREEN 10: DRAG & DROP CLASSIFICATION -->
-                <div id="screen-10" class="screen-view space-y-4 py-4 hidden">
+                <div id="screen-10" class="screen-view space-y-4 hidden">
                     <div class="text-center space-y-1">
                         <span
                             class="text-[10px] bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Aktiviti
@@ -1069,7 +1162,7 @@
                 </div>
 
                 <!-- SCREEN 11: LEARNING SUMMARY / RUMUSAN -->
-                <div id="screen-11" class="screen-view space-y-6 py-4 hidden">
+                <div id="screen-11" class="screen-view space-y-6 hidden">
                     <!-- Header -->
                     <div class="text-center space-y-1">
                         <span
@@ -1135,7 +1228,7 @@
                 </div>
 
                 <!-- SCREEN 12: FINAL ASSESSMENT -->
-                <div id="screen-12" class="screen-view space-y-6 py-4 hidden">
+                <div id="screen-12" class="screen-view space-y-6 hidden">
                     <div class="flex justify-between items-center border-b border-slate-200 pb-3" id="examHeader">
                         <div class="space-y-1">
                             <span
@@ -1225,7 +1318,7 @@
                 </div>
 
                 <!-- SCREEN 13: MODULE COMPLETION / OUTRO -->
-                <div id="screen-13" class="screen-view space-y-6 py-4 hidden">
+                <div id="screen-13" class="screen-view space-y-6 hidden">
                     <div
                         class="bg-white border border-slate-200 rounded-2xl p-8 max-w-3xl mx-auto text-center space-y-4 flex-1 shadow-xl relative overflow-hidden flex flex-col justify-center">
 
@@ -1296,30 +1389,71 @@
 
             </div>
 
-            <!-- FOOTER NAVIGATION TOOLBAR -->
-            <footer
-                class="shrink-0 pt-3 pb-1 mt-2 flex items-center justify-between w-full text-xs text-slate-400 font-medium">
-                <div class="flex items-center space-x-2">
-                    <span class="font-bold text-slate-700">Demo © 2026</span>
-                    <span>•</span>
-                    <span class="hidden md:inline">Institut Tadbiran
-                        Awam Negara</span>
-                </div>
-
-                <div class="flex items-center space-x-3">
-                    <button id="globalBackBtn" disabled onclick="navigateBack()"
-                        class="bg-white border border-slate-200 text-slate-400 px-4 py-2 rounded-lg font-bold transition-all duration-300 cursor-not-allowed shadow-sm">
-                        <i class="fa-solid fa-chevron-left mr-1"></i>
-                    </button>
-                    <!-- Dedicated single primary next button -->
-                    <button id="globalNextBtn" onclick="navigateNext()"
-                        class="bg-orange-600 hover:bg-orange-700 text-white px-5 py-2 rounded-lg font-bold transition-all duration-300 flex items-center shadow-sm"><i class="fa-solid fa-chevron-right ml-1"></i>
-                    </button>
-                </div>
-            </footer>
         </main>
 
     </div>
+
+    <!-- BOTTOM DOCK: 3-zone floating navigation bar -->
+    <div id="bottomDock"
+        class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40
+               w-[min(calc(100vw-2rem),640px)] md:w-auto
+               bg-white/95 backdrop-blur-sm border border-slate-200/60 shadow-2xl rounded-2xl overflow-hidden">
+
+        <!-- MOBILE SECONDARY ROW: Audio (left) + Exit (right) -->
+        <div class="md:hidden flex items-center justify-between px-3 py-2 border-b border-slate-100">
+            <button onclick="toggleAudio()"
+                class="flex items-center gap-2 h-9 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 rounded-xl text-xs font-semibold transition-all">
+                <i class="fa-solid fa-volume-high text-xs audio-btn-icon"></i>
+                <span class="audio-btn-label">Audio</span>
+            </button>
+            <button onclick="exitCourse()"
+                class="exit-course-btn flex items-center gap-1.5 h-9 px-3 bg-slate-100 hover:bg-red-50 border border-slate-200 hover:border-red-200 text-slate-500 hover:text-red-600 rounded-xl text-xs font-semibold transition-all"
+                style="display:none">
+                <i class="fa-solid fa-right-from-bracket text-xs"></i>
+                <span>Keluar</span>
+            </button>
+        </div>
+
+        <!-- MAIN ROW -->
+        <div class="flex items-center p-2 gap-0">
+
+            <!-- DESKTOP LEFT: Audio -->
+            <div class="hidden md:flex items-center shrink-0 pr-2 mr-1 border-r border-slate-100">
+                <button onclick="toggleAudio()"
+                    class="flex items-center gap-2 h-10 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 rounded-xl text-xs font-semibold transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-volume-high text-xs audio-btn-icon"></i>
+                    <span class="audio-btn-label">Audio</span>
+                </button>
+            </div>
+
+            <!-- CENTER: PRIMARY NAVIGATION (dominant) -->
+            <div class="flex items-center gap-2 flex-1 md:flex-none justify-center px-1">
+                <button id="globalBackBtn" disabled onclick="navigateBack()"
+                    class="flex items-center gap-2 h-11 px-4 bg-slate-100 border border-slate-200 text-slate-400 rounded-xl font-semibold text-sm cursor-not-allowed"
+                    aria-label="Kembali">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                </button>
+                <button id="globalNextBtn" onclick="navigateNext()"
+                    class="flex items-center gap-2 h-11 px-5 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-bold text-sm cursor-pointer transition-all"
+                    aria-label="Seterusnya">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+
+            <!-- DESKTOP RIGHT: Footer text + Exit -->
+            <div class="hidden md:flex items-center gap-3 shrink-0 pl-2 ml-1 border-l border-slate-100">
+                <button onclick="exitCourse()"
+                    class="exit-course-btn flex items-center gap-1.5 h-9 px-3 bg-slate-100 hover:bg-red-50 border border-slate-200 hover:border-red-200 text-slate-500 hover:text-red-600 rounded-xl text-xs font-semibold transition-all shrink-0"
+                    style="display:none">
+                    <i class="fa-solid fa-right-from-bracket text-xs"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Hidden audio element for narration -->
+    <audio id="courseAudio" preload="none"></audio>
 
     <!-- CERTIFICATE MODAL TEMPLATE -->
     <div id="certificateModal"
@@ -1510,6 +1644,7 @@
         // Strictly linear state initialization
         let visitedScreens = [1];
         let sidebarCollapsed = true;
+        let audioPlaying = false;
         let startTime = Date.now();
         let name = "Pegawai Kualiti EPSA";
 
@@ -1581,6 +1716,62 @@
             updateGlobalNavigationUI();
         }
 
+        // ── AUDIO NARRATION ──────────────────────────────────
+        const screenNarration = {
+            1: "Selamat datang ke modul Teknologi Makanan. Klik Mula Sekarang untuk memulakan pembelajaran anda.",
+            2: "Kandungan Modul. Modul ini mengandungi lima komponen pembelajaran interaktif yang direka untuk memberikan pengalaman pembelajaran berstruktur.",
+            3: "Objektif Pembelajaran. Sila klik dan buka kesemua empat objektif untuk mengaktifkan halaman seterusnya.",
+            4: "Video Pengenalan. Sila tonton video pengenalan ini untuk mengetahui lebih lanjut tentang teknologi makanan moden.",
+            5: "Rantai Pengeluaran Makanan. Klik pada tab di sebelah kanan untuk meneroka setiap fasa industri.",
+            6: "Terokai Fasiliti Pengeluaran. Klik pada titik penderia untuk menyiasat setiap kawasan operasi kilang.",
+            7: "Simulasi Situasi. Anda berperanan sebagai pegawai operasi. Buat keputusan yang tepat berdasarkan situasi yang diberikan.",
+            8: "Pembelajaran Interaktif. Klik pada setiap tab untuk meneroka topik teknologi makanan secara mendalam.",
+            9: "Kuiz. Jawab soalan-soalan yang diberikan untuk menguji kefahaman anda.",
+            10: "Permainan Padanan. Padankan setiap item dengan kategori yang betul.",
+            11: "Ringkasan Modul. Baca setiap halaman ringkasan untuk melengkapkan aktiviti ini.",
+            12: "Penilaian Akhir. Anda perlu mendapat sekurang-kurangnya lapan puluh peratus untuk lulus.",
+            13: "Tahniah! Anda telah berjaya melengkapkan modul Teknologi Makanan."
+        };
+
+        function updateAudioBtnState() {
+            document.querySelectorAll('.audio-btn-icon').forEach(el => {
+                el.className = (audioPlaying ? 'fa-solid fa-stop' : 'fa-solid fa-volume-high') + ' text-xs audio-btn-icon';
+            });
+            document.querySelectorAll('.audio-btn-label').forEach(el => {
+                el.textContent = audioPlaying ? 'Berhenti' : 'Audio';
+            });
+        }
+
+        function toggleAudio() {
+            if (!window.speechSynthesis) return;
+            if (audioPlaying) {
+                window.speechSynthesis.cancel();
+                audioPlaying = false;
+                updateAudioBtnState();
+                return;
+            }
+            window.speechSynthesis.cancel();
+            const currentScreenId = screens[currentScreenIdx]?.id;
+            const text = screenNarration[currentScreenId] || "Sila teruskan pembelajaran anda.";
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = "ms-MY";
+            utterance.rate = 0.92;
+            utterance.onend = () => { audioPlaying = false; updateAudioBtnState(); };
+            utterance.onerror = () => { audioPlaying = false; updateAudioBtnState(); };
+            window.speechSynthesis.speak(utterance);
+            audioPlaying = true;
+            updateAudioBtnState();
+        }
+
+        function exitCourse() {
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+            if (confirm('Adakah anda pasti ingin keluar? Kemajuan anda telah disimpan.')) {
+                audioPlaying = false;
+                updateAudioBtnState();
+                goToScreen(1);
+            }
+        }
+
         // Global Nav Control (Strict Linear Gates Check)
         function updateGlobalNavigationUI() {
             // Update global metrics percentage
@@ -1592,10 +1783,10 @@
             const backBtn = document.getElementById('globalBackBtn');
             if (currentScreenIdx === 0) {
                 backBtn.disabled = true;
-                backBtn.className = "bg-slate-100 border border-slate-200 text-slate-400 px-4 py-2 rounded-lg font-bold uppercase cursor-not-allowed shadow-sm";
+                backBtn.className = "flex items-center gap-2 h-11 px-4 bg-slate-100 border border-slate-200 text-slate-400 rounded-xl font-semibold text-sm cursor-not-allowed";
             } else {
                 backBtn.disabled = false;
-                backBtn.className = "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 px-4 py-2 rounded-lg font-bold uppercase cursor-pointer transition-all shadow-sm";
+                backBtn.className = "flex items-center gap-2 h-11 px-4 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl font-semibold text-sm cursor-pointer transition-all";
             }
 
             // Linear Screen Blocking / Lock Evaluation
@@ -1616,11 +1807,16 @@
 
             if (screenIsLocked) {
                 nextBtn.disabled = true;
-                nextBtn.className = "bg-slate-100 border border-slate-200 text-slate-300 px-5 py-2 rounded-lg font-bold uppercase cursor-not-allowed shadow-sm";
+                nextBtn.className = "flex items-center gap-2 h-11 px-5 bg-slate-100 border border-slate-200 text-slate-300 rounded-xl font-bold text-sm cursor-not-allowed";
             } else {
                 nextBtn.disabled = false;
-                nextBtn.className = "bg-teal-600 hover:bg-teal-700 text-white px-5 py-2 rounded-lg font-bold uppercase cursor-pointer transition-all shadow-sm";
+                nextBtn.className = "flex items-center gap-2 h-11 px-5 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold text-sm cursor-pointer transition-all";
             }
+
+            // Show Exit button only after course has started (past screen 1)
+            document.querySelectorAll('.exit-course-btn').forEach(btn => {
+                btn.style.display = currentScreenIdx > 0 ? 'flex' : 'none';
+            });
 
             renderSidebar();
 
@@ -1662,6 +1858,9 @@
 
             // Linear security check
             if (!visitedScreens.includes(screenId)) return;
+
+            // Stop any active narration when navigating
+            if (audioPlaying && window.speechSynthesis) { window.speechSynthesis.cancel(); audioPlaying = false; updateAudioBtnState(); }
 
             document.querySelectorAll('.screen-view').forEach(elem => {
                 elem.classList.add('hidden');
@@ -1869,6 +2068,8 @@
             if (timeEl) timeEl.innerText = `${fmt(cur)} / ${fmt(dur)}`;
             const badge = document.getElementById('videoDurationBadge');
             if (badge && dur > 0) badge.innerText = fmt(dur);
+            const summaryDur = document.getElementById('summaryVideoDuration');
+            if (summaryDur && dur > 0) summaryDur.innerText = fmt(dur);
         }
 
         function updateVideoFrameUI() {
