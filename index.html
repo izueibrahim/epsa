@@ -2485,9 +2485,9 @@
         // ==========================================
         function toggleInfoTab(id) {
             document.querySelectorAll('.info-tab-btn').forEach((btn, idx) => {
-                btn.className = "info-tab-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200";
+                btn.className = "info-tab-btn px-4 py-2 rounded-full text-lg font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200";
             });
-            document.getElementById(`tab-btn-${id}`).className = "info-tab-btn px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-teal-600 text-white shadow-sm";
+            document.getElementById(`tab-btn-${id}`).className = "info-tab-btn px-4 py-2 rounded-full text-lg font-bold transition-all duration-200 focus:outline-none flex items-center space-x-2 bg-teal-600 text-white shadow-sm";
 
             const data = tabData[id];
 
@@ -2497,11 +2497,11 @@
             });
 
             document.getElementById('tabContentArea').innerHTML = `
-                <div class="space-y-4 w-1/2">
-                    <h3 class="text-lg font-bold text-slate-900">${data.title}</h3>
-                    <p class="text-xs md:text-sm text-slate-600 leading-relaxed">${data.desc}</p>
+                <div class="space-y-4 w-1/2 h-full">
+                    <h2 class="text-2xl font-bold text-slate-900">${data.title}</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">${data.desc}</p>
 
-                    <ul class="space-y-1.5 text-xs text-slate-600 font-medium">
+                    <ul class="space-y-1.5 text-lg text-slate-600 font-medium">
                         ${listHTML}
                     </ul>
                 </div>
