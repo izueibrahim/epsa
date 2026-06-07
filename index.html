@@ -2178,7 +2178,7 @@
                     } focus:outline-none`;
                 btn.title = processData[i].label;
                 btn.onclick = () => selectProcessStep(i);
-                btn.innerHTML = `<span class="vertical-text text-slate-600 font-bold text-[10px] uppercase tracking-widest">${i}. ${processData[i].label}</span>`;
+                btn.innerHTML = `<span class="vertical-text text-slate-600 font-bold text-[10px] uppercase tracking-widest">${processData[i].label}</span>`;
                 tabContainer.appendChild(btn);
             }
 
