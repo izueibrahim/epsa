@@ -1519,9 +1519,9 @@
 
         <!-- MOBILE SECONDARY ROW: Audio (left) + Exit (right) -->
         <div class="md:hidden flex items-center justify-between px-3 py-2 border-b border-slate-100">
-            <button onclick="toggleAudio()"
-                class="flex items-center gap-2 h-9 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 rounded-xl text-xs font-semibold transition-all">
-                <i class="fa-solid fa-volume-high text-xs audio-btn-icon"></i>
+            <button onclick="toggleBgMusic()"
+                class="audio-music-btn flex items-center gap-2 h-9 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-500 rounded-xl text-xs font-semibold transition-all">
+                <i class="fa-solid fa-volume-xmark text-xs audio-btn-icon"></i>
                 <span class="audio-btn-label">Audio</span>
             </button>
             <button onclick="exitCourse()"
@@ -1537,10 +1537,9 @@
 
             <!-- DESKTOP LEFT: Audio -->
             <div class="hidden md:flex items-center shrink-0 pr-2 mr-1 border-r border-slate-100">
-                <button onclick="toggleAudio()"
-                    class="flex items-center gap-2 h-10 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 rounded-xl text-xs font-semibold transition-all whitespace-nowrap">
-                    <i class="fa-solid fa-volume-high text-xs audio-btn-icon"></i>
-                    <span class="audio-btn-label">Audio</span>
+                <button onclick="toggleBgMusic()"
+                    class="audio-music-btn flex items-center gap-2 h-10 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-500 rounded-xl text-xs font-semibold transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-volume-xmark text-xs audio-btn-icon"></i>
                 </button>
             </div>
 
@@ -1581,6 +1580,7 @@
 
     <!-- Hidden audio element for narration -->
     <audio id="courseAudio" preload="none"></audio>
+    <audio id="bgMusic" src="public/audio.mp3" loop preload="auto"></audio>
 
     <!-- CERTIFICATE MODAL TEMPLATE -->
     <div id="certificateModal"
@@ -1901,6 +1901,57 @@
         let visitedScreens = [1];
         let sidebarCollapsed = true;
         let audioPlaying = false;
+        let bgMusicPlaying = false;
+
+        function initBgMusic() {
+            const audio = document.getElementById('bgMusic');
+            if (!audio) return;
+            audio.volume = 0.25;
+            audio.play().then(() => {
+                bgMusicPlaying = true;
+                updateMusicBtnState();
+            }).catch(() => {
+                // Autoplay blocked — start silently on first user interaction
+                const startOnInteraction = () => {
+                    if (!bgMusicPlaying) {
+                        audio.play().then(() => {
+                            bgMusicPlaying = true;
+                            updateMusicBtnState();
+                        }).catch(() => {});
+                    }
+                    document.removeEventListener('click', startOnInteraction, true);
+                    document.removeEventListener('keydown', startOnInteraction, true);
+                };
+                document.addEventListener('click', startOnInteraction, true);
+                document.addEventListener('keydown', startOnInteraction, true);
+            });
+        }
+
+        function toggleBgMusic() {
+            const audio = document.getElementById('bgMusic');
+            if (!audio) return;
+            if (bgMusicPlaying) {
+                audio.pause();
+                bgMusicPlaying = false;
+            } else {
+                audio.play().catch(() => {});
+                bgMusicPlaying = true;
+            }
+            updateMusicBtnState();
+        }
+
+        function updateMusicBtnState() {
+            const isOn = bgMusicPlaying;
+            const colorOff = ['bg-slate-100','border-slate-200','text-slate-500'];
+            const colorOn  = ['bg-teal-50','border-teal-200','text-teal-600'];
+            document.querySelectorAll('.audio-music-btn').forEach(btn => {
+                [...colorOff, ...colorOn].forEach(c => btn.classList.remove(c));
+                (isOn ? colorOn : colorOff).forEach(c => btn.classList.add(c));
+            });
+            document.querySelectorAll('.audio-btn-icon').forEach(el => {
+                el.className = (isOn ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark') + ' text-xs audio-btn-icon';
+            });
+        }
         let startTime = Date.now();
         let name = "Pegawai Kualiti EPSA";
 
@@ -3860,6 +3911,7 @@
 
         window.onload = function () {
             initSCORM();
+            initBgMusic();
 
             // First, try to restore the complete state from localStorage
             let fullStateRestored = false;
