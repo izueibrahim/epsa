@@ -355,7 +355,7 @@
                     <div id="globalProgressBar" class="bg-teal-500 h-2 transition-all duration-500" style="width: 8%">
                     </div>
                 </div>
-                <span class="text-xs font-mono font-bold text-teal-300" id="globalProgressPercent">8%</span>
+                <span class="text-md font-bold text-teal-300" id="globalProgressPercent">8%</span>
             </div>
         </div>
         </div>
@@ -463,9 +463,7 @@
                             <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
                                 onclick="goToScreen(4)">
                                 <div class="space-y-3 text-center">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mx-auto text-lg font-bold">
-                                        1</div>
+                                    <img src="public/icon-1.png" alt="Ikon Pengenalan Video" class="w-12 h-12 mx-auto object-contain">
                                     <h3 class="text-xl font-bold text-slate-800">Pengenalan Video</h3>
                                     <p class="text-slate-500 text-md leading-relaxed">Pengenalan ringkas kepada
                                         teknologi
@@ -479,9 +477,7 @@
                             <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
                                 onclick="goToScreen(5)">
                                 <div class="space-y-3 text-center">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto text-lg font-bold">
-                                        2</div>
+                                    <img src="public/icon-2.png" alt="Ikon Proses Industri" class="w-12 h-12 mx-auto object-contain">
                                     <h3 class="text-xl font-bold text-slate-800">Proses Industri</h3>
                                     <p class="text-slate-500 text-md leading-relaxed">Rantaian pengeluaran dari bahan
                                         mentah
@@ -495,9 +491,7 @@
                             <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
                                 onclick="goToScreen(7)">
                                 <div class="space-y-3 text-center">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto text-lg font-bold">
-                                        3</div>
+                                    <img src="public/icon-3.png" alt="Ikon Interaksi & Simulasi" class="w-12 h-12 mx-auto object-contain">
                                     <h3 class="text-xl font-bold text-slate-800">Interaksi & Simulasi</h3>
                                     <p class="text-slate-500 text-md leading-relaxed">Penerokaan situasi keselamatan dan
                                         operasi makanan.</p>
@@ -510,9 +504,7 @@
                             <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
                                 onclick="goToScreen(10)">
                                 <div class="space-y-3 text-center">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mx-auto text-lg font-bold">
-                                        4</div>
+                                    <img src="public/icon-4.png" alt="Ikon Cabaran Interaktif" class="w-12 h-12 mx-auto object-contain">
                                     <h3 class="text-xl font-bold text-slate-800">Cabaran Interaktif</h3>
                                     <p class="text-slate-500 text-md leading-relaxed">Aktiviti pengukuhan pembelajaran &
                                         pengkategorian.</p>
@@ -943,7 +935,7 @@
                         </div>
                         <div class="text-right">
                             <span class="text-xs text-black block uppercase font-bold">Fasa Kajian Kes</span>
-                            <span class="text-xs font-mono font-bold text-teal-600" id="scenarioFlowLabel">Langkah 1:
+                            <span class="text-md font-bold text-teal-600" id="scenarioFlowLabel">Langkah 1:
                                 Kenal Pasti Isu</span>
                         </div>
                     </div>
@@ -1042,7 +1034,7 @@
 
                 <!-- SCREEN 8: TABS INTERACTION (KNOWLEDGE EXPLORER) -->
                 <div id="screen-8" class="screen-view space-y-4 hidden"
-                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
+                    style="background-image: url('public/bg-explorasi.png'); background-size: cover; background-position: center;">
                     <div class="space-y-1">
                         <h2 class="text-4xl font-bold text-slate-900">Peranan Teknologi dalam Industri Makanan</h2>
                         <p class="text-lg text-slate-500">Klik pada tab di atas untuk meneroka topik lain berkaitan
@@ -1106,7 +1098,7 @@
 
                 <!-- SCREEN 9: QUICK KNOWLEDGE CHECK -->
                 <div id="screen-9" class="screen-view space-y-6 hidden"
-                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
+                    style="background-image: url('public/bg-minda.png'); background-size: cover; background-position: center;">
                     <div class="text-center space-y-1">
                         <span
                             class="text-lg bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Cabaran
@@ -1116,7 +1108,7 @@
                             telah anda pelajari.</p>
                     </div>
 
-                    <div class="bg-white border w-1/2 border-slate-200 rounded-xl p-6 shadow-sm flex flex-col gap-4"
+                    <div class="bg-white border w-1/2 border-slate-200 rounded-xl p-6 shadow-sm flex flex-col mx-auto gap-4"
                         id="quizBox">
                         <div id="quizActiveArea" class="space-y-4">
                             <div class="flex justify-between items-center text-lg">
@@ -1158,7 +1150,7 @@
 
                 <!-- SCREEN 10: DRAG & DROP CLASSIFICATION -->
                 <div id="screen-10" class="screen-view space-y-4 hidden"
-                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
+                    style="background-image: url('public/bg-pengkategorian.png'); background-size: cover; background-position: center;">
                     <div class="text-center space-y-1">
                         <span
                             class="text-md bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Aktiviti
@@ -1217,7 +1209,7 @@
 
                 <!-- SCREEN 11: LEARNING SUMMARY / RUMUSAN -->
                 <div id="screen-11" class="screen-view space-y-6 hidden"
-                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
+                    style="background-image: url('public/bg-rumusan.png'); background-size: cover; background-position: center;">
                     <!-- Header -->
                     <div class="text-center space-y-1">
                         <span
@@ -1239,7 +1231,7 @@
                         <div
                             class="flex flex-col md:flex-row items-center md:items-start justify-between gap-6 pb-6 border-b border-slate-100">
                             <div class="space-y-2 text-center md:text-left flex-1">
-                                <span class="text-[10px] font-mono text-teal-600 uppercase tracking-widest font-bold"
+                                <span class="text-[10px] text-teal-600 uppercase tracking-widest font-bold"
                                     id="summaryPageSub">Halaman 1 Dari 5</span>
                                 <h3 class="text-xl font-extrabold text-slate-800" id="summaryPageTitle">Konsep Teknologi
                                     Makanan Moden</h3>
@@ -1277,14 +1269,14 @@
                         </div>
                         <!-- Progress text tracker -->
                         <span
-                            class="text-xs font-mono font-bold bg-white border border-slate-200 text-teal-600 px-3 py-1.5 rounded-lg shadow-sm"
+                            class="text-mdfont-bold bg-white border border-slate-200 text-teal-600 px-3 py-1.5 rounded-lg shadow-sm"
                             id="summaryProgressTracker">Halaman dilawati: 0 / 5</span>
                     </div>
                 </div>
 
                 <!-- SCREEN 12: FINAL ASSESSMENT -->
                 <div id="screen-12" class="screen-view space-y-6 hidden"
-                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
+                    style="background-image: url('public/bg-penilaian.png'); background-size: cover; background-position: center;">
                     <div class="flex justify-between items-center border-b border-slate-200 pb-3" id="examHeader">
                         <div class="space-y-1">
                             <span
@@ -1294,7 +1286,7 @@
                         </div>
                         <div class="text-right">
                             <span class="text-[10px] text-slate-400 block uppercase font-bold">Pemeriksaan Rasmi</span>
-                            <span class="text-xs font-mono font-bold text-teal-600">Lulus minima 80%</span>
+                            <span class="text-md font-bold text-teal-600">Lulus minima 80%</span>
                         </div>
                     </div>
 
@@ -1340,7 +1332,7 @@
                         class="hidden max-w-2xl mx-auto bg-white border border-slate-200 rounded-xl p-6 space-y-6 shadow-sm">
                         <div class="flex justify-between items-center text-xs border-b border-slate-200 pb-3">
                             <span class="text-slate-500 font-semibold" id="examProgressLabel">Soalan 1 dari 5</span>
-                            <span class="text-teal-600 font-mono font-bold" id="examTimerLabel">Sesi Ujian Aktif</span>
+                            <span class="text-teal-600 font-bold" id="examTimerLabel">Sesi Ujian Aktif</span>
                         </div>
 
                         <div class="space-y-3">
@@ -1543,11 +1535,11 @@
                 <div class="grid grid-cols-2 gap-4 text-[10px] text-slate-550 pt-4 border-t border-slate-100">
                     <div>
                         <p class="font-bold uppercase tracking-wider">Markah Kelulusan</p>
-                        <p class="font-mono text-xs text-slate-700 font-bold" id="certScore">100%</p>
+                        <p class=" text-md text-slate-700 font-bold" id="certScore">100%</p>
                     </div>
                     <div>
                         <p class="font-bold uppercase tracking-wider">Tarikh Selesai</p>
-                        <p class="font-mono text-xs text-slate-700 font-bold" id="certDate">28 Mei 2026</p>
+                        <p class="text-md text-slate-700 font-bold" id="certDate">28 Mei 2026</p>
                     </div>
                 </div>
 
