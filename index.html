@@ -251,6 +251,13 @@
             padding: 1rem 1rem 9rem;
         }
 
+        /* Decorative corner-frame backgrounds are sized against the viewport, not the
+           resizing screen box, so toggling the sidebar can't change their aspect ratio
+           and expose the image's white margins as empty bands at top/bottom. */
+        .screen-view {
+            background-attachment: fixed;
+        }
+
         @media (min-width: 768px) {
             .screen-view:not(.hidden) {
                 padding: 1.25rem 100px 5.5rem;
@@ -959,7 +966,7 @@
                                     class="bg-orange-50 border border-orange-100 p-3.5 rounded-lg flex items-start space-x-2">
                                     <i class="fa-solid fa-circle-exclamation text-orange-600 mt-0.5"></i>
                                     <p class="text-md text-orange-800 leading-normal font-medium">Terokai
-                                        keempat-empat zon pengeluaran dengan mengklik simbol penderia pada pelan kilang
+                                        keempat-empat zon pengeluaran dengan mengklik simbol <span class="italic">hotspot</span> pada pelan kilang
                                         di sebelah kiri.</p>
                                 </div>
                                 <div class="space-y-2">
@@ -1809,7 +1816,7 @@
                 }
 
                 const btn = document.createElement('button');
-                btn.className = `w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left text-xs transition-all duration-200 ${isActive ? 'bg-teal-50 border border-teal-100 text-teal-800 font-bold shadow-sm' :
+                btn.className = `w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left text-md transition-all duration-200 ${isActive ? 'bg-teal-50 border border-teal-100 text-teal-800 font-bold shadow-sm' :
                     isVisited ? 'text-slate-600 hover:bg-slate-100 hover:text-slate-800' : 'text-slate-300 cursor-not-allowed opacity-60'
                     }`;
                 btn.disabled = !isVisited;
@@ -2408,37 +2415,37 @@
 
         function advanceScenarioToStep2() {
             scenarioStep = 2;
-            document.getElementById('scen-step-tab-2').className = "py-1 px-2 rounded-md text-xs font-bold bg-white text-teal-800 shadow-sm";
-            document.getElementById('scen-step-tab-1').className = "py-1 px-2 rounded-md text-xs font-bold text-slate-400";
+            document.getElementById('scen-step-tab-2').className = "py-1 px-2 rounded-md text-md font-bold bg-white text-teal-800 shadow-sm";
+            document.getElementById('scen-step-tab-1').className = "py-1 px-2 rounded-md text-md font-bold text-slate-400";
             document.getElementById('scenarioFlowLabel').innerText = "Langkah 2: Buat Keputusan";
 
             document.getElementById('scenarioInteractionArea').innerHTML = `
                 <div class="space-y-4">
-                    <h3 class="text-md font-bold text-slate-800">Langkah 2: Sila Pilih Tindakan Paling Sesuai</h3>
-                    <p class="text-md text-slate-500">Sebagai pegawai operasi, apakah tindakan paling sesuai berdasarkan amalan keselamatan makanan?</p>
-                    
+                    <h3 class="text-lg font-bold text-slate-800">Langkah 2: Sila Pilih Tindakan Paling Sesuai</h3>
+                    <p class="text-lg text-slate-500">Sebagai pegawai operasi, apakah tindakan paling sesuai berdasarkan amalan keselamatan makanan?</p>
+
                     <div class="space-y-3 font-medium">
                         <button onclick="submitScenarioChoice('A')" class="w-full text-left bg-white border border-slate-200 hover:border-slate-300 p-4 rounded-xl flex items-start space-x-3 transition-all duration-200 shadow-sm">
                             <span class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-md font-bold text-slate-600 shrink-0">A</span>
                             <div>
-                                <h4 class="text-md font-bold text-slate-800">Teruskan penghantaran produk</h4>
-                                <p class="text-md text-slate-500 mt-1">Mengabaikan gangguan suhu pendek demi mengekalkan kelancaran jadual penghantaran logistik.</p>
+                                <h4 class="text-lg font-bold text-slate-800">Teruskan penghantaran produk</h4>
+                                <p class="text-lg text-slate-500 mt-1">Mengabaikan gangguan suhu pendek demi mengekalkan kelancaran jadual penghantaran logistik.</p>
                             </div>
                         </button>
-                        
+
                         <button onclick="submitScenarioChoice('B')" class="w-full text-left bg-white border border-slate-200 hover:border-slate-300 p-4 rounded-xl flex items-start space-x-3 transition-all duration-200 shadow-sm">
                             <span class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-md font-bold text-slate-600 shrink-0">B</span>
                             <div>
-                                <h4 class="text-md font-bold text-slate-800">Jalankan pemeriksaan lanjut dan kuarantin batch</h4>
-                                <p class="text-md text-slate-500 mt-1">Lakukan pemeriksaan mikrobiologi makmal secara menyeluruh sebelum sebarang pelepasan kargo.</p>
+                                <h4 class="text-lg font-bold text-slate-800">Jalankan pemeriksaan lanjut dan kuarantin batch</h4>
+                                <p class="text-lg text-slate-500 mt-1">Lakukan pemeriksaan mikrobiologi makmal secara menyeluruh sebelum sebarang pelepasan kargo.</p>
                             </div>
                         </button>
-                        
+
                         <button onclick="submitScenarioChoice('C')" class="w-full text-left bg-white border border-slate-200 hover:border-slate-300 p-4 rounded-xl flex items-start space-x-3 transition-all duration-200 shadow-sm">
                             <span class="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center text-md font-bold text-slate-600 shrink-0">C</span>
                             <div>
-                                <h4 class="text-md font-bold text-slate-800">Tukar pembungkusan dan teruskan penghantaran</h4>
-                                <p class="text-md text-slate-500 mt-1">Membuat penukaran kotak luaran yang bersih tanpa menguji kemerosotan biologi dalaman.</p>
+                                <h4 class="text-lg font-bold text-slate-800">Tukar pembungkusan dan teruskan penghantaran</h4>
+                                <p class="text-lg text-slate-500 mt-1">Membuat penukaran kotak luaran yang bersih tanpa menguji kemerosotan biologi dalaman.</p>
                             </div>
                         </button>
                     </div>
@@ -2449,8 +2456,8 @@
 
         function submitScenarioChoice(choice) {
             scenarioStep = 3;
-            document.getElementById('scen-step-tab-3').className = "py-1 px-2 rounded-md text-xs font-bold bg-white text-teal-800 shadow-sm";
-            document.getElementById('scen-step-tab-2').className = "py-1 px-2 rounded-md text-xs font-bold text-slate-400";
+            document.getElementById('scen-step-tab-3').className = "py-1 px-2 rounded-md text-md font-bold bg-white text-teal-800 shadow-sm";
+            document.getElementById('scen-step-tab-2').className = "py-1 px-2 rounded-md text-md font-bold text-slate-400";
             document.getElementById('scenarioFlowLabel').innerText = "Langkah 3: Maklum Balas Keputusan";
 
             let isCorrect = choice === 'B';
@@ -2462,17 +2469,17 @@
 
             document.getElementById('scenarioInteractionArea').innerHTML = `
                 <div class="space-y-6">
-                    <h3 class="text-md font-bold text-slate-800">Langkah 3: Maklum Balas Kualiti SOP</h3>
-                    
+                    <h3 class="text-lg font-bold text-slate-800">Langkah 3: Maklum Balas Kualiti SOP</h3>
+
                     <div class="border p-4 rounded-xl space-y-2 ${feedbackClass} shadow-sm">
-                        <div class="flex items-center space-x-2 font-bold text-md">
+                        <div class="flex items-center space-x-2 font-bold text-lg">
                             <i class="${isCorrect ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark'}"></i>
                             <span>${statusText} (Pilihan Anda: Pilihan ${choice})</span>
                         </div>
-                        <p class="text-md leading-relaxed">${feedbackDesc}</p>
+                        <p class="text-lg leading-relaxed">${feedbackDesc}</p>
                     </div>
 
-                    <p class="text-md text-slate-500 leading-normal">
+                    <p class="text-lg text-slate-500 leading-normal">
                         Keputusan anda adalah penting dalam membentuk pengurusan rantai nilai makanan negara mengikut piawaian KKM. Sila tekan butang Seterusnya di bahagian bawah untuk meneruskan.
                     </p>
                 </div>
