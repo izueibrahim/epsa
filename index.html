@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teknologi Makanan</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS (bundled locally for offline SCORM use) -->
+    <script src="public/vendor/tailwind.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -65,12 +65,10 @@
         }
     </script>
 
-    <!-- Google Fonts: Inter & Playfair Display for certificate -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap"
-        rel="stylesheet">
-    <!-- FontAwesome Icons for Industrial look -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Playfair Display (bundled locally for offline SCORM use) -->
+    <link rel="stylesheet" href="public/vendor/fonts/fonts.css">
+    <!-- FontAwesome Icons (bundled locally for offline SCORM use) -->
+    <link rel="stylesheet" href="public/vendor/fontawesome/css/all.min.css">
 
     <style>
         /* ════════════════════════════════════════════════════════════
@@ -393,7 +391,7 @@
             <div class="h-6 w-px bg-slate-400"></div>
             <div class="flex items-center space-x-2">
                 <img src="public/jata-negara.png" class="h-9 w-auto" alt="Jata Negara" />
-                <span class="text-black font-black text-base tracking-widest">EPSA</span>
+                <img src="public/logo-intan.png" class="h-9 w-auto" alt="INTAN" />
             </div>
         </div>
 
@@ -924,7 +922,7 @@
 
                         <div
                             class="lg:col-span-8 bg-white rounded-xl overflow-hidden border border-slate-200 p-4 relative flex items-center justify-center shadow-sm">
-                            <img src="public/teknologi.png" class="w-full h-auto rounded-lg object-cover"
+                            <img src="public/teknologi.jpg" class="w-full h-auto rounded-lg object-cover"
                                 alt="Fasiliti Pengeluaran Makanan" />
 
                             <!-- Interactive Pulse Hotspots -->
@@ -1163,7 +1161,7 @@
 
                         <!-- Graphic representation -->
                         <div class="w-1/2 rounded-xl overflow-hidden">
-                            <img src="public/teknologi.png" class="w-full h-auto rounded-xl" alt="Teknologi Makanan" />
+                            <img src="public/teknologi.jpg" class="w-full h-auto rounded-xl" alt="Teknologi Makanan" />
                         </div>
                     </div>
                 </div>
@@ -1790,28 +1788,28 @@
                 title: "Peranan Teknologi dalam Industri Makanan",
                 desc: "Teknologi moden membantu meningkatkan kecekapan, konsistensi, dan keselamatan makanan melalui sistem automasi bersepadu, pemantauan kualiti masa nyata, dan analitik data pintar.",
                 icon: "fa-solid fa-industry",
-                image: "public/teknologi.png",
+                image: "public/teknologi.jpg",
                 points: ["Automasi proses pengeluaran", "Pemantauan masa nyata", "Kawalan kualiti digital yang konsisten"]
             },
             2: {
                 title: "Kepentingan Keselamatan Makanan",
                 desc: "Teknologi memainkan peranan penting dalam memastikan makanan dihasilkan, diproses dan diedarkan dalam keadaan yang selamat bagi mengelakkan pencemaran biologi dan kimia.",
                 icon: "fa-solid fa-shield-halved",
-                image: "public/keselamatan.png",
+                image: "public/keselamatan.jpg",
                 points: ["Kawalan suhu automatik", "Kebersihan operator standard tinggi", "Pencegahan kontaminasi silang"]
             },
             3: {
                 title: "Kawalan Kualiti Standard Industri",
                 desc: "Kawalan kualiti memastikan setiap produk memenuhi piawaian keselamatan, rasa, pembungkusan, dan kualiti yang ketat sebelum diedarkan kepada masyarakat umum.",
                 icon: "fa-solid fa-square-check",
-                image: "public/kualiti.png",
+                image: "public/kualiti.jpg",
                 points: ["Pemeriksaan produk sebelum pelepasan", "Kepatuhan parameter HACCP", "Konsistensi rupa bentuk produk"]
             },
             4: {
                 title: "Inovasi & Pembangunan Produk Baru",
                 desc: "Teknologi menyokong pembangunan produk baharu serta penambahbaikan proses pengeluaran bagi memenuhi keperluan makanan sihat masa hadapan secara lestari.",
                 icon: "fa-solid fa-lightbulb",
-                image: "public/inovasi.png",
+                image: "public/inovasi.jpg",
                 points: ["Penyelidikan bahan formulasi baru", "Ujian makmal jangka hayat", "Pengurangan sisa industri makanan"]
             }
         };
@@ -2391,7 +2389,7 @@
                 desc: "Pemilihan bahan mentah yang berkualiti merupakan langkah awal dalam memastikan keselamatan dan kualiti produk makanan.",
                 bullets: ["Saringan kualiti fizikal awal", "Kepatuhan standard pembekal", "Ujian mikrobiologi primer"],
                 color: "bg-teal-800", brandColor: "#F46523", textColor: "#ffffff",
-                svgPath: '<img src="public/bahan-mentah.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
+                svgPath: '<img src="public/bahan-mentah.jpg" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             2: {
                 label: "Fasa 2",
@@ -2399,7 +2397,7 @@
                 desc: "Fasa ini melibatkan penggunaan teknologi seperti pasteurisasi dan pensterilan untuk membasmi kuman merbahaya tanpa menjejaskan kualiti.",
                 bullets: ["Kawalan takat terma kinetik", "Sistem pasteurisasi automatik", "Pencegahan pembiakan bakteria"],
                 color: "bg-blue-800", brandColor: "#FFFFFF", textColor: "#000000",
-                svgPath: '<img src="public/pemprosesan.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
+                svgPath: '<img src="public/pemprosesan.jpg" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             3: {
                 label: "Fasa 3",
@@ -2407,7 +2405,7 @@
                 desc: "Pembungkusan vakum atau gas nitrogen membantu mengekalkan kesegaran makanan serta melindungi dari pencemaran luar.",
                 bullets: ["Sistem pengedap udara nitrogen", "Pengekalan nutrisi makanan", "Saringan kebocoran mikro"],
                 color: "bg-purple-800", brandColor: "#009788", textColor: "#FFFFFF",
-                svgPath: '<img src="public/pembungkusan.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
+                svgPath: '<img src="public/pembungkusan.jpg" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             4: {
                 label: "Fasa 4",
@@ -2415,7 +2413,7 @@
                 desc: "Rantaian sejuk dikekalkan dalam suhu 0°C - 5°C bagi produk sejuk beku demi menjamin integriti biologi makanan.",
                 bullets: ["Pemeliharaan suhu rantaian sejuk", "Pemantauan telemetri digital", "Kawalan kestabilan kelembapan"],
                 color: "bg-amber-800", brandColor: "#000000", textColor: "#FFFFFF",
-                svgPath: '<img src="public/penyimpanan.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
+                svgPath: '<img src="public/penyimpanan.jpg" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             5: {
                 label: "Fasa 5",
@@ -2423,7 +2421,7 @@
                 desc: "Logistik pintar membolehkan pengesanan status batch dan suhu dalam masa nyata sehingga sampai kepada pengguna akhir.",
                 bullets: ["Penjejakan logistik masa nyata", "Pengekalan standard kualiti lori", "Audit kebersihan storan transit"],
                 color: "bg-indigo-800", brandColor: "#54C3BC", textColor: "#000000",
-                svgPath: '<img src="public/pengedaran.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
+                svgPath: '<img src="public/pengedaran.jpg" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             }
         };
 
