@@ -1660,7 +1660,8 @@
             const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
             const mins = Math.floor(elapsedSeconds / 60).toString().padStart(2, '0');
             const secs = (elapsedSeconds % 60).toString().padStart(2, '0');
-            document.getElementById('globalTimer').innerText = `${mins}:${secs}`;
+            const timerEl = document.getElementById('globalTimer');
+            if (timerEl) timerEl.innerText = `${mins}:${secs}`;
         }, 1000);
 
         // Toggle Sidebar
@@ -3067,7 +3068,8 @@
 
                 // Update Outro screen values
                 document.getElementById('outroScoreLabel').innerText = `${finalPercent}%`;
-                document.getElementById('outroTimeLabel').innerText = document.getElementById('globalTimer').innerText;
+                const _timerEl = document.getElementById('globalTimer');
+                document.getElementById('outroTimeLabel').innerText = _timerEl ? _timerEl.innerText : '00:00';
                 document.getElementById('outroWelcomeText').innerText = `Tahniah ${name}! Anda telah berjaya melengkapkan keseluruhan modul pembelajaran Teknologi Makanan.`;
 
                 unlockNextScreen();
@@ -3400,7 +3402,8 @@
                     var lmsName = scormAPI.LMSGetValue("cmi.core.student_name");
                     if (lmsName && lmsName.trim() !== "") {
                         name = formatStudentName(lmsName);
-                        document.getElementById('userNameLabel').innerText = name;
+                        const _nameEl = document.getElementById('userNameLabel');
+                        if (_nameEl) _nameEl.innerText = name;
                     }
 
                     var status = scormAPI.LMSGetValue("cmi.core.lesson_status");
@@ -3425,7 +3428,8 @@
             scormLog("init", "Mod Simulasi Diaktifkan (Tiada LMS dikesan)", "Konsol Log SCORM diaktifkan di bahagian bawah");
 
             drawSimulatorConsole();
-            document.getElementById('userNameLabel').innerText = name;
+            const userNameLabelEl = document.getElementById('userNameLabel');
+            if (userNameLabelEl) userNameLabelEl.innerText = name;
 
             try {
                 var localSave = localStorage.getItem('mock_scorm_data');
