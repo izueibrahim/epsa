@@ -271,6 +271,33 @@
             justify-content: center;
         }
 
+        /* ── PROCESS PHASE TABS: BRAND COLOR SYSTEM ────────────── */
+        .proc-tab { transition: filter 0.15s ease, box-shadow 0.18s ease; }
+
+        .proc-tab[data-fasa="1"] { background-color: #F46523; color: #000000; }
+        .proc-tab[data-fasa="2"] { background-color: #FFFFFF; color: #000000; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
+        .proc-tab[data-fasa="3"] { background-color: #009788; color: #FFFFFF; }
+        .proc-tab[data-fasa="4"] { background-color: #000000; color: #FFFFFF; }
+        .proc-tab[data-fasa="5"] { background-color: #54C3BC; color: #000000; }
+
+        /* Hover — subtle brightness shift, no color swap */
+        .proc-tab[data-fasa="1"]:hover:not(.is-active) { filter: brightness(0.90); }
+        .proc-tab[data-fasa="2"]:hover:not(.is-active) { filter: brightness(0.96); }
+        .proc-tab[data-fasa="3"]:hover:not(.is-active) { filter: brightness(0.90); }
+        .proc-tab[data-fasa="4"]:hover:not(.is-active) { filter: brightness(1.25); }
+        .proc-tab[data-fasa="5"]:hover:not(.is-active) { filter: brightness(0.90); }
+
+        /* Active — left accent bar via inset shadow + slight elevation */
+        .proc-tab.is-active { filter: brightness(1.05); }
+        .proc-tab.is-active[data-fasa="1"] { box-shadow: inset 4px 0 0 rgba(0,0,0,0.35), 2px 0 10px rgba(244,101,35,0.25); }
+        .proc-tab.is-active[data-fasa="2"] { box-shadow: inset 4px 0 0 rgba(0,0,0,0.15), 2px 0 8px rgba(0,0,0,0.08); }
+        .proc-tab.is-active[data-fasa="3"] { box-shadow: inset 4px 0 0 rgba(255,255,255,0.55), 2px 0 10px rgba(0,151,136,0.25); }
+        .proc-tab.is-active[data-fasa="4"] { box-shadow: inset 4px 0 0 rgba(255,255,255,0.45), 2px 0 10px rgba(0,0,0,0.35); }
+        .proc-tab.is-active[data-fasa="5"] { box-shadow: inset 4px 0 0 rgba(0,0,0,0.28), 2px 0 10px rgba(84,195,188,0.25); }
+
+        /* Unvisited — dimmed to indicate not yet seen */
+        .proc-tab:not(.is-viewed):not(.is-active) { filter: brightness(0.70); }
+
         /* Video screen: player fills remaining height, controls never scroll off */
         #screen-4:not(.hidden) {
             overflow-y: auto;
@@ -515,7 +542,7 @@
                 <div id="screen-3" class="screen-view hidden relative overflow-hidden"
                     style="background-image: url('public/bg-objektif.png'); background-size: cover; background-position: center;">
                     <div class="absolute inset-0"></div>
-                    <div class="relative z-10 space-y-4 px-4 md:px-[100px] py-4 md:py-5">
+                    <div class="relative z-10 space-y-4 px-4 md:px-[100px] w-2/3 py-4 md:py-5">
                     <div class="space-y-1">
                         <h2 class="text-2xl font-extrabold text-slate-900">Objektif Pembelajaran</h2>
                         <p class="text-slate-500 text-sm">Sila klik pada mana-mana objektif pembelajaran di bawah untuk
@@ -756,9 +783,10 @@
                         class="flex flex-1 min-h-[280px] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-md">
                         <!-- Left Side: ACTIVE TAB LABEL -->
                         <div id="active-side-tab"
-                            class="w-12 bg-slate-800 flex items-center justify-center transition-all duration-300 text-center">
-                            <span class="vertical-text text-white font-bold uppercase tracking-widest text-[11px]"
-                                id="currentActiveLabel">Bahan Mentah</span>
+                            class="w-12 flex items-center justify-center transition-all duration-300 text-center shrink-0"
+                            style="background-color: #F46523; box-shadow: 2px 0 8px rgba(244,101,35,0.25);">
+                            <span class="vertical-text font-bold uppercase tracking-widest text-[11px]"
+                                id="currentActiveLabel" style="color: #000000;">Bahan Mentah</span>
                         </div>
 
                         <!-- Center: CONTENT AREA (Text Left, Image Right) -->
@@ -788,7 +816,7 @@
                         </div>
 
                         <!-- Right Side: TAB BUTTONS (Click and Reveal) -->
-                        <div id="inactive-tabs-container" class="w-14 bg-slate-200 flex flex-col">
+                        <div id="inactive-tabs-container" class="w-14 bg-slate-900 flex flex-col">
                             <!-- Tab buttons generated dynamically -->
                         </div>
                     </div>
@@ -2127,7 +2155,7 @@
                 title: "Bahan Mentah",
                 desc: "Pemilihan bahan mentah yang berkualiti merupakan langkah awal dalam memastikan keselamatan dan kualiti produk makanan.",
                 bullets: ["Saringan kualiti fizikal awal", "Kepatuhan standard pembekal", "Ujian mikrobiologi primer"],
-                color: "bg-teal-800",
+                color: "bg-teal-800", brandColor: "#F46523", textColor: "#ffffff",
                 svgPath: '<img src="public/bahan-mentah.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             2: {
@@ -2135,7 +2163,7 @@
                 title: "Pemprosesan",
                 desc: "Fasa ini melibatkan penggunaan teknologi seperti pasteurisasi dan pensterilan untuk membasmi kuman merbahaya tanpa menjejaskan kualiti.",
                 bullets: ["Kawalan takat terma kinetik", "Sistem pasteurisasi automatik", "Pencegahan pembiakan bakteria"],
-                color: "bg-blue-800",
+                color: "bg-blue-800", brandColor: "#FFFFFF", textColor: "#000000",
                 svgPath: '<img src="public/pemprosesan.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             3: {
@@ -2143,7 +2171,7 @@
                 title: "Pembungkusan",
                 desc: "Pembungkusan vakum atau gas nitrogen membantu mengekalkan kesegaran makanan serta melindungi dari pencemaran luar.",
                 bullets: ["Sistem pengedap udara nitrogen", "Pengekalan nutrisi makanan", "Saringan kebocoran mikro"],
-                color: "bg-purple-800",
+                color: "bg-purple-800", brandColor: "#009788", textColor: "#FFFFFF",
                 svgPath: '<img src="public/pembungkusan.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             4: {
@@ -2151,7 +2179,7 @@
                 title: "Penyimpanan",
                 desc: "Rantaian sejuk dikekalkan dalam suhu 0°C - 5°C bagi produk sejuk beku demi menjamin integriti biologi makanan.",
                 bullets: ["Pemeliharaan suhu rantaian sejuk", "Pemantauan telemetri digital", "Kawalan kestabilan kelembapan"],
-                color: "bg-amber-800",
+                color: "bg-amber-800", brandColor: "#000000", textColor: "#FFFFFF",
                 svgPath: '<img src="public/penyimpanan.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             },
             5: {
@@ -2159,7 +2187,7 @@
                 title: "Pengedaran",
                 desc: "Logistik pintar membolehkan pengesanan status batch dan suhu dalam masa nyata sehingga sampai kepada pengguna akhir.",
                 bullets: ["Penjejakan logistik masa nyata", "Pengekalan standard kualiti lori", "Audit kebersihan storan transit"],
-                color: "bg-indigo-800",
+                color: "bg-indigo-800", brandColor: "#54C3BC", textColor: "#000000",
                 svgPath: '<img src="public/pengedaran.png" class="w-full h-full object-cover rounded-lg" alt="Bahan Mentah">'
             }
         };
@@ -2172,13 +2200,11 @@
             for (let i = 1; i <= 5; i++) {
                 const btn = document.createElement('button');
                 const isViewed = viewedProcesses.includes(i);
-                btn.className = `flex-1 flex items-center justify-center transition-all duration-200 relative ${isViewed
-                    ? 'bg-slate-300 hover:bg-slate-400'
-                    : 'bg-slate-200 hover:bg-slate-300'
-                    } focus:outline-none`;
+                btn.className = `proc-tab flex-1 flex items-center justify-center relative focus:outline-none${isViewed ? ' is-viewed' : ''}`;
+                btn.dataset.fasa = i;
                 btn.title = processData[i].label;
                 btn.onclick = () => selectProcessStep(i);
-                btn.innerHTML = `<span class="vertical-text text-slate-600 font-bold text-[10px] uppercase tracking-widest">${processData[i].label}</span>`;
+                btn.innerHTML = `<span class="vertical-text font-bold text-[10px] uppercase tracking-widest">${i}. ${processData[i].label}</span>`;
                 tabContainer.appendChild(btn);
             }
 
@@ -2193,11 +2219,15 @@
             const activeLabel = document.getElementById('currentActiveLabel');
             if (activeLabel) activeLabel.innerText = data.label;
 
-            // Update the active-side-tab color
+            // Update the active-side-tab with brand color
             const activeSideTab = document.getElementById('active-side-tab');
             if (activeSideTab) {
-                // Reset classes then set new background
-                activeSideTab.className = `w-12 flex items-center justify-center transition-all duration-300 text-center ${data.color}`;
+                activeSideTab.style.backgroundColor = data.brandColor;
+                activeSideTab.style.boxShadow = data.brandColor === '#000000'
+                    ? '2px 0 10px rgba(0,0,0,0.45)'
+                    : `2px 0 10px rgba(0,0,0,0.18)`;
+                const label = document.getElementById('currentActiveLabel');
+                if (label) label.style.color = data.textColor;
             }
 
             // Update title
@@ -2225,17 +2255,15 @@
                 viewedProcesses.push(stepId);
             }
 
-            // Update tab buttons to reflect viewed state
+            // Update tab buttons: apply is-viewed / is-active states
             const tabContainer = document.getElementById('inactive-tabs-container');
             if (tabContainer) {
                 const btns = tabContainer.querySelectorAll('button');
                 btns.forEach((btn, idx) => {
                     const i = idx + 1;
+                    const isActive = (i === stepId);
                     const isViewed = viewedProcesses.includes(i);
-                    btn.className = `flex-1 flex items-center justify-center transition-all duration-200 relative ${isViewed
-                        ? 'bg-slate-300 hover:bg-slate-400'
-                        : 'bg-slate-200 hover:bg-slate-300'
-                        } focus:outline-none`;
+                    btn.className = `proc-tab flex-1 flex items-center justify-center relative focus:outline-none${isViewed ? ' is-viewed' : ''}${isActive ? ' is-active' : ''}`;
                 });
             }
 
