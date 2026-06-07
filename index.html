@@ -258,7 +258,9 @@
         }
 
         /* Full-bleed screens: background stretches edge-to-edge, content padded inside */
-        #screen-1, #screen-2, #screen-3 {
+        #screen-1,
+        #screen-2,
+        #screen-3 {
             padding: 0;
         }
 
@@ -275,6 +277,7 @@
         #screen-4:not(.hidden) {
             overflow-y: auto;
         }
+
         @media (min-width: 1024px) {
             #screen-4:not(.hidden) {
                 overflow: hidden;
@@ -286,8 +289,7 @@
 <body class="text-slate-800 flex flex-col h-screen overflow-hidden">
 
     <!-- TOP HEADER BAR (Ultra Clean Light Theme) -->
-    <header
-        class="bg-black h-16 min-h-16 flex items-center justify-between px-6 z-10 shadow-sm">
+    <header class="bg-black h-16 min-h-16 flex items-center justify-between px-6 z-10 shadow-sm">
         <div class="flex items-center space-x-3">
             <!-- Sidebar Toggle Menu Button -->
             <button onclick="toggleSidebar()"
@@ -336,7 +338,8 @@
         <aside id="sidebarMenuContainer"
             class="bg-white border-r border-slate-200 flex flex-col justify-between transition-all duration-300 ease-in-out shrink-0">
             <div class="p-4">
-                <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-widest px-2 mb-3">Laluan Pembelajaran</h3>
+                <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-widest px-2 mb-3">Laluan Pembelajaran
+                </h3>
                 <nav class="space-y-1" id="sidebarMenu">
                     <!-- Dynamic Navigation Injected Here in clean light states -->
                 </nav>
@@ -418,96 +421,100 @@
                     style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
                     <div class="absolute inset-0"></div>
                     <div class="relative z-10 space-y-4 px-4 md:px-[100px] py-4 md:py-5">
-                    <div class="text-center space-y-2">
-                        <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Kandungan Modul</h2>
-                        <p class="text-slate-500 text-sm">Modul ini mengandungi beberapa komponen pembelajaran
-                            interaktif yang direka untuk memberikan pengalaman pembelajaran yang berstruktur dan
-                            praktikal.</p>
-                    </div>
+                        <div class="text-center space-y-2">
+                            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Kandungan Modul</h2>
+                            <p class="text-slate-500 text-sm">Modul ini mengandungi beberapa komponen pembelajaran
+                                interaktif yang direka untuk memberikan pengalaman pembelajaran yang berstruktur dan
+                                praktikal.</p>
+                        </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 font-medium">
-                        <!-- TOC Card 1 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
-                            onclick="goToScreen(4)">
-                            <div class="space-y-3 text-center">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mx-auto text-lg font-bold">
-                                    1</div>
-                                <h3 class="text-sm font-bold text-slate-800">Pengenalan Video</h3>
-                                <p class="text-slate-500 text-md leading-relaxed">Pengenalan ringkas kepada teknologi
-                                    makanan.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 font-medium">
+                            <!-- TOC Card 1 -->
+                            <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
+                                onclick="goToScreen(4)">
+                                <div class="space-y-3 text-center">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mx-auto text-lg font-bold">
+                                        1</div>
+                                    <h3 class="text-sm font-bold text-slate-800">Pengenalan Video</h3>
+                                    <p class="text-slate-500 text-md leading-relaxed">Pengenalan ringkas kepada
+                                        teknologi
+                                        makanan.</p>
+                                </div>
+                                <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
+                                    <span>Estimasi: 2 Min</span>
+                                </div>
                             </div>
-                            <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
-                                <span>Estimasi: 2 Min</span>
+                            <!-- TOC Card 2 -->
+                            <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
+                                onclick="goToScreen(5)">
+                                <div class="space-y-3 text-center">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto text-lg font-bold">
+                                        2</div>
+                                    <h3 class="text-sm font-bold text-slate-800">Proses Industri</h3>
+                                    <p class="text-slate-500 text-md leading-relaxed">Rantaian pengeluaran dari bahan
+                                        mentah
+                                        hingga pengedaran.</p>
+                                </div>
+                                <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
+                                    <span>Estimasi: 3 Min</span>
+                                </div>
+                            </div>
+                            <!-- TOC Card 3 -->
+                            <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
+                                onclick="goToScreen(7)">
+                                <div class="space-y-3 text-center">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto text-lg font-bold">
+                                        3</div>
+                                    <h3 class="text-sm font-bold text-slate-800">Interaksi & Simulasi</h3>
+                                    <p class="text-slate-500 text-md leading-relaxed">Penerokaan situasi keselamatan dan
+                                        operasi makanan.</p>
+                                </div>
+                                <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
+                                    <span>Estimasi: 3 Min</span>
+                                </div>
+                            </div>
+                            <!-- TOC Card 4 -->
+                            <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
+                                onclick="goToScreen(10)">
+                                <div class="space-y-3 text-center">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mx-auto text-lg font-bold">
+                                        4</div>
+                                    <h3 class="text-sm font-bold text-slate-800">Cabaran Interaktif</h3>
+                                    <p class="text-slate-500 text-md leading-relaxed">Aktiviti pengukuhan pembelajaran &
+                                        pengkategorian.</p>
+                                </div>
+                                <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
+                                    <span>Estimasi: 2 Min</span>
+                                </div>
+                            </div>
+                            <!-- TOC Card 5 -->
+                            <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
+                                onclick="goToScreen(12)">
+                                <div class="space-y-3 text-center">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto text-lg font-bold">
+                                        5</div>
+                                    <h3 class="text-sm font-bold text-slate-800">Penilaian Akhir</h3>
+                                    <p class="text-slate-500 text-md leading-relaxed">Ujian kefahaman selepas modul
+                                        selesai.
+                                    </p>
+                                </div>
+                                <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
+                                    <span>Lulus: Min 80%</span>
+                                </div>
                             </div>
                         </div>
-                        <!-- TOC Card 2 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
-                            onclick="goToScreen(5)">
-                            <div class="space-y-3 text-center">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto text-lg font-bold">
-                                    2</div>
-                                <h3 class="text-sm font-bold text-slate-800">Proses Industri</h3>
-                                <p class="text-slate-500 text-md leading-relaxed">Rantaian pengeluaran dari bahan mentah
-                                    hingga pengedaran.</p>
-                            </div>
-                            <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
-                                <span>Estimasi: 3 Min</span>
-                            </div>
-                        </div>
-                        <!-- TOC Card 3 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
-                            onclick="goToScreen(7)">
-                            <div class="space-y-3 text-center">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto text-lg font-bold">
-                                    3</div>
-                                <h3 class="text-sm font-bold text-slate-800">Interaksi & Simulasi</h3>
-                                <p class="text-slate-500 text-md leading-relaxed">Penerokaan situasi keselamatan dan
-                                    operasi makanan.</p>
-                            </div>
-                            <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
-                                <span>Estimasi: 3 Min</span>
-                            </div>
-                        </div>
-                        <!-- TOC Card 4 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
-                            onclick="goToScreen(10)">
-                            <div class="space-y-3 text-center">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mx-auto text-lg font-bold">
-                                    4</div>
-                                <h3 class="text-sm font-bold text-slate-800">Cabaran Interaktif</h3>
-                                <p class="text-slate-500 text-md leading-relaxed">Aktiviti pengukuhan pembelajaran &
-                                    pengkategorian.</p>
-                            </div>
-                            <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
-                                <span>Estimasi: 2 Min</span>
-                            </div>
-                        </div>
-                        <!-- TOC Card 5 -->
-                        <div class="bg-white border border-slate-200 p-5 rounded-xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all cursor-pointer"
-                            onclick="goToScreen(12)">
-                            <div class="space-y-3 text-center">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto text-lg font-bold">
-                                    5</div>
-                                <h3 class="text-sm font-bold text-slate-800">Penilaian Akhir</h3>
-                                <p class="text-slate-500 text-md leading-relaxed">Ujian kefahaman selepas modul selesai.
-                                </p>
-                            </div>
-                            <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
-                                <span>Lulus: Min 80%</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="bg-white border border-slate-200 rounded-xl p-5 flex items-center space-x-3 shadow-sm">
-                        <i class="fa-solid fa-circle-info text-teal-650 text-lg animate-pulse"></i>
-                        <span class="text-xs md:text-sm text-slate-655">Sila ikuti urutan pembelajaran linear.
-                            Selesaikan aktiviti untuk melayakkan diri ke halaman seterusnya.</span>
-                    </div>
+                        <div
+                            class="bg-white border border-slate-200 rounded-xl p-5 flex items-center space-x-3 shadow-sm">
+                            <i class="fa-solid fa-circle-info text-teal-650 text-lg animate-pulse"></i>
+                            <span class="text-xs md:text-sm text-slate-655">Sila ikuti urutan pembelajaran linear.
+                                Selesaikan aktiviti untuk melayakkan diri ke halaman seterusnya.</span>
+                        </div>
                     </div>
                 </div>
 
@@ -516,106 +523,110 @@
                     style="background-image: url('public/bg-objektif.png'); background-size: cover; background-position: center;">
                     <div class="absolute inset-0"></div>
                     <div class="relative z-10 space-y-4 px-4 md:px-[100px] py-4 md:py-5">
-                    <div class="space-y-1">
-                        <h2 class="text-2xl font-extrabold text-slate-900">Objektif Pembelajaran</h2>
-                        <p class="text-slate-500 text-sm">Sila klik pada mana-mana objektif pembelajaran di bawah untuk
-                            membuka penerangan:</p>
-                    </div>
+                        <div class="space-y-1">
+                            <h2 class="text-2xl font-extrabold text-slate-900">Objektif Pembelajaran</h2>
+                            <p class="text-slate-500 text-sm">Sila klik pada mana-mana objektif pembelajaran di bawah
+                                untuk
+                                membuka penerangan:</p>
+                        </div>
 
-                    <div class="space-y-3">
-                        <!-- Obj Row 1 (Green) -->
-                        <div
-                            class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
-                            <button onclick="revealObjective(1)"
-                                class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
-                                <div class="flex items-center space-x-4">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">
-                                        1</div>
-                                    <span class="text-sm font-bold text-slate-800">Konsep Teknologi Makanan</span>
+                        <div class="space-y-3">
+                            <!-- Obj Row 1 (Green) -->
+                            <div
+                                class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
+                                <button onclick="revealObjective(1)"
+                                    class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
+                                    <div class="flex items-center space-x-4">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">
+                                            1</div>
+                                        <span class="text-sm font-bold text-slate-800">Konsep Teknologi Makanan</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-1"></i>
+                                </button>
+                                <div id="obj-content-1"
+                                    class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
+                                    Memahami definisi teknologi makanan serta peranannya dalam penghasilan, pemprosesan
+                                    dan
+                                    pengurusan makanan.
                                 </div>
-                                <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-1"></i>
-                            </button>
-                            <div id="obj-content-1"
-                                class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Memahami definisi teknologi makanan serta peranannya dalam penghasilan, pemprosesan dan
-                                pengurusan makanan.
+                            </div>
+
+                            <!-- Obj Row 2 (Blue) -->
+                            <div
+                                class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
+                                <button onclick="revealObjective(2)"
+                                    class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
+                                    <div class="flex items-center space-x-4">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">
+                                            2</div>
+                                        <span class="text-sm font-bold text-slate-800">Rantaian Industri Makanan</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-2"></i>
+                                </button>
+                                <div id="obj-content-2"
+                                    class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
+                                    Mengenal pasti proses utama dalam rantaian pengeluaran makanan daripada bahan mentah
+                                    hingga pengedaran.
+                                </div>
+                            </div>
+
+                            <!-- Obj Row 3 (Purple) -->
+                            <div
+                                class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
+                                <button onclick="revealObjective(3)"
+                                    class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
+                                    <div class="flex items-center space-x-4">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold">
+                                            3</div>
+                                        <span class="text-sm font-bold text-slate-800">Keselamatan & Kualiti</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-3"></i>
+                                </button>
+                                <div id="obj-content-3"
+                                    class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
+                                    Memahami kepentingan keselamatan makanan, kawalan kualiti dan pematuhan standard
+                                    industri.
+                                </div>
+                            </div>
+
+                            <!-- Obj Row 4 (Orange) -->
+                            <div
+                                class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
+                                <button onclick="revealObjective(4)"
+                                    class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
+                                    <div class="flex items-center space-x-4">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">
+                                            4</div>
+                                        <span class="text-sm font-bold text-slate-800">Aplikasi Aplikasi Industri</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-4"></i>
+                                </button>
+                                <div id="obj-content-4"
+                                    class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
+                                    Meneroka bagaimana teknologi menyokong kecekapan operasi dan pembangunan produk
+                                    baharu.
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Obj Row 2 (Blue) -->
+                        <!-- Informative guide -->
                         <div
-                            class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
-                            <button onclick="revealObjective(2)"
-                                class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
-                                <div class="flex items-center space-x-4">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">
-                                        2</div>
-                                    <span class="text-sm font-bold text-slate-800">Rantaian Industri Makanan</span>
-                                </div>
-                                <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-2"></i>
-                            </button>
-                            <div id="obj-content-2"
-                                class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Mengenal pasti proses utama dalam rantaian pengeluaran makanan daripada bahan mentah
-                                hingga pengedaran.
-                            </div>
+                            class="bg-slate-100 border border-slate-200 rounded-xl p-4 shadow-sm flex items-center space-x-2">
+                            <i class="fa-solid fa-lock text-teal-600"></i>
+                            <span class="text-xs text-slate-550" id="objectiveGuide">Sila klik dan buka kesemua <span
+                                    class="font-bold text-teal-600">4 objektif</span> di atas untuk mengaktifkan butang
+                                Seterusnya di bawah.</span>
                         </div>
-
-                        <!-- Obj Row 3 (Purple) -->
-                        <div
-                            class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
-                            <button onclick="revealObjective(3)"
-                                class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
-                                <div class="flex items-center space-x-4">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center text-xs font-bold">
-                                        3</div>
-                                    <span class="text-sm font-bold text-slate-800">Keselamatan & Kualiti</span>
-                                </div>
-                                <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-3"></i>
-                            </button>
-                            <div id="obj-content-3"
-                                class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Memahami kepentingan keselamatan makanan, kawalan kualiti dan pematuhan standard
-                                industri.
-                            </div>
-                        </div>
-
-                        <!-- Obj Row 4 (Orange) -->
-                        <div
-                            class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all">
-                            <button onclick="revealObjective(4)"
-                                class="w-full px-5 py-4 flex items-center justify-between text-left focus:outline-none">
-                                <div class="flex items-center space-x-4">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">
-                                        4</div>
-                                    <span class="text-sm font-bold text-slate-800">Aplikasi Aplikasi Industri</span>
-                                </div>
-                                <i class="fa-solid fa-chevron-down text-slate-400" id="obj-arrow-4"></i>
-                            </button>
-                            <div id="obj-content-4"
-                                class="hidden px-5 pb-5 border-t border-slate-100 pt-3 text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                                Meneroka bagaimana teknologi menyokong kecekapan operasi dan pembangunan produk baharu.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Informative guide -->
-                    <div
-                        class="bg-slate-100 border border-slate-200 rounded-xl p-4 shadow-sm flex items-center space-x-2">
-                        <i class="fa-solid fa-lock text-teal-600"></i>
-                        <span class="text-xs text-slate-550" id="objectiveGuide">Sila klik dan buka kesemua <span
-                                class="font-bold text-teal-600">4 objektif</span> di atas untuk mengaktifkan butang
-                            Seterusnya di bawah.</span>
-                    </div>
                     </div>
                 </div>
 
                 <!-- SCREEN 4: INTRO VIDEO -->
-                <div id="screen-4" class="screen-view hidden gap-3">
+                <div id="screen-4" class="screen-view hidden gap-3"
+                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
                     <!-- Header row -->
                     <div class="shrink-0 flex justify-between items-center border-b border-slate-200 pb-3">
                         <div class="space-y-1">
@@ -632,7 +643,8 @@
                     <div class="flex flex-col lg:flex-row flex-1 min-h-0 gap-4 overflow-hidden">
 
                         <!-- LEFT: Video player -->
-                        <div class="flex-1 min-h-0 flex flex-col bg-slate-900 rounded-xl overflow-hidden border border-slate-200 shadow-xl">
+                        <div
+                            class="flex-1 min-h-0 flex flex-col bg-slate-900 rounded-xl overflow-hidden border border-slate-200 shadow-xl">
                             <!-- Video fills height -->
                             <video id="introVideo" class="flex-1 min-h-0 w-full object-contain bg-black"
                                 ontimeupdate="updateIntroVideoUI()" onloadedmetadata="updateIntroVideoUI()"
@@ -640,16 +652,19 @@
                                 <source src="public/intro.mp4" type="video/mp4">
                             </video>
                             <!-- Controls Bar -->
-                            <div class="shrink-0 bg-slate-950 border-t border-slate-800 px-4 py-2.5 flex items-center gap-3">
+                            <div
+                                class="shrink-0 bg-slate-950 border-t border-slate-800 px-4 py-2.5 flex items-center gap-3">
                                 <button onclick="toggleIntroVideo()"
                                     class="text-white hover:text-teal-400 focus:outline-none text-sm transition-colors shrink-0 w-5 text-center"
                                     id="videoPlayBtn">
                                     <i class="fa-solid fa-play"></i>
                                 </button>
-                                <span class="text-[11px] font-mono text-slate-400 shrink-0" id="videoTimeText">0:00 / 0:00</span>
+                                <span class="text-[11px] font-mono text-slate-400 shrink-0" id="videoTimeText">0:00 /
+                                    0:00</span>
                                 <div class="flex-1 bg-slate-800 rounded-full h-1.5 relative cursor-pointer"
                                     id="videoProgressBar" onclick="seekIntroVideo(event)">
-                                    <div class="bg-teal-500 h-1.5 rounded-full" id="videoProgressFill" style="width: 0%"></div>
+                                    <div class="bg-teal-500 h-1.5 rounded-full" id="videoProgressFill"
+                                        style="width: 0%"></div>
                                 </div>
                                 <button onclick="cycleVideoSpeed()" id="videoSpeedBtn"
                                     class="shrink-0 text-[10px] font-bold text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700 w-10 transition-colors"
@@ -674,30 +689,40 @@
                                 <div class="p-4 space-y-4 text-sm">
                                     <!-- Overview -->
                                     <p class="text-xs text-slate-600 leading-relaxed">
-                                        Video ini memperkenalkan konsep asas teknologi makanan, merangkumi proses industri moden, peralatan pengeluaran, dan amalan keselamatan yang memastikan kualiti produk.
+                                        Video ini memperkenalkan konsep asas teknologi makanan, merangkumi proses
+                                        industri moden, peralatan pengeluaran, dan amalan keselamatan yang memastikan
+                                        kualiti produk.
                                     </p>
 
                                     <div class="h-px bg-slate-100"></div>
 
                                     <!-- What you'll learn -->
                                     <div class="space-y-2.5">
-                                        <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Apa Yang Akan Dipelajari</h4>
+                                        <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Apa
+                                            Yang Akan Dipelajari</h4>
                                         <ul class="space-y-2">
                                             <li class="flex items-start gap-2">
-                                                <i class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
-                                                <span class="text-xs text-slate-700">Konsep asas teknologi makanan</span>
+                                                <i
+                                                    class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
+                                                <span class="text-xs text-slate-700">Konsep asas teknologi
+                                                    makanan</span>
                                             </li>
                                             <li class="flex items-start gap-2">
-                                                <i class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
-                                                <span class="text-xs text-slate-700">Proses automasi industri makanan</span>
+                                                <i
+                                                    class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
+                                                <span class="text-xs text-slate-700">Proses automasi industri
+                                                    makanan</span>
                                             </li>
                                             <li class="flex items-start gap-2">
-                                                <i class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
+                                                <i
+                                                    class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
                                                 <span class="text-xs text-slate-700">Peralatan moden pengeluaran</span>
                                             </li>
                                             <li class="flex items-start gap-2">
-                                                <i class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
-                                                <span class="text-xs text-slate-700">Kawalan kualiti dan keselamatan</span>
+                                                <i
+                                                    class="fa-solid fa-circle-check text-teal-600 text-xs mt-0.5 shrink-0"></i>
+                                                <span class="text-xs text-slate-700">Kawalan kualiti dan
+                                                    keselamatan</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -706,9 +731,12 @@
 
                                     <!-- Learning outcome -->
                                     <div class="space-y-2">
-                                        <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Hasil Pembelajaran</h4>
-                                        <p class="text-xs text-slate-600 leading-relaxed bg-teal-50 border border-teal-100 rounded-lg p-3">
-                                            Selepas menonton video ini, anda akan memahami asas teknologi makanan moden dan aliran operasi industri.
+                                        <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Hasil
+                                            Pembelajaran</h4>
+                                        <p
+                                            class="text-xs text-slate-600 leading-relaxed bg-teal-50 border border-teal-100 rounded-lg p-3">
+                                            Selepas menonton video ini, anda akan memahami asas teknologi makanan moden
+                                            dan aliran operasi industri.
                                         </p>
                                     </div>
 
@@ -718,23 +746,31 @@
                                     <div class="space-y-3">
                                         <div class="flex items-center gap-2 text-xs text-slate-500">
                                             <i class="fa-regular fa-clock text-slate-400 text-xs"></i>
-                                            <span>Tempoh: <span id="summaryVideoDuration" class="font-semibold text-slate-700">—</span></span>
+                                            <span>Tempoh: <span id="summaryVideoDuration"
+                                                    class="font-semibold text-slate-700">—</span></span>
                                         </div>
                                         <div class="flex flex-wrap gap-1.5">
-                                            <span class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Automasi</span>
-                                            <span class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Teknologi</span>
-                                            <span class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Keselamatan</span>
-                                            <span class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Industri</span>
-                                            <span class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Kualiti</span>
+                                            <span
+                                                class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Automasi</span>
+                                            <span
+                                                class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Teknologi</span>
+                                            <span
+                                                class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Keselamatan</span>
+                                            <span
+                                                class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Industri</span>
+                                            <span
+                                                class="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">Kualiti</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Progress tip -->
-                            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 flex items-start gap-2.5 shrink-0">
+                            <div
+                                class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 flex items-start gap-2.5 shrink-0">
                                 <i class="fa-solid fa-lightbulb text-amber-500 text-xs mt-0.5 shrink-0"></i>
-                                <p class="text-xs text-amber-800 leading-relaxed">Tonton video sehingga tamat untuk mengaktifkan halaman pembelajaran seterusnya.</p>
+                                <p class="text-xs text-amber-800 leading-relaxed">Tonton video sehingga tamat untuk
+                                    mengaktifkan halaman pembelajaran seterusnya.</p>
                             </div>
 
                         </div>
@@ -745,10 +781,12 @@
                 </div>
 
                 <!-- SCREEN 5: PROCESS EXPLORER (CLICK & REVEAL - ACCORDING TO IMAGE) -->
-                <div id="screen-5" class="screen-view space-y-4 hidden">
+                <div id="screen-5" class="screen-view space-y-4 hidden"
+                    style="background-image: url('public/bg-rantaian.png'); background-size: cover; background-position: center;">
                     <div class="text-center mb-4">
                         <h2 class="text-2xl font-extrabold text-slate-900">Rantai Pengeluaran Makanan</h2>
-                        <p class="text-xs text-slate-500">Klik pada tab di sebelah kanan untuk melihat setiap fasa industri.</p>
+                        <p class="text-xs text-slate-500">Klik pada tab di sebelah kanan untuk melihat setiap fasa
+                            industri.</p>
                     </div>
 
                     <!-- Layout based on image -->
@@ -801,7 +839,8 @@
                 </div>
 
                 <!-- SCREEN 6: HOTSPOT FACTORY INTERACTION -->
-                <div id="screen-6" class="screen-view space-y-4 hidden">
+                <div id="screen-6" class="screen-view space-y-4 hidden"
+                    style="background-image: url('public/bg-fasiliti.png'); background-size: cover; background-position: center;">
                     <div class="space-y-1">
                         <h2 class="text-xl font-bold text-slate-900">Terokai Fasiliti Pengeluaran</h2>
                         <p class="text-xs text-slate-500">Klik pada titik penderia hijau (+) di dalam pelan kilang untuk
@@ -813,7 +852,8 @@
 
                         <div
                             class="lg:col-span-8 bg-white rounded-xl overflow-hidden border border-slate-200 p-4 relative flex items-center justify-center shadow-sm">
-                            <img src="public/teknologi.png" class="w-full h-auto rounded-lg object-cover" alt="Fasiliti Pengeluaran Makanan" />
+                            <img src="public/teknologi.png" class="w-full h-auto rounded-lg object-cover"
+                                alt="Fasiliti Pengeluaran Makanan" />
 
                             <!-- Interactive Pulse Hotspots -->
                             <div class="absolute top-[50%] left-[16%] transform -translate-x-1/2 -translate-y-1/2">
@@ -883,7 +923,8 @@
                 </div>
 
                 <!-- SCREEN 7: SCENARIO-BASED SIMULATION -->
-                <div id="screen-7" class="screen-view space-y-4 hidden">
+                <div id="screen-7" class="screen-view space-y-4 hidden"
+                    style="background-image: url('public/bg-simulasi.png'); background-size: cover; background-position: center;">
                     <div class="flex justify-between items-center border-b border-slate-200 pb-2">
                         <div class="space-y-1">
                             <span
@@ -973,7 +1014,8 @@
                                         <span class="text-red-600 font-bold">Kritikal</span>
                                     </div>
                                     <p class="text-xs text-slate-500 leading-normal">
-                                        Setiap keputusan yang anda buat memberi impak kepada keselamatan makanan dankepatuhan operasi perundangan halal serta GMP.
+                                        Setiap keputusan yang anda buat memberi impak kepada keselamatan makanan
+                                        dankepatuhan operasi perundangan halal serta GMP.
                                     </p>
                                 </div>
                             </div>
@@ -990,7 +1032,8 @@
                 </div>
 
                 <!-- SCREEN 8: TABS INTERACTION (KNOWLEDGE EXPLORER) -->
-                <div id="screen-8" class="screen-view space-y-4 hidden">
+                <div id="screen-8" class="screen-view space-y-4 hidden"
+                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
                     <div class="space-y-1">
                         <h2 class="text-xl font-bold text-slate-900">Peranan Teknologi dalam Industri Makanan</h2>
                         <p class="text-md text-slate-500">Klik pada tab di atas untuk meneroka topik lain berkaitan
@@ -1053,17 +1096,18 @@
                 </div>
 
                 <!-- SCREEN 9: QUICK KNOWLEDGE CHECK -->
-                <div id="screen-9" class="screen-view space-y-6 hidden">
+                <div id="screen-9" class="screen-view space-y-6 hidden"
+                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
                     <div class="text-center space-y-1">
                         <span
-                            class="text-[10px] bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Cabaran
+                            class="text-xs bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Cabaran
                             Pantas</span>
                         <h2 class="text-2xl font-bold text-slate-900">Uji Pengetahuan Anda</h2>
                         <p class="text-xs text-slate-500">Pilih jawapan yang paling tepat berdasarkan maklumat yang
                             telah anda pelajari.</p>
                     </div>
 
-                    <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col gap-4"
+                    <div class="bg-white border w-1/2 border-slate-200 rounded-xl p-6 shadow-sm flex flex-col gap-4"
                         id="quizBox">
                         <div id="quizActiveArea" class="space-y-4">
                             <div class="flex justify-between items-center text-xs">
@@ -1104,7 +1148,8 @@
                 </div>
 
                 <!-- SCREEN 10: DRAG & DROP CLASSIFICATION -->
-                <div id="screen-10" class="screen-view space-y-4 hidden">
+                <div id="screen-10" class="screen-view space-y-4 hidden"
+                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
                     <div class="text-center space-y-1">
                         <span
                             class="text-[10px] bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-bold uppercase tracking-wider">Aktiviti
@@ -1162,7 +1207,8 @@
                 </div>
 
                 <!-- SCREEN 11: LEARNING SUMMARY / RUMUSAN -->
-                <div id="screen-11" class="screen-view space-y-6 hidden">
+                <div id="screen-11" class="screen-view space-y-6 hidden"
+                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
                     <!-- Header -->
                     <div class="text-center space-y-1">
                         <span
@@ -1228,7 +1274,8 @@
                 </div>
 
                 <!-- SCREEN 12: FINAL ASSESSMENT -->
-                <div id="screen-12" class="screen-view space-y-6 hidden">
+                <div id="screen-12" class="screen-view space-y-6 hidden"
+                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
                     <div class="flex justify-between items-center border-b border-slate-200 pb-3" id="examHeader">
                         <div class="space-y-1">
                             <span
@@ -1318,7 +1365,8 @@
                 </div>
 
                 <!-- SCREEN 13: MODULE COMPLETION / OUTRO -->
-                <div id="screen-13" class="screen-view space-y-6 hidden">
+                <div id="screen-13" class="screen-view space-y-6 hidden"
+                    style="background-image: url('public/bg-kandungan.png'); background-size: cover; background-position: center;">
                     <div
                         class="bg-white border border-slate-200 rounded-2xl p-8 max-w-3xl mx-auto text-center space-y-4 flex-1 shadow-xl relative overflow-hidden flex flex-col justify-center">
 
@@ -1394,8 +1442,7 @@
     </div>
 
     <!-- BOTTOM DOCK: 3-zone floating navigation bar -->
-    <div id="bottomDock"
-        class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40
+    <div id="bottomDock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40
                w-[min(calc(100vw-2rem),640px)] md:w-auto
                bg-white/95 backdrop-blur-sm border border-slate-200/60 shadow-2xl rounded-2xl overflow-hidden">
 
